@@ -117,6 +117,14 @@ class Player {
         }
     }
     take(object) {
-       
+        if (this.location.items.some(name === object)) {
+            this.inventory.push(this.location.items.find(name === object));
+            this.location.removeItem(this.location.items.find(name === object));
+            return `Got ${object}.`;
+        }
+        else {
+            return `I don't see that here.`;
+        }
     }
 }
+
