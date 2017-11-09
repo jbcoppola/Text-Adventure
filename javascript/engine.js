@@ -46,33 +46,48 @@ function newInput(input) {
     let output = new Output(input);
 
     input = input.toLowerCase();
-    input = input.split("");
-    let verb = input[0];
+    input = input.split(" ");
 
-    if (verb === "move" || verb === "go") {
-        verb = input[1];
+    if (input[0] === "move" || input[0] === "go") {
+        input.splice(0, 1);
     }
+
+    let verb = input[0];
+    input.splice(0, 1);
+
     if (directions.includes(verb)) {
         player.move(parseDirections(input));
         output.addWithBreaks(`You move ${input}.`);
         return output.text;
     }
-    
+
     if (verb === "look") {
-        if (input[1] === "at") {
+        if (input[0] === "at") {
             verb = "examine";
-            input.splice(1, 1);
+            input.splice(0, 1);
         }
-        else if (input[1] === undefined) {
+        else if (input[0] === undefined) {
             output.addWithBreaks(player.look());
         }
         else {
-            output.addWithBreaks(`I don't know what ${input[1]} is.`);
+            output.addWithBreaks(`I don't know what ${input[0]} is.`);
         }
     };
 
-    if (verb === "examine" || verb) { };
-    else if (take.includes(verb)) { };
+    let noun;
+    if (input.includes("on") {
+        let onPos = indexOf("on");
+        noun = input.slice(0, onPos - 1).join(" ");
+        let secondNoun = input.slice(onPos + 1, input.length);
+    }
+    else { noun = input.join(" ");
+
+    if (verb === "examine") {
+        output.addWithBreaks(player.examine(noun))
+    }
+    else if (take.includes(verb)) {
+        output.addWithBreaks(player.take(noun));
+    }
     else if () { };
     
     return output.text;

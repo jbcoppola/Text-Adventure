@@ -85,6 +85,9 @@ class Player {
             return `I don't see that here.`;
         }
     }
+    use(object, secondObject) {
+
+    }
 }
 
 class Output {
