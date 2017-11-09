@@ -87,5 +87,17 @@ class Player {
     }
 }
 
-export { Item, Coin, Area, Player }
+class Output {
+    constructor(input) {
+        this.text = `> ${input}\n\n`;
+    }
+    add(text) {
+        this.text += `${text}`
+    }
+    addWithBreaks(text) {
+        this.text += `${text}\n\n`
+    }
+}
+
+export { Item, Coin, Area, Player, Output }
 
