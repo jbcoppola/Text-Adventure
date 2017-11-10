@@ -1,11 +1,13 @@
 ﻿import newInput from './engine.js';
 
 document.onload = function () {
+    console.log("started");
     let player = new Player();
-    let input = document.querySelector(input).value;
     let output = document.querySelector(".output");
-
-    input.addEventListener("submit", function () {
+    document.querySelector("form").addEventListener("submit", function (e) {
+        e.preventDefault();
+        console.log("working");
+        let input = document.querySelector(input).value;
         output.innerText += newInput(input.value);
     });
 };

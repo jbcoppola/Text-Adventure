@@ -1,5 +1,5 @@
 ﻿import { Item, Coin, Area, Player, Output } from './classes.js';
-import Areas from './area-data.js';
+import { Areas } from './area-data.js';
 
 let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];
 let take = ["get", "take", "steal", "grab"];
@@ -43,6 +43,7 @@ function parseDirections(input) {
 }
 
 export default function newInput(input) {
+    console.log("running");
     let output = new Output(input);
 
     input = input.toLowerCase();

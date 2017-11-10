@@ -33,4 +33,4 @@ Areas.get = function (roomName) {
     return Areas.find(name === roomName);
 };
 
-export default Areas;
+export { Areas };
