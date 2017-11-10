@@ -1,16 +1,14 @@
-﻿import { newInput } from 'engine';
+﻿import newInput from './engine.js';
 
 document.onload = function () {
     let player = new Player();
-    let input = document.querySelector(input);
+    let input = document.querySelector(input).value;
     let output = document.querySelector(".output");
 
     input.addEventListener("submit", function () {
-        while(true) {
-            output.innerText += newInput(input.value);
-        }
-    })
-}
+        output.innerText += newInput(input.value);
+    });
+};
 
 /*
 GAMEPLAY LOOP:

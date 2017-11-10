@@ -1,12 +1,23 @@
 ﻿class Item {
-    constructor(name, description, value = 0) {
+    constructor(name, description, value = 0, usedWith = "", usedText = "") {
         this.name = name;
         this.description = description;
         this.value = value;
+        this.use = { with: usedWith, text: usedText };
     }
-
     print() {
         return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;
+    }
+    use(object) {
+        if (object.name === this.use.usedWith) {
+            return this.use.text;
+        }
+        else if (object === "player") {
+            return `Use ${this.name} on what?`;
+        }
+        else {
+            return `Can't use ${object.name} on ${this.name}.`;
+        }
     }
 }
 
@@ -18,7 +29,7 @@ class Coin extends Item {
 }
 
 class Area {
-    constructor(name, description, exits = [], items = []) {
+    constructor({ name, description, exits = [], items = [] }) {
         this.name = name;
         this.description = description;
         this.exits = exits;
@@ -86,7 +97,25 @@ class Player {
         }
     }
     use(object, secondObject) {
-
+        // using object "on" something
+        if (secondObject) {
+            //check if second object is in area or on player
+            if (Area.items.some(name === secondObject) || this.inventory.some(name === secondObject)) {
+                //check if player has first object
+                if (this.inventory.some(name === object)) { return secondObject.use(object); }
+                else { return `You don't have a ${object}.`;}
+            }
+            else {
+                return `There is no ${secondObject} here.`;
+            }
+        }
+        // using object by itself
+        else {
+            if (Area.items.some(name === object) || this.inventory.some(name === object)) {
+                object.use("player");
+            }
+            else { return `You don't have a ${object}.`; }
+        }
     }
 }
 
@@ -95,12 +124,12 @@ class Output {
         this.text = `> ${input}\n\n`;
     }
     add(text) {
-        this.text += `${text}`
+        this.text += `${text}`;
     }
     addWithBreaks(text) {
-        this.text += `${text}\n\n`
+        this.text += `${text}\n\n`;
     }
 }
 
-export { Item, Coin, Area, Player, Output }
+export { Item, Coin, Area, Player, Output };
 

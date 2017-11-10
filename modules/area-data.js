@@ -1,4 +1,4 @@
-﻿import { Area } from 'Classes';
+﻿import { Area } from './classes.js';
 
 var areaData = [{
     "name": "Start",
@@ -28,9 +28,9 @@ var areaData = [{
     }]
 }];
 
-var Areas = areaData.map(area => new Area({ name, description, exits, items }));
+var Areas = areaData.map(area => new Area(area));
 Areas.get = function (roomName) {
-    return Areas.find(name == roomName);
-}
+    return Areas.find(name === roomName);
+};
 
-export { Areas }
+export default Areas;
