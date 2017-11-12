@@ -1,6 +1,6 @@
 ﻿import newInput from './engine.js';
 
-document.onload = function () {
+window.onload = function () {
     console.log("started");
     let player = new Player();
     let output = document.querySelector(".output");
@@ -10,7 +10,7 @@ document.onload = function () {
         let input = document.querySelector(input).value;
         output.innerText += newInput(input.value);
     });
-};
+}
 
 /*
 GAMEPLAY LOOP:
