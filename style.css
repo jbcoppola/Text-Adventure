@@ -1,0 +1,38 @@
+﻿body {
+    font-family: 'Ubuntu Mono', monospace;
+    letter-spacing: 1px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    padding: 30px;
+}
+
+.main * {
+    align-self: center;
+}
+
+.main .output {
+    height: 70vh;
+    width: 70vw;
+    padding: 30px;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 18px;
+    overflow-y: scroll;
+}
+
+.main .input {
+    
+}
+
+.main input {
+    min-width: 50vw;
+    margin: 5px;
+    padding: 10px;
+    font-size: 18px;
+}

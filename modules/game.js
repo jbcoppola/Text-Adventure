@@ -2,11 +2,12 @@
     player = new Player();
     console.log(player);
     let output = document.querySelector(".output");
-    output.innerText = player.location.description;
+    output.innerText = `${player.location.description}\n\n`;
     document.querySelector("form").addEventListener("submit", function (e) {
         e.preventDefault();
-        let input = document.querySelector("input").value;
+        let input = document.querySelector("input");
         output.innerText += newInput(input.value);
+        input.value = "";
     });
 }
 
@@ -65,12 +66,30 @@ class Area {
         items.forEach(item => removeItem(item));
         return this;
     }
+    listExits() {
+        let output = "";
+        for (let exit of this.exits) {
+            output += `To the ${exit.cardinal} there is a ${exit.description}.\n`
+        }
+        return output;
+    }
+    listItems() {
+        let output = `On the ground there is: `
+        for (let item of this.items) {
+            output += `${item.name} `
+        }
+        output += '.';
+        return output;
+    }
+    describe() {
+        return `${this.description}\n\n${this.listExits()}\n${this.listItems()}`;
+    }
 }
 
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Start");
+        this.location = Areas.get("Start Room");
     }
     printInventory() {
         for (let item of this.inventory) {
@@ -78,12 +97,16 @@ class Player {
         }
     }
     transport(roomName) {
-        this.location = Areas.get(roomName);
+        let newRoom = Areas.get(roomName);
+        if (newRoom) { this.location = newRoom; }
+        else { console.log("Error: invalid room name passed to transport") };
     }
     move(direction) {
-        if (this.location.exits.some(cardinal === direction)) {
-            this.transport(exits.find(cardinal === direction).destination);
+        if (this.location.exits.some(exit => exit.cardinal === direction)) {
+            this.transport(this.location.exits.find(exit => exit.cardinal === direction).destination);
+            return `You move ${direction}.`;
         }
+        else { return `You can't go ${direction} here.`;}
     }
     look() {
         return this.location.description;
@@ -145,12 +168,12 @@ class Output {
 }
 
 var areaData = [{
-    "name": "Start",
+    "name": "Start Room",
     "description": "Starting room. Boring.",
     "exits": [{
-        "cardinal": "North",
+        "cardinal": "north",
         "destination": "North Room",
-        "description": "Path to north room"
+        "description": "path to north room"
     }],
     "items": [{
         "name": "Rock",
@@ -161,9 +184,9 @@ var areaData = [{
     "name": "North Room",
     "description": "The room in the north.",
     "exits": [{
-        "cardinal": "South",
+        "cardinal": "south",
         "destination": "Start Room",
-        "description": "Path to start"
+        "description": "path to the start"
     }],
     "items": [{
         "name": "Stick",
@@ -219,7 +242,6 @@ function parseDirections(input) {
 }
 
 function newInput(input) {
-    console.log("running");
     let output = new Output(input);
 
     input = input.toLowerCase();
@@ -233,8 +255,8 @@ function newInput(input) {
     input.splice(0, 1);
 
     if (directions.includes(verb)) {
-        player.move(parseDirections(input));
-        output.addWithBreaks(`You move ${input}.`);
+        output.addWithBreaks(player.move(parseDirections(verb)));
+        output.addWithBreaks(player.location.describe());
         return output.text;
     }
 
