@@ -6,6 +6,7 @@ var newInput = require("./engine");
 window.onload = function () {
     player = new Player();
     console.log(player);
+    console.log(Areas);
     let output = document.querySelector(".output");
     output.innerText = `${player.location.describe()}\n\n`;
     document.querySelector("form").addEventListener("submit", function (e) {

@@ -1,9 +1,9 @@
 ﻿class Item {
-    constructor(name, description, value = 0, usedWith = "", usedText = "") {
+    constructor({ name, description, value = 0, used = {}}) {
         this.name = name;
         this.description = description;
         this.value = value;
-        this.used = { with: usedWith, text: usedText };
+        this.used = { with: used.With, text: used.Text };
     }
     print() {
         return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;
@@ -29,7 +29,7 @@ class Coin extends Item {
 }
 
 class Area {
-    constructor({ name, description, exits = [], items = [] }) {
+    constructor({ name, description, exits=[], items=[] }) {
         this.name = name;
         this.description = description;
         this.exits = exits;
@@ -66,7 +66,8 @@ class Area {
     listItems() {
         let output = `On the ground there is: `
         for (let item of this.items) {
-            output += `${item.name}`;
+            output += `${item.name}`
+            console.log(item);
         }
         output += '.';
         return output;
