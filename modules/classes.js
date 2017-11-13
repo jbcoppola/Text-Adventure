@@ -67,7 +67,6 @@ class Area {
         let output = `On the ground there is: `
         for (let item of this.items) {
             output += `${item.name}`
-            console.log(item);
         }
         output += '.';
         return output;

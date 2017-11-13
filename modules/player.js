@@ -6,10 +6,12 @@ class Player {
         this.inventory = [];
         this.location = Areas.get("Start Room");
     }
-    printInventory() {
+    listInventory() {
+        let output = `You have: `;
         for (let item of this.inventory) {
-            console.log(item);
+            output += item.name;
         }
+        return output;
     }
     transport(roomName) {
         let newRoom = Areas.get(roomName);

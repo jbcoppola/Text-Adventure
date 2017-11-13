@@ -4,6 +4,7 @@ var Areas = require("./area-data.js");
 
 let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];
 let take = ["get", "take", "steal", "grab"];
+let inventory = ["i", "inventory"]
 
 function parseDirections(input) {
     switch (input) {
@@ -48,6 +49,11 @@ function newInput(player, input) {
 
     input = input.toLowerCase();
     input = input.split(" ");
+
+    if (inventory.includes(input[0])) {
+        output.addWithBreaks(player.listInventory());
+        return output.text;
+    }
 
     if (input[0] === "move" || input[0] === "go") {
         input.splice(0, 1);

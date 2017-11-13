@@ -74,8 +74,6 @@ var newInput = __webpack_require__(2);
 
 window.onload = function () {
     player = new Player();
-    console.log(player);
-    console.log(Areas);
     let output = document.querySelector(".output");
     output.innerText = `${player.location.describe()}\n\n`;
     document.querySelector("form").addEventListener("submit", function (e) {
@@ -159,7 +157,6 @@ class Area {
         let output = `On the ground there is: `
         for (let item of this.items) {
             output += `${item.name}`
-            console.log(item);
         }
         output += '.';
         return output;
@@ -195,6 +192,7 @@ var Areas = __webpack_require__(4);
 
 let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];
 let take = ["get", "take", "steal", "grab"];
+let inventory = ["i", "inventory"]
 
 function parseDirections(input) {
     switch (input) {
@@ -239,6 +237,11 @@ function newInput(player, input) {
 
     input = input.toLowerCase();
     input = input.split(" ");
+
+    if (inventory.includes(input[0])) {
+        output.addWithBreaks(player.listInventory());
+        return output.text;
+    }
 
     if (input[0] === "move" || input[0] === "go") {
         input.splice(0, 1);
@@ -348,10 +351,12 @@ class Player {
         this.inventory = [];
         this.location = Areas.get("Start Room");
     }
-    printInventory() {
+    listInventory() {
+        let output = `You have: `;
         for (let item of this.inventory) {
-            console.log(item);
+            output += item.name;
         }
+        return output;
     }
     transport(roomName) {
         let newRoom = Areas.get(roomName);
