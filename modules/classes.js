@@ -3,13 +3,13 @@
         this.name = name;
         this.description = description;
         this.value = value;
-        this.use = { with: usedWith, text: usedText };
+        this.used = { with: usedWith, text: usedText };
     }
     print() {
         return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;
     }
     use(object) {
-        if (object.name === this.use.usedWith) {
+        if (object === this.use.usedWith) {
             return this.use.text;
         }
         else if (object === "player") {
@@ -33,7 +33,11 @@ class Area {
         this.name = name;
         this.description = description;
         this.exits = exits;
-        this.items = items;
+        this.items = [];
+        for (let item of items) {
+            let newItem = new Item(item);
+            this.items.push(newItem);
+        }
     }
     addItem(item) {
         this.items.push(item);
@@ -52,70 +56,23 @@ class Area {
         items.forEach(item => removeItem(item));
         return this;
     }
-}
-
-class Player {
-    constructor() {
-        this.inventory = [];
-        this.location = Areas.go("Start Room");
+    listExits() {
+        let output = "";
+        for (let exit of this.exits) {
+            output += `To the ${exit.cardinal} there is a ${exit.description}.\n`
+        }
+        return output;
     }
-    printInventory() {
-        for (let item of this.inventory) {
-            console.log(item);
+    listItems() {
+        let output = `On the ground there is: `
+        for (let item of this.items) {
+            output += `${item.name}`;
         }
+        output += '.';
+        return output;
     }
-    transport(roomName) {
-        this.location = Areas.get(roomName);
-    }
-    move(direction) {
-        if (this.location.exits.some(cardinal === direction)) {
-            this.transport(exits.find(cardinal === direction).destination);
-        }
-    }
-    look() {
-        return this.location.description;
-    }
-    examine(object) {
-        if (this.inventory.some(name === object)) {
-            return this.inventory.find(name === object).description;
-        }
-        else if (this.location.items.some(name === object)) {
-            return this.location.items.find(name === object).description;
-        }
-        else {
-            return `I don't see that here.`;
-        }
-    }
-    take(object) {
-        if (this.location.items.some(name === object)) {
-            this.inventory.push(this.location.items.find(name === object));
-            this.location.removeItem(this.location.items.find(name === object));
-            return `Got ${object}.`;
-        }
-        else {
-            return `I don't see that here.`;
-        }
-    }
-    use(object, secondObject) {
-        // using object "on" something
-        if (secondObject) {
-            //check if second object is in area or on player
-            if (Area.items.some(name === secondObject) || this.inventory.some(name === secondObject)) {
-                //check if player has first object
-                if (this.inventory.some(name === object)) { return secondObject.use(object); }
-                else { return `You don't have a ${object}.`;}
-            }
-            else {
-                return `There is no ${secondObject} here.`;
-            }
-        }
-        // using object by itself
-        else {
-            if (Area.items.some(name === object) || this.inventory.some(name === object)) {
-                object.use("player");
-            }
-            else { return `You don't have a ${object}.`; }
-        }
+    describe() {
+        return `${this.description}\n\n${this.listExits()}\n${this.listItems()}`;
     }
 }
 
@@ -131,5 +88,5 @@ class Output {
     }
 }
 
-export { Item, Coin, Area, Player, Output };
+module.exports = { Item, Coin, Area, Output };
 

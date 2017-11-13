@@ -1,25 +1,30 @@
-﻿import { Area } from './classes.js';
+﻿var classes = require("./classes.js");
 
 var areaData = [{
-    "name": "Start",
+    "name": "Start Room",
     "description": "Starting room. Boring.",
     "exits": [{
-        "cardinal": "North",
+        "cardinal": "north",
         "destination": "North Room",
-        "description": "Path to north room"
+        "description": "path to north room"
     }],
     "items": [{
         "name": "Rock",
         "description": "A rock.",
+        "value": 0
+    },
+    {
+        "name": "Rock 2",
+        "description": "The sequel to rock.",
         "value": 0
     }]
 }, {
     "name": "North Room",
     "description": "The room in the north.",
     "exits": [{
-        "cardinal": "South",
+        "cardinal": "south",
         "destination": "Start Room",
-        "description": "Path to start"
+        "description": "path to the start"
     }],
     "items": [{
         "name": "Stick",
@@ -28,9 +33,9 @@ var areaData = [{
     }]
 }];
 
-var Areas = areaData.map(area => new Area(area));
+var Areas = areaData.map(area => new classes.Area(area));
 Areas.get = function (roomName) {
-    return Areas.find(name === roomName);
+    return Areas.find(room => room.name === roomName);
 };
 
-export { Areas };
+module.exports = Areas;

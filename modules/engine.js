@@ -1,5 +1,6 @@
-﻿import { Item, Coin, Area, Player, Output } from './classes.js';
-import { Areas } from './area-data.js';
+﻿var classes = require("./classes.js");
+var player = require("./player.js");
+var Areas = require("./area-data.js");
 
 let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];
 let take = ["get", "take", "steal", "grab"];
@@ -42,9 +43,8 @@ function parseDirections(input) {
     return input;
 }
 
-export default function newInput(input) {
-    console.log("running");
-    let output = new Output(input);
+function newInput(player, input) {
+    let output = new classes.Output(input);
 
     input = input.toLowerCase();
     input = input.split(" ");
@@ -57,8 +57,8 @@ export default function newInput(input) {
     input.splice(0, 1);
 
     if (directions.includes(verb)) {
-        player.move(parseDirections(input));
-        output.addWithBreaks(`You move ${input}.`);
+        output.addWithBreaks(player.move(parseDirections(verb)));
+        output.addWithBreaks(player.location.describe());
         return output.text;
     }
 
@@ -90,8 +90,10 @@ export default function newInput(input) {
             output.addWithBreaks(player.take(noun));
         }
         else if (verb === "use") {
-            output.addWithBreaks(player.use(noun, secondNoun));
+            output.addWithBreaks(player.use(noun));
         }
     }
     return output.text;
 }
+
+module.exports = newInput;
