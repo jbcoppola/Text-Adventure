@@ -60,367 +60,38 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-﻿var classes = __webpack_require__(1);
-var Player = __webpack_require__(5);
-var Areas = __webpack_require__(4);
-var newInput = __webpack_require__(2);
-
-window.onload = function () {
-    player = new Player();
-    let output = document.querySelector(".output");
-    output.innerText = `${player.location.describe()}\n\n`;
-    document.querySelector("form").addEventListener("submit", function (e) {
-        e.preventDefault();
-        let input = document.querySelector("input");
-        output.innerText += newInput(player, input.value);
-        input.value = "";
-    });
-}
+eval("﻿class Item {\r\n    constructor({ name, description, value = 0, used = {}}) {\r\n        this.name = name;\r\n        this.description = description;\r\n        this.value = value;\r\n        this.used = { with: used.With, text: used.Text };\r\n    }\r\n    print() {\r\n        return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;\r\n    }\r\n    use(object) {\r\n        if (object === this.use.usedWith) {\r\n            return this.use.text;\r\n        }\r\n        else if (object === \"player\") {\r\n            return `Use ${this.name} on what?`;\r\n        }\r\n        else {\r\n            return `Can't use ${object.name} on ${this.name}.`;\r\n        }\r\n    }\r\n}\r\n\r\nclass Coin extends Item {\r\n    constructor(amt) {\r\n        this.amt = amt;\r\n        super(\"Coin\", \"An assortment of coins and precious metals.\", this.amt);\r\n    }\r\n}\r\n\r\nclass Area {\r\n    constructor({ name, description, exits=[], items=[] }) {\r\n        this.name = name;\r\n        this.description = description;\r\n        this.exits = exits;\r\n        this.items = [];\r\n        for (let item of items) {\r\n            let newItem = new Item(item);\r\n            this.items.push(newItem);\r\n        }\r\n    }\r\n    addItem(item) {\r\n        this.items.push(item);\r\n        return this;\r\n    }\r\n    addItems(...items) {\r\n        items.forEach(item => addItem(item));\r\n        return this;\r\n    }\r\n    removeItem(item) {\r\n        var i = this.items.indexOf(item);\r\n        this.items.splice(i, 1);\r\n        return this;\r\n    }\r\n    removeItems(...items) {\r\n        items.forEach(item => removeItem(item));\r\n        return this;\r\n    }\r\n    listExits() {\r\n        let output = \"\";\r\n        for (let exit of this.exits) {\r\n            output += `To the ${exit.cardinal} there is a ${exit.description}.\\n`\r\n        }\r\n        return output;\r\n    }\r\n    listItems() {\r\n        let output;\r\n        if (this.items.length !== 0) {\r\n            output = `On the ground there is `\r\n            for (let i = 0; i < this.items.length; i++) {\r\n                output += `a ${this.items[i].name}`\r\n                if (i + 1 !== this.items.length) {\r\n                    output += ', ';\r\n                    if (i + 2 === this.items.length) {\r\n                        output += 'and ';\r\n                    }\r\n                }\r\n            }\r\n            output += '.';\r\n        }\r\n        return output;\r\n    }\r\n    describe() {\r\n        return `${this.description}\\n\\n${this.listExits()}\\n${this.listItems()}`;\r\n    }\r\n}\r\n\r\nclass Output {\r\n    constructor(input) {\r\n        this.text = `> ${input}\\n\\n`;\r\n    }\r\n    add(text) {\r\n        this.text += `${text}`;\r\n    }\r\n    addWithBreaks(text) {\r\n        this.text += `${text}\\n\\n`;\r\n    }\r\n}\r\n\r\nmodule.exports = { Item, Coin, Area, Output };\r\n\r\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21vZHVsZXMvY2xhc3Nlcy5qcz9hMWNmIl0sInNvdXJjZXNDb250ZW50IjpbIu+7v2NsYXNzIEl0ZW0ge1xyXG4gICAgY29uc3RydWN0b3IoeyBuYW1lLCBkZXNjcmlwdGlvbiwgdmFsdWUgPSAwLCB1c2VkID0ge319KSB7XHJcbiAgICAgICAgdGhpcy5uYW1lID0gbmFtZTtcclxuICAgICAgICB0aGlzLmRlc2NyaXB0aW9uID0gZGVzY3JpcHRpb247XHJcbiAgICAgICAgdGhpcy52YWx1ZSA9IHZhbHVlO1xyXG4gICAgICAgIHRoaXMudXNlZCA9IHsgd2l0aDogdXNlZC5XaXRoLCB0ZXh0OiB1c2VkLlRleHQgfTtcclxuICAgIH1cclxuICAgIHByaW50KCkge1xyXG4gICAgICAgIHJldHVybiBgTmFtZTogJHt0aGlzLm5hbWV9OyBEZXNjcmlwdGlvbjogJHt0aGlzLmRlc2NyaXB0aW9ufTsgVmFsdWU6ICR7dGhpcy52YWx1ZX1gO1xyXG4gICAgfVxyXG4gICAgdXNlKG9iamVjdCkge1xyXG4gICAgICAgIGlmIChvYmplY3QgPT09IHRoaXMudXNlLnVzZWRXaXRoKSB7XHJcbiAgICAgICAgICAgIHJldHVybiB0aGlzLnVzZS50ZXh0O1xyXG4gICAgICAgIH1cclxuICAgICAgICBlbHNlIGlmIChvYmplY3QgPT09IFwicGxheWVyXCIpIHtcclxuICAgICAgICAgICAgcmV0dXJuIGBVc2UgJHt0aGlzLm5hbWV9IG9uIHdoYXQ/YDtcclxuICAgICAgICB9XHJcbiAgICAgICAgZWxzZSB7XHJcbiAgICAgICAgICAgIHJldHVybiBgQ2FuJ3QgdXNlICR7b2JqZWN0Lm5hbWV9IG9uICR7dGhpcy5uYW1lfS5gO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxufVxyXG5cclxuY2xhc3MgQ29pbiBleHRlbmRzIEl0ZW0ge1xyXG4gICAgY29uc3RydWN0b3IoYW10KSB7XHJcbiAgICAgICAgdGhpcy5hbXQgPSBhbXQ7XHJcbiAgICAgICAgc3VwZXIoXCJDb2luXCIsIFwiQW4gYXNzb3J0bWVudCBvZiBjb2lucyBhbmQgcHJlY2lvdXMgbWV0YWxzLlwiLCB0aGlzLmFtdCk7XHJcbiAgICB9XHJcbn1cclxuXHJcbmNsYXNzIEFyZWEge1xyXG4gICAgY29uc3RydWN0b3IoeyBuYW1lLCBkZXNjcmlwdGlvbiwgZXhpdHM9W10sIGl0ZW1zPVtdIH0pIHtcclxuICAgICAgICB0aGlzLm5hbWUgPSBuYW1lO1xyXG4gICAgICAgIHRoaXMuZGVzY3JpcHRpb24gPSBkZXNjcmlwdGlvbjtcclxuICAgICAgICB0aGlzLmV4aXRzID0gZXhpdHM7XHJcbiAgICAgICAgdGhpcy5pdGVtcyA9IFtdO1xyXG4gICAgICAgIGZvciAobGV0IGl0ZW0gb2YgaXRlbXMpIHtcclxuICAgICAgICAgICAgbGV0IG5ld0l0ZW0gPSBuZXcgSXRlbShpdGVtKTtcclxuICAgICAgICAgICAgdGhpcy5pdGVtcy5wdXNoKG5ld0l0ZW0pO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuICAgIGFkZEl0ZW0oaXRlbSkge1xyXG4gICAgICAgIHRoaXMuaXRlbXMucHVzaChpdGVtKTtcclxuICAgICAgICByZXR1cm4gdGhpcztcclxuICAgIH1cclxuICAgIGFkZEl0ZW1zKC4uLml0ZW1zKSB7XHJcbiAgICAgICAgaXRlbXMuZm9yRWFjaChpdGVtID0+IGFkZEl0ZW0oaXRlbSkpO1xyXG4gICAgICAgIHJldHVybiB0aGlzO1xyXG4gICAgfVxyXG4gICAgcmVtb3ZlSXRlbShpdGVtKSB7XHJcbiAgICAgICAgdmFyIGkgPSB0aGlzLml0ZW1zLmluZGV4T2YoaXRlbSk7XHJcbiAgICAgICAgdGhpcy5pdGVtcy5zcGxpY2UoaSwgMSk7XHJcbiAgICAgICAgcmV0dXJuIHRoaXM7XHJcbiAgICB9XHJcbiAgICByZW1vdmVJdGVtcyguLi5pdGVtcykge1xyXG4gICAgICAgIGl0ZW1zLmZvckVhY2goaXRlbSA9PiByZW1vdmVJdGVtKGl0ZW0pKTtcclxuICAgICAgICByZXR1cm4gdGhpcztcclxuICAgIH1cclxuICAgIGxpc3RFeGl0cygpIHtcclxuICAgICAgICBsZXQgb3V0cHV0ID0gXCJcIjtcclxuICAgICAgICBmb3IgKGxldCBleGl0IG9mIHRoaXMuZXhpdHMpIHtcclxuICAgICAgICAgICAgb3V0cHV0ICs9IGBUbyB0aGUgJHtleGl0LmNhcmRpbmFsfSB0aGVyZSBpcyBhICR7ZXhpdC5kZXNjcmlwdGlvbn0uXFxuYFxyXG4gICAgICAgIH1cclxuICAgICAgICByZXR1cm4gb3V0cHV0O1xyXG4gICAgfVxyXG4gICAgbGlzdEl0ZW1zKCkge1xyXG4gICAgICAgIGxldCBvdXRwdXQ7XHJcbiAgICAgICAgaWYgKHRoaXMuaXRlbXMubGVuZ3RoICE9PSAwKSB7XHJcbiAgICAgICAgICAgIG91dHB1dCA9IGBPbiB0aGUgZ3JvdW5kIHRoZXJlIGlzIGBcclxuICAgICAgICAgICAgZm9yIChsZXQgaSA9IDA7IGkgPCB0aGlzLml0ZW1zLmxlbmd0aDsgaSsrKSB7XHJcbiAgICAgICAgICAgICAgICBvdXRwdXQgKz0gYGEgJHt0aGlzLml0ZW1zW2ldLm5hbWV9YFxyXG4gICAgICAgICAgICAgICAgaWYgKGkgKyAxICE9PSB0aGlzLml0ZW1zLmxlbmd0aCkge1xyXG4gICAgICAgICAgICAgICAgICAgIG91dHB1dCArPSAnLCAnO1xyXG4gICAgICAgICAgICAgICAgICAgIGlmIChpICsgMiA9PT0gdGhpcy5pdGVtcy5sZW5ndGgpIHtcclxuICAgICAgICAgICAgICAgICAgICAgICAgb3V0cHV0ICs9ICdhbmQgJztcclxuICAgICAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgICAgICB9XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgb3V0cHV0ICs9ICcuJztcclxuICAgICAgICB9XHJcbiAgICAgICAgcmV0dXJuIG91dHB1dDtcclxuICAgIH1cclxuICAgIGRlc2NyaWJlKCkge1xyXG4gICAgICAgIHJldHVybiBgJHt0aGlzLmRlc2NyaXB0aW9ufVxcblxcbiR7dGhpcy5saXN0RXhpdHMoKX1cXG4ke3RoaXMubGlzdEl0ZW1zKCl9YDtcclxuICAgIH1cclxufVxyXG5cclxuY2xhc3MgT3V0cHV0IHtcclxuICAgIGNvbnN0cnVjdG9yKGlucHV0KSB7XHJcbiAgICAgICAgdGhpcy50ZXh0ID0gYD4gJHtpbnB1dH1cXG5cXG5gO1xyXG4gICAgfVxyXG4gICAgYWRkKHRleHQpIHtcclxuICAgICAgICB0aGlzLnRleHQgKz0gYCR7dGV4dH1gO1xyXG4gICAgfVxyXG4gICAgYWRkV2l0aEJyZWFrcyh0ZXh0KSB7XHJcbiAgICAgICAgdGhpcy50ZXh0ICs9IGAke3RleHR9XFxuXFxuYDtcclxuICAgIH1cclxufVxyXG5cclxubW9kdWxlLmV4cG9ydHMgPSB7IEl0ZW0sIENvaW4sIEFyZWEsIE91dHB1dCB9O1xyXG5cclxuXG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9tb2R1bGVzL2NsYXNzZXMuanNcbi8vIG1vZHVsZSBpZCA9IDBcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBOyIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///0\n");
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-﻿class Item {
-    constructor({ name, description, value = 0, used = {}}) {
-        this.name = name;
-        this.description = description;
-        this.value = value;
-        this.used = { with: used.With, text: used.Text };
-    }
-    print() {
-        return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;
-    }
-    use(object) {
-        if (object === this.use.usedWith) {
-            return this.use.text;
-        }
-        else if (object === "player") {
-            return `Use ${this.name} on what?`;
-        }
-        else {
-            return `Can't use ${object.name} on ${this.name}.`;
-        }
-    }
-}
-
-class Coin extends Item {
-    constructor(amt) {
-        this.amt = amt;
-        super("Coin", "An assortment of coins and precious metals.", this.amt);
-    }
-}
-
-class Area {
-    constructor({ name, description, exits=[], items=[] }) {
-        this.name = name;
-        this.description = description;
-        this.exits = exits;
-        this.items = [];
-        for (let item of items) {
-            let newItem = new Item(item);
-            this.items.push(newItem);
-        }
-    }
-    addItem(item) {
-        this.items.push(item);
-        return this;
-    }
-    addItems(...items) {
-        items.forEach(item => addItem(item));
-        return this;
-    }
-    removeItem(item) {
-        var i = this.items.indexOf(item);
-        this.items.splice(i, 1);
-        return this;
-    }
-    removeItems(...items) {
-        items.forEach(item => removeItem(item));
-        return this;
-    }
-    listExits() {
-        let output = "";
-        for (let exit of this.exits) {
-            output += `To the ${exit.cardinal} there is a ${exit.description}.\n`
-        }
-        return output;
-    }
-    listItems() {
-        let output = `On the ground there is: `
-        for (let item of this.items) {
-            output += `${item.name}`
-        }
-        output += '.';
-        return output;
-    }
-    describe() {
-        return `${this.description}\n\n${this.listExits()}\n${this.listItems()}`;
-    }
-}
-
-class Output {
-    constructor(input) {
-        this.text = `> ${input}\n\n`;
-    }
-    add(text) {
-        this.text += `${text}`;
-    }
-    addWithBreaks(text) {
-        this.text += `${text}\n\n`;
-    }
-}
-
-module.exports = { Item, Coin, Area, Output };
-
-
+eval("﻿var classes = __webpack_require__(0);\r\n\r\nvar areaData = [{\r\n    \"name\": \"Start Room\",\r\n    \"description\": \"Starting room. Boring.\",\r\n    \"exits\": [{\r\n        \"cardinal\": \"north\",\r\n        \"destination\": \"North Room\",\r\n        \"description\": \"path to north room\"\r\n    }],\r\n    \"items\": [{\r\n        \"name\": \"rock\",\r\n        \"description\": \"A rock.\",\r\n        \"value\": 0\r\n    },\r\n    {\r\n        \"name\": \"rock 2\",\r\n        \"description\": \"The sequel to rock.\",\r\n        \"value\": 0\r\n    }]\r\n}, {\r\n    \"name\": \"North Room\",\r\n    \"description\": \"The room in the north.\",\r\n    \"exits\": [{\r\n        \"cardinal\": \"south\",\r\n        \"destination\": \"Start Room\",\r\n        \"description\": \"path to the start\"\r\n    }],\r\n    \"items\": [{\r\n        \"name\": \"stick\",\r\n        \"description\": \"A stick.\",\r\n        \"value\": 0\r\n    }]\r\n}];\r\n\r\nvar Areas = areaData.map(area => new classes.Area(area));\r\nAreas.get = function (roomName) {\r\n    return Areas.find(room => room.name === roomName);\r\n};\r\n\r\nmodule.exports = Areas;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMS5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21vZHVsZXMvYXJlYS1kYXRhLmpzPzIzMTEiXSwic291cmNlc0NvbnRlbnQiOlsi77u/dmFyIGNsYXNzZXMgPSByZXF1aXJlKFwiLi9jbGFzc2VzLmpzXCIpO1xyXG5cclxudmFyIGFyZWFEYXRhID0gW3tcclxuICAgIFwibmFtZVwiOiBcIlN0YXJ0IFJvb21cIixcclxuICAgIFwiZGVzY3JpcHRpb25cIjogXCJTdGFydGluZyByb29tLiBCb3JpbmcuXCIsXHJcbiAgICBcImV4aXRzXCI6IFt7XHJcbiAgICAgICAgXCJjYXJkaW5hbFwiOiBcIm5vcnRoXCIsXHJcbiAgICAgICAgXCJkZXN0aW5hdGlvblwiOiBcIk5vcnRoIFJvb21cIixcclxuICAgICAgICBcImRlc2NyaXB0aW9uXCI6IFwicGF0aCB0byBub3J0aCByb29tXCJcclxuICAgIH1dLFxyXG4gICAgXCJpdGVtc1wiOiBbe1xyXG4gICAgICAgIFwibmFtZVwiOiBcInJvY2tcIixcclxuICAgICAgICBcImRlc2NyaXB0aW9uXCI6IFwiQSByb2NrLlwiLFxyXG4gICAgICAgIFwidmFsdWVcIjogMFxyXG4gICAgfSxcclxuICAgIHtcclxuICAgICAgICBcIm5hbWVcIjogXCJyb2NrIDJcIixcclxuICAgICAgICBcImRlc2NyaXB0aW9uXCI6IFwiVGhlIHNlcXVlbCB0byByb2NrLlwiLFxyXG4gICAgICAgIFwidmFsdWVcIjogMFxyXG4gICAgfV1cclxufSwge1xyXG4gICAgXCJuYW1lXCI6IFwiTm9ydGggUm9vbVwiLFxyXG4gICAgXCJkZXNjcmlwdGlvblwiOiBcIlRoZSByb29tIGluIHRoZSBub3J0aC5cIixcclxuICAgIFwiZXhpdHNcIjogW3tcclxuICAgICAgICBcImNhcmRpbmFsXCI6IFwic291dGhcIixcclxuICAgICAgICBcImRlc3RpbmF0aW9uXCI6IFwiU3RhcnQgUm9vbVwiLFxyXG4gICAgICAgIFwiZGVzY3JpcHRpb25cIjogXCJwYXRoIHRvIHRoZSBzdGFydFwiXHJcbiAgICB9XSxcclxuICAgIFwiaXRlbXNcIjogW3tcclxuICAgICAgICBcIm5hbWVcIjogXCJzdGlja1wiLFxyXG4gICAgICAgIFwiZGVzY3JpcHRpb25cIjogXCJBIHN0aWNrLlwiLFxyXG4gICAgICAgIFwidmFsdWVcIjogMFxyXG4gICAgfV1cclxufV07XHJcblxyXG52YXIgQXJlYXMgPSBhcmVhRGF0YS5tYXAoYXJlYSA9PiBuZXcgY2xhc3Nlcy5BcmVhKGFyZWEpKTtcclxuQXJlYXMuZ2V0ID0gZnVuY3Rpb24gKHJvb21OYW1lKSB7XHJcbiAgICByZXR1cm4gQXJlYXMuZmluZChyb29tID0+IHJvb20ubmFtZSA9PT0gcm9vbU5hbWUpO1xyXG59O1xyXG5cclxubW9kdWxlLmV4cG9ydHMgPSBBcmVhcztcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL21vZHVsZXMvYXJlYS1kYXRhLmpzXG4vLyBtb2R1bGUgaWQgPSAxXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///1\n");
 
 /***/ }),
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-﻿var classes = __webpack_require__(1);
-var player = __webpack_require__(5);
-var Areas = __webpack_require__(4);
-
-let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];
-let take = ["get", "take", "steal", "grab"];
-let inventory = ["i", "inventory"]
-
-function parseDirections(input) {
-    switch (input) {
-        case "n":
-        case "north":
-            input = "north";
-            break;
-        case "s":
-        case "south":
-            input = "south";
-            break;
-        case "e":
-        case "east":
-            input = "east";
-            break;
-        case "w":
-        case "west":
-            input = "west";
-            break;
-        case "nw":
-        case "northwest":
-            input = "northwest";
-            break;
-        case "sw":
-        case "southwest":
-            input = "southwest";
-            break;
-        case "se":
-        case "southeast":
-            input = "southeast";
-            break;
-        case "ne":
-        case "northeast":
-            input = "northeast";
-            break;
-    }
-    return input;
-}
-
-function newInput(player, input) {
-    let output = new classes.Output(input);
-
-    input = input.toLowerCase();
-    input = input.split(" ");
-
-    if (inventory.includes(input[0])) {
-        output.addWithBreaks(player.listInventory());
-        return output.text;
-    }
-
-    if (input[0] === "move" || input[0] === "go") {
-        input.splice(0, 1);
-    }
-
-    let verb = input[0];
-    input.splice(0, 1);
-
-    if (directions.includes(verb)) {
-        output.addWithBreaks(player.move(parseDirections(verb)));
-        output.addWithBreaks(player.location.describe());
-        return output.text;
-    }
-
-    if (verb === "look") {
-        if (input[0] === "at") {
-            verb = "examine";
-            input.splice(0, 1);
-        }
-        else if (input[0] === undefined) {
-            output.addWithBreaks(player.look());
-        }
-        else {
-            output.addWithBreaks(player.examine(input[0]));
-        }
-    }
-
-    if (input.includes("on")) {
-        let onPos = indexOf("on");
-        let noun = input.slice(0, onPos - 1).join(" ");
-        let secondNoun = input.slice(onPos + 1, input.length);
-    }
-    else {
-        let noun = input.join(" ");
-
-        if (verb === "examine") {
-            output.addWithBreaks(player.examine(noun));
-        }
-        else if (take.includes(verb)) {
-            output.addWithBreaks(player.take(noun));
-        }
-        else if (verb === "use") {
-            output.addWithBreaks(player.use(noun));
-        }
-    }
-    return output.text;
-}
-
-module.exports = newInput;
+eval("﻿var classes = __webpack_require__(0);\r\nvar Areas = __webpack_require__(1);\r\n\r\nclass Player {\r\n    constructor() {\r\n        this.inventory = [];\r\n        this.location = Areas.get(\"Start Room\");\r\n    }\r\n    listInventory() {\r\n        let output = `You have: `;\r\n        for (let item of this.inventory) {\r\n            output += item.name;\r\n        }\r\n        return output;\r\n    }\r\n    transport(roomName) {\r\n        let newRoom = Areas.get(roomName);\r\n        if (newRoom) { this.location = newRoom; }\r\n        else { console.log(\"Error: invalid room name passed to transport\") };\r\n    }\r\n    move(direction) {\r\n        if (this.location.exits.some(exit => exit.cardinal === direction)) {\r\n            this.transport(this.location.exits.find(exit => exit.cardinal === direction).destination);\r\n            return `You move ${direction}.`;\r\n        }\r\n        else { return `You can't go ${direction} here.`; }\r\n    }\r\n    look() {\r\n        return this.location.description;\r\n    }\r\n    examine(object) {\r\n        if (this.inventory.some(name === object)) {\r\n            return this.inventory.find(name === object).description;\r\n        }\r\n        else if (this.location.items.some(name === object)) {\r\n            return this.location.items.find(name === object).description;\r\n        }\r\n        else {\r\n            return `I don't see that here.`;\r\n        }\r\n    }\r\n    take(object) {\r\n        if (this.location.items.some(item => item.name.toLowerCase() === object)) {\r\n            this.inventory.push(this.location.items.find(item => item.name.toLowerCase() === object));\r\n            this.location.removeItem(this.location.items.find(item => item.name.toLowerCase() === object));\r\n            return `Got ${object}.`;\r\n        }\r\n        else {\r\n            return `I don't see that here.`;\r\n        }\r\n    }\r\n    use(object, secondObject) {\r\n        // using object \"on\" something\r\n        if (secondObject) {\r\n            //check if second object is in area or on player\r\n            if (this.location.items.some(item => item.name.toLowerCase() === secondObject) || this.inventory.some(item => item.name.toLowerCase() === secondObject)) {\r\n                //check if player has first object\r\n                if (this.inventory.some(item => item.name.toLowerCase() === object)) { return secondObject.use(object); }\r\n                else { return `You don't have a ${object}.`; }\r\n            }\r\n            else {\r\n                return `There is no ${secondObject} here.`;\r\n            }\r\n        }\r\n        // using object by itself\r\n        else {\r\n            if (this.location.items.some(item => item.name.toLowerCase() === object)) {\r\n                return this.location.items.find(item => item.name.toLowerCase() === object).use(\"player\");\r\n            }\r\n            else if (this.inventory.some(item => item.name.toLowerCase() === object)) {\r\n                return this.inventory.find(item => item.name.toLowerCase() === object).use(\"player\");\r\n            }\r\n            else { return `You don't have a ${object}.`; }\r\n        }\r\n    }\r\n}\r\n\r\nmodule.exports = Player;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMi5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21vZHVsZXMvcGxheWVyLmpzPzU4ZTEiXSwic291cmNlc0NvbnRlbnQiOlsi77u/dmFyIGNsYXNzZXMgPSByZXF1aXJlKFwiLi9jbGFzc2VzLmpzXCIpO1xyXG52YXIgQXJlYXMgPSByZXF1aXJlKFwiLi9hcmVhLWRhdGEuanNcIik7XHJcblxyXG5jbGFzcyBQbGF5ZXIge1xyXG4gICAgY29uc3RydWN0b3IoKSB7XHJcbiAgICAgICAgdGhpcy5pbnZlbnRvcnkgPSBbXTtcclxuICAgICAgICB0aGlzLmxvY2F0aW9uID0gQXJlYXMuZ2V0KFwiU3RhcnQgUm9vbVwiKTtcclxuICAgIH1cclxuICAgIGxpc3RJbnZlbnRvcnkoKSB7XHJcbiAgICAgICAgbGV0IG91dHB1dCA9IGBZb3UgaGF2ZTogYDtcclxuICAgICAgICBmb3IgKGxldCBpdGVtIG9mIHRoaXMuaW52ZW50b3J5KSB7XHJcbiAgICAgICAgICAgIG91dHB1dCArPSBpdGVtLm5hbWU7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIHJldHVybiBvdXRwdXQ7XHJcbiAgICB9XHJcbiAgICB0cmFuc3BvcnQocm9vbU5hbWUpIHtcclxuICAgICAgICBsZXQgbmV3Um9vbSA9IEFyZWFzLmdldChyb29tTmFtZSk7XHJcbiAgICAgICAgaWYgKG5ld1Jvb20pIHsgdGhpcy5sb2NhdGlvbiA9IG5ld1Jvb207IH1cclxuICAgICAgICBlbHNlIHsgY29uc29sZS5sb2coXCJFcnJvcjogaW52YWxpZCByb29tIG5hbWUgcGFzc2VkIHRvIHRyYW5zcG9ydFwiKSB9O1xyXG4gICAgfVxyXG4gICAgbW92ZShkaXJlY3Rpb24pIHtcclxuICAgICAgICBpZiAodGhpcy5sb2NhdGlvbi5leGl0cy5zb21lKGV4aXQgPT4gZXhpdC5jYXJkaW5hbCA9PT0gZGlyZWN0aW9uKSkge1xyXG4gICAgICAgICAgICB0aGlzLnRyYW5zcG9ydCh0aGlzLmxvY2F0aW9uLmV4aXRzLmZpbmQoZXhpdCA9PiBleGl0LmNhcmRpbmFsID09PSBkaXJlY3Rpb24pLmRlc3RpbmF0aW9uKTtcclxuICAgICAgICAgICAgcmV0dXJuIGBZb3UgbW92ZSAke2RpcmVjdGlvbn0uYDtcclxuICAgICAgICB9XHJcbiAgICAgICAgZWxzZSB7IHJldHVybiBgWW91IGNhbid0IGdvICR7ZGlyZWN0aW9ufSBoZXJlLmA7IH1cclxuICAgIH1cclxuICAgIGxvb2soKSB7XHJcbiAgICAgICAgcmV0dXJuIHRoaXMubG9jYXRpb24uZGVzY3JpcHRpb247XHJcbiAgICB9XHJcbiAgICBleGFtaW5lKG9iamVjdCkge1xyXG4gICAgICAgIGlmICh0aGlzLmludmVudG9yeS5zb21lKG5hbWUgPT09IG9iamVjdCkpIHtcclxuICAgICAgICAgICAgcmV0dXJuIHRoaXMuaW52ZW50b3J5LmZpbmQobmFtZSA9PT0gb2JqZWN0KS5kZXNjcmlwdGlvbjtcclxuICAgICAgICB9XHJcbiAgICAgICAgZWxzZSBpZiAodGhpcy5sb2NhdGlvbi5pdGVtcy5zb21lKG5hbWUgPT09IG9iamVjdCkpIHtcclxuICAgICAgICAgICAgcmV0dXJuIHRoaXMubG9jYXRpb24uaXRlbXMuZmluZChuYW1lID09PSBvYmplY3QpLmRlc2NyaXB0aW9uO1xyXG4gICAgICAgIH1cclxuICAgICAgICBlbHNlIHtcclxuICAgICAgICAgICAgcmV0dXJuIGBJIGRvbid0IHNlZSB0aGF0IGhlcmUuYDtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbiAgICB0YWtlKG9iamVjdCkge1xyXG4gICAgICAgIGlmICh0aGlzLmxvY2F0aW9uLml0ZW1zLnNvbWUoaXRlbSA9PiBpdGVtLm5hbWUudG9Mb3dlckNhc2UoKSA9PT0gb2JqZWN0KSkge1xyXG4gICAgICAgICAgICB0aGlzLmludmVudG9yeS5wdXNoKHRoaXMubG9jYXRpb24uaXRlbXMuZmluZChpdGVtID0+IGl0ZW0ubmFtZS50b0xvd2VyQ2FzZSgpID09PSBvYmplY3QpKTtcclxuICAgICAgICAgICAgdGhpcy5sb2NhdGlvbi5yZW1vdmVJdGVtKHRoaXMubG9jYXRpb24uaXRlbXMuZmluZChpdGVtID0+IGl0ZW0ubmFtZS50b0xvd2VyQ2FzZSgpID09PSBvYmplY3QpKTtcclxuICAgICAgICAgICAgcmV0dXJuIGBHb3QgJHtvYmplY3R9LmA7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgICByZXR1cm4gYEkgZG9uJ3Qgc2VlIHRoYXQgaGVyZS5gO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuICAgIHVzZShvYmplY3QsIHNlY29uZE9iamVjdCkge1xyXG4gICAgICAgIC8vIHVzaW5nIG9iamVjdCBcIm9uXCIgc29tZXRoaW5nXHJcbiAgICAgICAgaWYgKHNlY29uZE9iamVjdCkge1xyXG4gICAgICAgICAgICAvL2NoZWNrIGlmIHNlY29uZCBvYmplY3QgaXMgaW4gYXJlYSBvciBvbiBwbGF5ZXJcclxuICAgICAgICAgICAgaWYgKHRoaXMubG9jYXRpb24uaXRlbXMuc29tZShpdGVtID0+IGl0ZW0ubmFtZS50b0xvd2VyQ2FzZSgpID09PSBzZWNvbmRPYmplY3QpIHx8IHRoaXMuaW52ZW50b3J5LnNvbWUoaXRlbSA9PiBpdGVtLm5hbWUudG9Mb3dlckNhc2UoKSA9PT0gc2Vjb25kT2JqZWN0KSkge1xyXG4gICAgICAgICAgICAgICAgLy9jaGVjayBpZiBwbGF5ZXIgaGFzIGZpcnN0IG9iamVjdFxyXG4gICAgICAgICAgICAgICAgaWYgKHRoaXMuaW52ZW50b3J5LnNvbWUoaXRlbSA9PiBpdGVtLm5hbWUudG9Mb3dlckNhc2UoKSA9PT0gb2JqZWN0KSkgeyByZXR1cm4gc2Vjb25kT2JqZWN0LnVzZShvYmplY3QpOyB9XHJcbiAgICAgICAgICAgICAgICBlbHNlIHsgcmV0dXJuIGBZb3UgZG9uJ3QgaGF2ZSBhICR7b2JqZWN0fS5gOyB9XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgZWxzZSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gYFRoZXJlIGlzIG5vICR7c2Vjb25kT2JqZWN0fSBoZXJlLmA7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICB9XHJcbiAgICAgICAgLy8gdXNpbmcgb2JqZWN0IGJ5IGl0c2VsZlxyXG4gICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgICBpZiAodGhpcy5sb2NhdGlvbi5pdGVtcy5zb21lKGl0ZW0gPT4gaXRlbS5uYW1lLnRvTG93ZXJDYXNlKCkgPT09IG9iamVjdCkpIHtcclxuICAgICAgICAgICAgICAgIHJldHVybiB0aGlzLmxvY2F0aW9uLml0ZW1zLmZpbmQoaXRlbSA9PiBpdGVtLm5hbWUudG9Mb3dlckNhc2UoKSA9PT0gb2JqZWN0KS51c2UoXCJwbGF5ZXJcIik7XHJcbiAgICAgICAgICAgIH1cclxuICAgICAgICAgICAgZWxzZSBpZiAodGhpcy5pbnZlbnRvcnkuc29tZShpdGVtID0+IGl0ZW0ubmFtZS50b0xvd2VyQ2FzZSgpID09PSBvYmplY3QpKSB7XHJcbiAgICAgICAgICAgICAgICByZXR1cm4gdGhpcy5pbnZlbnRvcnkuZmluZChpdGVtID0+IGl0ZW0ubmFtZS50b0xvd2VyQ2FzZSgpID09PSBvYmplY3QpLnVzZShcInBsYXllclwiKTtcclxuICAgICAgICAgICAgfVxyXG4gICAgICAgICAgICBlbHNlIHsgcmV0dXJuIGBZb3UgZG9uJ3QgaGF2ZSBhICR7b2JqZWN0fS5gOyB9XHJcbiAgICAgICAgfVxyXG4gICAgfVxyXG59XHJcblxyXG5tb2R1bGUuZXhwb3J0cyA9IFBsYXllcjtcblxuXG4vLy8vLy8vLy8vLy8vLy8vLy9cbi8vIFdFQlBBQ0sgRk9PVEVSXG4vLyAuL21vZHVsZXMvcGxheWVyLmpzXG4vLyBtb2R1bGUgaWQgPSAyXG4vLyBtb2R1bGUgY2h1bmtzID0gMCJdLCJtYXBwaW5ncyI6IkFBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///2\n");
 
 /***/ }),
-/* 3 */,
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+eval("﻿var classes = __webpack_require__(0);\r\nvar Player = __webpack_require__(2);\r\nvar Areas = __webpack_require__(1);\r\nvar newInput = __webpack_require__(4);\r\n\r\nwindow.onload = function () {\r\n    player = new Player();\r\n    let output = document.querySelector(\".output\");\r\n    output.innerText = `${player.location.describe()}\\n\\n`;\r\n    document.querySelector(\"form\").addEventListener(\"submit\", function (e) {\r\n        e.preventDefault();\r\n        let input = document.querySelector(\"input\");\r\n        output.innerText += newInput(player, input.value);\r\n        input.value = \"\";\r\n    });\r\n}//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiMy5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21vZHVsZXMvZ2FtZS5qcz9iMWRkIl0sInNvdXJjZXNDb250ZW50IjpbIu+7v3ZhciBjbGFzc2VzID0gcmVxdWlyZShcIi4vY2xhc3Nlc1wiKTtcclxudmFyIFBsYXllciA9IHJlcXVpcmUoXCIuL3BsYXllclwiKTtcclxudmFyIEFyZWFzID0gcmVxdWlyZShcIi4vYXJlYS1kYXRhXCIpO1xyXG52YXIgbmV3SW5wdXQgPSByZXF1aXJlKFwiLi9lbmdpbmVcIik7XHJcblxyXG53aW5kb3cub25sb2FkID0gZnVuY3Rpb24gKCkge1xyXG4gICAgcGxheWVyID0gbmV3IFBsYXllcigpO1xyXG4gICAgbGV0IG91dHB1dCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIub3V0cHV0XCIpO1xyXG4gICAgb3V0cHV0LmlubmVyVGV4dCA9IGAke3BsYXllci5sb2NhdGlvbi5kZXNjcmliZSgpfVxcblxcbmA7XHJcbiAgICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKFwiZm9ybVwiKS5hZGRFdmVudExpc3RlbmVyKFwic3VibWl0XCIsIGZ1bmN0aW9uIChlKSB7XHJcbiAgICAgICAgZS5wcmV2ZW50RGVmYXVsdCgpO1xyXG4gICAgICAgIGxldCBpbnB1dCA9IGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCJpbnB1dFwiKTtcclxuICAgICAgICBvdXRwdXQuaW5uZXJUZXh0ICs9IG5ld0lucHV0KHBsYXllciwgaW5wdXQudmFsdWUpO1xyXG4gICAgICAgIGlucHV0LnZhbHVlID0gXCJcIjtcclxuICAgIH0pO1xyXG59XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9tb2R1bGVzL2dhbWUuanNcbi8vIG1vZHVsZSBpZCA9IDNcbi8vIG1vZHVsZSBjaHVua3MgPSAwIl0sIm1hcHBpbmdzIjoiQUFBQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///3\n");
+
+/***/ }),
 /* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
-﻿var classes = __webpack_require__(1);
-
-var areaData = [{
-    "name": "Start Room",
-    "description": "Starting room. Boring.",
-    "exits": [{
-        "cardinal": "north",
-        "destination": "North Room",
-        "description": "path to north room"
-    }],
-    "items": [{
-        "name": "Rock",
-        "description": "A rock.",
-        "value": 0
-    },
-    {
-        "name": "Rock 2",
-        "description": "The sequel to rock.",
-        "value": 0
-    }]
-}, {
-    "name": "North Room",
-    "description": "The room in the north.",
-    "exits": [{
-        "cardinal": "south",
-        "destination": "Start Room",
-        "description": "path to the start"
-    }],
-    "items": [{
-        "name": "Stick",
-        "description": "A stick.",
-        "value": 0
-    }]
-}];
-
-var Areas = areaData.map(area => new classes.Area(area));
-Areas.get = function (roomName) {
-    return Areas.find(room => room.name === roomName);
-};
-
-module.exports = Areas;
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-﻿var classes = __webpack_require__(1);
-var Areas = __webpack_require__(4);
-
-class Player {
-    constructor() {
-        this.inventory = [];
-        this.location = Areas.get("Start Room");
-    }
-    listInventory() {
-        let output = `You have: `;
-        for (let item of this.inventory) {
-            output += item.name;
-        }
-        return output;
-    }
-    transport(roomName) {
-        let newRoom = Areas.get(roomName);
-        if (newRoom) { this.location = newRoom; }
-        else { console.log("Error: invalid room name passed to transport") };
-    }
-    move(direction) {
-        if (this.location.exits.some(exit => exit.cardinal === direction)) {
-            this.transport(this.location.exits.find(exit => exit.cardinal === direction).destination);
-            return `You move ${direction}.`;
-        }
-        else { return `You can't go ${direction} here.`; }
-    }
-    look() {
-        return this.location.description;
-    }
-    examine(object) {
-        if (this.inventory.some(name === object)) {
-            return this.inventory.find(name === object).description;
-        }
-        else if (this.location.items.some(name === object)) {
-            return this.location.items.find(name === object).description;
-        }
-        else {
-            return `I don't see that here.`;
-        }
-    }
-    take(object) {
-        if (this.location.items.some(item => item.name.toLowerCase() === object)) {
-            this.inventory.push(this.location.items.find(item => item.name.toLowerCase() === object));
-            this.location.removeItem(this.location.items.find(item => item.name.toLowerCase() === object));
-            return `Got ${object}.`;
-        }
-        else {
-            return `I don't see that here.`;
-        }
-    }
-    use(object, secondObject) {
-        // using object "on" something
-        if (secondObject) {
-            //check if second object is in area or on player
-            if (this.location.items.some(item => item.name.toLowerCase() === secondObject) || this.inventory.some(item => item.name.toLowerCase() === secondObject)) {
-                //check if player has first object
-                if (this.inventory.some(item => item.name.toLowerCase() === object)) { return secondObject.use(object); }
-                else { return `You don't have a ${object}.`; }
-            }
-            else {
-                return `There is no ${secondObject} here.`;
-            }
-        }
-        // using object by itself
-        else {
-            if (this.location.items.some(item => item.name.toLowerCase() === object)) {
-                return this.location.items.find(item => item.name.toLowerCase() === object).use("player");
-            }
-            else if (this.inventory.some(item => item.name.toLowerCase() === object)) {
-                return this.inventory.find(item => item.name.toLowerCase() === object).use("player");
-            }
-            else { return `You don't have a ${object}.`; }
-        }
-    }
-}
-
-module.exports = Player;
+eval("﻿var classes = __webpack_require__(0);\r\nvar player = __webpack_require__(2);\r\nvar Areas = __webpack_require__(1);\r\n\r\nlet directions = [\"north\", \"n\", \"south\", \"s\", \"east\", \"e\", \"west\", \"w\", \"southwest\", \"sw\", \"northwest\", \"nw\", \"northeast\", \"ne\", \"southwest\", \"se\"];\r\nlet take = [\"get\", \"take\", \"steal\", \"grab\"];\r\nlet inventory = [\"i\", \"inventory\"]\r\n\r\nfunction parseDirections(input) {\r\n    switch (input) {\r\n        case \"n\":\r\n        case \"north\":\r\n            input = \"north\";\r\n            break;\r\n        case \"s\":\r\n        case \"south\":\r\n            input = \"south\";\r\n            break;\r\n        case \"e\":\r\n        case \"east\":\r\n            input = \"east\";\r\n            break;\r\n        case \"w\":\r\n        case \"west\":\r\n            input = \"west\";\r\n            break;\r\n        case \"nw\":\r\n        case \"northwest\":\r\n            input = \"northwest\";\r\n            break;\r\n        case \"sw\":\r\n        case \"southwest\":\r\n            input = \"southwest\";\r\n            break;\r\n        case \"se\":\r\n        case \"southeast\":\r\n            input = \"southeast\";\r\n            break;\r\n        case \"ne\":\r\n        case \"northeast\":\r\n            input = \"northeast\";\r\n            break;\r\n    }\r\n    return input;\r\n}\r\n\r\nfunction newInput(player, input) {\r\n    let output = new classes.Output(input);\r\n\r\n    input = input.toLowerCase();\r\n    input = input.split(\" \");\r\n\r\n    if (inventory.includes(input[0])) {\r\n        output.addWithBreaks(player.listInventory());\r\n        return output.text;\r\n    }\r\n\r\n    if (input[0] === \"move\" || input[0] === \"go\") {\r\n        input.splice(0, 1);\r\n    }\r\n\r\n    let verb = input[0];\r\n    input.splice(0, 1);\r\n\r\n    if (directions.includes(verb)) {\r\n        output.addWithBreaks(player.move(parseDirections(verb)));\r\n        output.addWithBreaks(player.location.describe());\r\n        return output.text;\r\n    }\r\n\r\n    if (verb === \"look\") {\r\n        if (input[0] === \"at\") {\r\n            verb = \"examine\";\r\n            input.splice(0, 1);\r\n        }\r\n        else if (input[0] === undefined) {\r\n            output.addWithBreaks(player.look());\r\n        }\r\n        else {\r\n            output.addWithBreaks(player.examine(input[0]));\r\n        }\r\n    }\r\n\r\n    if (input.includes(\"on\")) {\r\n        let onPos = indexOf(\"on\");\r\n        let noun = input.slice(0, onPos - 1).join(\" \");\r\n        let secondNoun = input.slice(onPos + 1, input.length);\r\n    }\r\n    else {\r\n        let noun = input.join(\" \");\r\n\r\n        if (verb === \"examine\") {\r\n            output.addWithBreaks(player.examine(noun));\r\n        }\r\n        else if (take.includes(verb)) {\r\n            output.addWithBreaks(player.take(noun));\r\n        }\r\n        else if (verb === \"use\") {\r\n            output.addWithBreaks(player.use(noun));\r\n        }\r\n    }\r\n    return output.text;\r\n}\r\n\r\nmodule.exports = newInput;//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiNC5qcyIsInNvdXJjZXMiOlsid2VicGFjazovLy8uL21vZHVsZXMvZW5naW5lLmpzP2UzNTEiXSwic291cmNlc0NvbnRlbnQiOlsi77u/dmFyIGNsYXNzZXMgPSByZXF1aXJlKFwiLi9jbGFzc2VzLmpzXCIpO1xyXG52YXIgcGxheWVyID0gcmVxdWlyZShcIi4vcGxheWVyLmpzXCIpO1xyXG52YXIgQXJlYXMgPSByZXF1aXJlKFwiLi9hcmVhLWRhdGEuanNcIik7XHJcblxyXG5sZXQgZGlyZWN0aW9ucyA9IFtcIm5vcnRoXCIsIFwiblwiLCBcInNvdXRoXCIsIFwic1wiLCBcImVhc3RcIiwgXCJlXCIsIFwid2VzdFwiLCBcIndcIiwgXCJzb3V0aHdlc3RcIiwgXCJzd1wiLCBcIm5vcnRod2VzdFwiLCBcIm53XCIsIFwibm9ydGhlYXN0XCIsIFwibmVcIiwgXCJzb3V0aHdlc3RcIiwgXCJzZVwiXTtcclxubGV0IHRha2UgPSBbXCJnZXRcIiwgXCJ0YWtlXCIsIFwic3RlYWxcIiwgXCJncmFiXCJdO1xyXG5sZXQgaW52ZW50b3J5ID0gW1wiaVwiLCBcImludmVudG9yeVwiXVxyXG5cclxuZnVuY3Rpb24gcGFyc2VEaXJlY3Rpb25zKGlucHV0KSB7XHJcbiAgICBzd2l0Y2ggKGlucHV0KSB7XHJcbiAgICAgICAgY2FzZSBcIm5cIjpcclxuICAgICAgICBjYXNlIFwibm9ydGhcIjpcclxuICAgICAgICAgICAgaW5wdXQgPSBcIm5vcnRoXCI7XHJcbiAgICAgICAgICAgIGJyZWFrO1xyXG4gICAgICAgIGNhc2UgXCJzXCI6XHJcbiAgICAgICAgY2FzZSBcInNvdXRoXCI6XHJcbiAgICAgICAgICAgIGlucHV0ID0gXCJzb3V0aFwiO1xyXG4gICAgICAgICAgICBicmVhaztcclxuICAgICAgICBjYXNlIFwiZVwiOlxyXG4gICAgICAgIGNhc2UgXCJlYXN0XCI6XHJcbiAgICAgICAgICAgIGlucHV0ID0gXCJlYXN0XCI7XHJcbiAgICAgICAgICAgIGJyZWFrO1xyXG4gICAgICAgIGNhc2UgXCJ3XCI6XHJcbiAgICAgICAgY2FzZSBcIndlc3RcIjpcclxuICAgICAgICAgICAgaW5wdXQgPSBcIndlc3RcIjtcclxuICAgICAgICAgICAgYnJlYWs7XHJcbiAgICAgICAgY2FzZSBcIm53XCI6XHJcbiAgICAgICAgY2FzZSBcIm5vcnRod2VzdFwiOlxyXG4gICAgICAgICAgICBpbnB1dCA9IFwibm9ydGh3ZXN0XCI7XHJcbiAgICAgICAgICAgIGJyZWFrO1xyXG4gICAgICAgIGNhc2UgXCJzd1wiOlxyXG4gICAgICAgIGNhc2UgXCJzb3V0aHdlc3RcIjpcclxuICAgICAgICAgICAgaW5wdXQgPSBcInNvdXRod2VzdFwiO1xyXG4gICAgICAgICAgICBicmVhaztcclxuICAgICAgICBjYXNlIFwic2VcIjpcclxuICAgICAgICBjYXNlIFwic291dGhlYXN0XCI6XHJcbiAgICAgICAgICAgIGlucHV0ID0gXCJzb3V0aGVhc3RcIjtcclxuICAgICAgICAgICAgYnJlYWs7XHJcbiAgICAgICAgY2FzZSBcIm5lXCI6XHJcbiAgICAgICAgY2FzZSBcIm5vcnRoZWFzdFwiOlxyXG4gICAgICAgICAgICBpbnB1dCA9IFwibm9ydGhlYXN0XCI7XHJcbiAgICAgICAgICAgIGJyZWFrO1xyXG4gICAgfVxyXG4gICAgcmV0dXJuIGlucHV0O1xyXG59XHJcblxyXG5mdW5jdGlvbiBuZXdJbnB1dChwbGF5ZXIsIGlucHV0KSB7XHJcbiAgICBsZXQgb3V0cHV0ID0gbmV3IGNsYXNzZXMuT3V0cHV0KGlucHV0KTtcclxuXHJcbiAgICBpbnB1dCA9IGlucHV0LnRvTG93ZXJDYXNlKCk7XHJcbiAgICBpbnB1dCA9IGlucHV0LnNwbGl0KFwiIFwiKTtcclxuXHJcbiAgICBpZiAoaW52ZW50b3J5LmluY2x1ZGVzKGlucHV0WzBdKSkge1xyXG4gICAgICAgIG91dHB1dC5hZGRXaXRoQnJlYWtzKHBsYXllci5saXN0SW52ZW50b3J5KCkpO1xyXG4gICAgICAgIHJldHVybiBvdXRwdXQudGV4dDtcclxuICAgIH1cclxuXHJcbiAgICBpZiAoaW5wdXRbMF0gPT09IFwibW92ZVwiIHx8IGlucHV0WzBdID09PSBcImdvXCIpIHtcclxuICAgICAgICBpbnB1dC5zcGxpY2UoMCwgMSk7XHJcbiAgICB9XHJcblxyXG4gICAgbGV0IHZlcmIgPSBpbnB1dFswXTtcclxuICAgIGlucHV0LnNwbGljZSgwLCAxKTtcclxuXHJcbiAgICBpZiAoZGlyZWN0aW9ucy5pbmNsdWRlcyh2ZXJiKSkge1xyXG4gICAgICAgIG91dHB1dC5hZGRXaXRoQnJlYWtzKHBsYXllci5tb3ZlKHBhcnNlRGlyZWN0aW9ucyh2ZXJiKSkpO1xyXG4gICAgICAgIG91dHB1dC5hZGRXaXRoQnJlYWtzKHBsYXllci5sb2NhdGlvbi5kZXNjcmliZSgpKTtcclxuICAgICAgICByZXR1cm4gb3V0cHV0LnRleHQ7XHJcbiAgICB9XHJcblxyXG4gICAgaWYgKHZlcmIgPT09IFwibG9va1wiKSB7XHJcbiAgICAgICAgaWYgKGlucHV0WzBdID09PSBcImF0XCIpIHtcclxuICAgICAgICAgICAgdmVyYiA9IFwiZXhhbWluZVwiO1xyXG4gICAgICAgICAgICBpbnB1dC5zcGxpY2UoMCwgMSk7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGVsc2UgaWYgKGlucHV0WzBdID09PSB1bmRlZmluZWQpIHtcclxuICAgICAgICAgICAgb3V0cHV0LmFkZFdpdGhCcmVha3MocGxheWVyLmxvb2soKSk7XHJcbiAgICAgICAgfVxyXG4gICAgICAgIGVsc2Uge1xyXG4gICAgICAgICAgICBvdXRwdXQuYWRkV2l0aEJyZWFrcyhwbGF5ZXIuZXhhbWluZShpbnB1dFswXSkpO1xyXG4gICAgICAgIH1cclxuICAgIH1cclxuXHJcbiAgICBpZiAoaW5wdXQuaW5jbHVkZXMoXCJvblwiKSkge1xyXG4gICAgICAgIGxldCBvblBvcyA9IGluZGV4T2YoXCJvblwiKTtcclxuICAgICAgICBsZXQgbm91biA9IGlucHV0LnNsaWNlKDAsIG9uUG9zIC0gMSkuam9pbihcIiBcIik7XHJcbiAgICAgICAgbGV0IHNlY29uZE5vdW4gPSBpbnB1dC5zbGljZShvblBvcyArIDEsIGlucHV0Lmxlbmd0aCk7XHJcbiAgICB9XHJcbiAgICBlbHNlIHtcclxuICAgICAgICBsZXQgbm91biA9IGlucHV0LmpvaW4oXCIgXCIpO1xyXG5cclxuICAgICAgICBpZiAodmVyYiA9PT0gXCJleGFtaW5lXCIpIHtcclxuICAgICAgICAgICAgb3V0cHV0LmFkZFdpdGhCcmVha3MocGxheWVyLmV4YW1pbmUobm91bikpO1xyXG4gICAgICAgIH1cclxuICAgICAgICBlbHNlIGlmICh0YWtlLmluY2x1ZGVzKHZlcmIpKSB7XHJcbiAgICAgICAgICAgIG91dHB1dC5hZGRXaXRoQnJlYWtzKHBsYXllci50YWtlKG5vdW4pKTtcclxuICAgICAgICB9XHJcbiAgICAgICAgZWxzZSBpZiAodmVyYiA9PT0gXCJ1c2VcIikge1xyXG4gICAgICAgICAgICBvdXRwdXQuYWRkV2l0aEJyZWFrcyhwbGF5ZXIudXNlKG5vdW4pKTtcclxuICAgICAgICB9XHJcbiAgICB9XHJcbiAgICByZXR1cm4gb3V0cHV0LnRleHQ7XHJcbn1cclxuXHJcbm1vZHVsZS5leHBvcnRzID0gbmV3SW5wdXQ7XG5cblxuLy8vLy8vLy8vLy8vLy8vLy8vXG4vLyBXRUJQQUNLIEZPT1RFUlxuLy8gLi9tb2R1bGVzL2VuZ2luZS5qc1xuLy8gbW9kdWxlIGlkID0gNFxuLy8gbW9kdWxlIGNodW5rcyA9IDAiXSwibWFwcGluZ3MiOiJBQUFBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSIsInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///4\n");
 
 /***/ })
 /******/ ]);

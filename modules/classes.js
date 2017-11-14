@@ -64,11 +64,20 @@ class Area {
         return output;
     }
     listItems() {
-        let output = `On the ground there is: `
-        for (let item of this.items) {
-            output += `${item.name}`
+        let output;
+        if (this.items.length !== 0) {
+            output = `On the ground there is `
+            for (let i = 0; i < this.items.length; i++) {
+                output += `a ${this.items[i].name}`
+                if (i + 1 !== this.items.length) {
+                    output += ', ';
+                    if (i + 2 === this.items.length) {
+                        output += 'and ';
+                    }
+                }
+            }
+            output += '.';
         }
-        output += '.';
         return output;
     }
     describe() {

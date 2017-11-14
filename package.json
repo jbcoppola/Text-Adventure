@@ -1,0 +1,26 @@
+{
+  "name": "textadventure",
+  "version": "1.0.0",
+  "description": "Text adventure game",
+  "main": "node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --progress -p",
+    "watch": "webpack --progress --watch",
+    "server": "webpack-dev-server --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jbcoppola/Text-Adventure.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jbcoppola/Text-Adventure/issues"
+  },
+  "homepage": "https://github.com/jbcoppola/Text-Adventure#readme",
+  "devDependencies": {
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
+  }
+}

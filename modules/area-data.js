@@ -9,12 +9,12 @@ var areaData = [{
         "description": "path to north room"
     }],
     "items": [{
-        "name": "Rock",
+        "name": "rock",
         "description": "A rock.",
         "value": 0
     },
     {
-        "name": "Rock 2",
+        "name": "rock 2",
         "description": "The sequel to rock.",
         "value": 0
     }]
@@ -27,7 +27,7 @@ var areaData = [{
         "description": "path to the start"
     }],
     "items": [{
-        "name": "Stick",
+        "name": "stick",
         "description": "A stick.",
         "value": 0
     }]
