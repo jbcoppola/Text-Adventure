@@ -26,14 +26,14 @@ class Player {
         else { return `You can't go ${direction} here.`; }
     }
     look() {
-        return this.location.description;
+        return this.location.describe();
     }
     examine(object) {
-        if (this.inventory.some(name === object)) {
-            return this.inventory.find(name === object).description;
+        if (this.inventory.some(item => item.name === object)) {
+            return this.inventory.find(item => item.name === object).description;
         }
-        else if (this.location.items.some(name === object)) {
-            return this.location.items.find(name === object).description;
+        else if (this.location.items.some(item => item.name === object)) {
+            return this.location.items.find(item => item.name === object).description;
         }
         else {
             return `I don't see that here.`;
@@ -50,28 +50,36 @@ class Player {
         }
     }
     use(object, secondObject) {
-        // using object "on" something
-        if (secondObject) {
-            //check if second object is in area or on player
-            if (this.location.items.some(item => item.name.toLowerCase() === secondObject) || this.inventory.some(item => item.name.toLowerCase() === secondObject)) {
-                //check if player has first object
-                if (this.inventory.some(item => item.name.toLowerCase() === object)) { return secondObject.use(object); }
+        //check if player has first object
+        if (this.inventory.some(item => item.name.toLowerCase() === object)) {
+            // using object "on" something
+            if (secondObject) {
+                //check if second object is in area
+                if (this.location.items.some(item => item.name.toLowerCase() === secondObject)) {
+                    return this.location.items.find(item => item.name.toLowerCase() === secondObject).use(object);
+                }
+                //...or in inventory
+                else if (this.inventory.some(item => item.name.toLowerCase() === secondObject)) {
+                    return this.inventory.find(item => item.name.toLowerCase() === secondObject).use(object);
+                }
+                else {
+                    return `There is no ${secondObject} here.`;
+                }
+            }
+            // using object by itself
+            else {
+                //check if object is in area
+                if (this.location.items.some(item => item.name.toLowerCase() === object)) {
+                    return this.location.items.find(item => item.name.toLowerCase() === object).use("player");
+                }
+                //...or in inventory
+                else if (this.inventory.some(item => item.name.toLowerCase() === object)) {
+                    return this.inventory.find(item => item.name.toLowerCase() === object).use("player");
+                }
                 else { return `You don't have a ${object}.`; }
             }
-            else {
-                return `There is no ${secondObject} here.`;
-            }
         }
-        // using object by itself
-        else {
-            if (this.location.items.some(item => item.name.toLowerCase() === object)) {
-                return this.location.items.find(item => item.name.toLowerCase() === object).use("player");
-            }
-            else if (this.inventory.some(item => item.name.toLowerCase() === object)) {
-                return this.inventory.find(item => item.name.toLowerCase() === object).use("player");
-            }
-            else { return `You don't have a ${object}.`; }
-        }
+        else { return `You don't have a ${object}.`; }
     }
 }
 

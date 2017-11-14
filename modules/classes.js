@@ -16,7 +16,7 @@
             return `Use ${this.name} on what?`;
         }
         else {
-            return `Can't use ${object.name} on ${this.name}.`;
+            return `Can't use ${object} on ${this.name}.`;
         }
     }
 }
@@ -81,7 +81,14 @@ class Area {
         return output;
     }
     describe() {
-        return `${this.description}\n\n${this.listExits()}\n${this.listItems()}`;
+        let output = `${this.description}\n\n`;
+        if (this.listExits !== undefined) {
+            output += `${this.listExits()}\n`;
+        }
+        if (this.listItems() !== undefined) {
+            output += `${this.listItems()}`;
+        }
+        return output;
     }
 }
 

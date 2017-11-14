@@ -77,27 +77,31 @@ function newInput(player, input) {
             output.addWithBreaks(player.look());
         }
         else {
-            output.addWithBreaks(player.examine(input[0]));
-        }
-    }
-
-    if (input.includes("on")) {
-        let onPos = indexOf("on");
-        let noun = input.slice(0, onPos - 1).join(" ");
-        let secondNoun = input.slice(onPos + 1, input.length);
-    }
-    else {
-        let noun = input.join(" ");
-
-        if (verb === "examine") {
+            let noun = input.join(" ");
             output.addWithBreaks(player.examine(noun));
         }
-        else if (take.includes(verb)) {
-            output.addWithBreaks(player.take(noun));
+    }
+    if (verb === "examine") {
+        let noun = input.join(" ");
+        output.addWithBreaks(player.examine(noun));
+    }
+    if (take.includes(verb)) {
+        let noun = input.join(" ");
+        output.addWithBreaks(player.take(noun));
+    }
+
+    if (verb === "use") {
+        let noun;
+        let secondNoun;
+        if (input.includes("on")) {
+            let onPos = input.indexOf("on");
+            noun = input.slice(0, onPos).join(" ");
+            secondNoun = input.slice(onPos + 1, input.length).join(" ");
         }
-        else if (verb === "use") {
-            output.addWithBreaks(player.use(noun));
+        else {
+            noun = input.join(" ");
         }
+        output.addWithBreaks(player.use(noun, secondNoun));
     }
     return output.text;
 }
