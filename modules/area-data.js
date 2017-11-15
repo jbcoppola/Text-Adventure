@@ -14,7 +14,12 @@ var areaData = [{
         "onGround": true,
         "used": {
             "with": "rock 2",
-            "text": "The rock explodes."
+            "text": "The rock explodes into powder.",
+            "creates": {
+                "name": "rock dust",
+                "description": "The remains of the rock.",
+                "onGround": true,
+            }
         }
     },
     {
@@ -23,7 +28,8 @@ var areaData = [{
         "onGround": true,
         "used": {
             "with": "rock",
-            "text": "Rock 2 implodes."
+            "text": "Rock 2 is impervious to force.",
+            "destroy": false
         }
     },
     {
@@ -33,9 +39,18 @@ var areaData = [{
         "onGround": true,
         "used": {
             "with": "rock",
-            "text": "The lever snaps off at the base."
+            "text": "The lever snaps off at the base.",
+            "creates":
+            {
+                "name": "snapped lever",
+                "description": "The unusable base of the snapped lever.",
+                "active": false,
+                "takeable": false,
+                "onGround": true,
+            }
         }
-    }]
+    }
+    ]
 },
 {
     "name": "North Room",

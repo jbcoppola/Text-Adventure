@@ -3,9 +3,12 @@
         this.name = name;
         this.description = description;
         this.value = value;
+        //for listing whether item is on ground (applies to dropped objects)
         this.onGround = onGround;
+        //whether the player can add the item to inventory
         this.takeable = takeable;
-        this.used = { with: used.with, text: used.text };
+        //items the item can be used with, the description of what happens when used, whether item is destroyed on use, and what the item creates after use
+        this.used = { with: used.with, text: used.text, destroy: used.destroy, creates: used.creates };
     }
     print() {
         return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;
@@ -69,13 +72,13 @@ class Area {
     listItems() {
         let output;
         //index of last item in area on the ground
-        let lastOnGround = this.items.length - this.items.slice().reverse().findIndex(item => item.onGround === true) - 1;
+        let lastOnGround = this.items.length - this.items.slice().reverse().findIndex(item => item.onGround) - 1;
 
         //formatting the grammar for listed objects
         if (this.items.some(item => item.onGround)) {
             output = `\nOn the ground there is `
             for (let i = 0; i < this.items.length; i++) {
-                if (this.items[i].onGround === true) {
+                if (this.items[i].onGround) {
 
                     if (i === lastOnGround) {
                         output += 'and ';
