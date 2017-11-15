@@ -1,8 +1,9 @@
 ﻿class Item {
-    constructor({ name, description, value = 0, takeable = true, used = {}}) {
+    constructor({ name, description, value = 0, takeable = true, onGround = false, used = {}}) {
         this.name = name;
         this.description = description;
         this.value = value;
+        this.onGround = onGround;
         this.takeable = takeable;
         this.used = { with: used.with, text: used.text };
     }
@@ -64,24 +65,25 @@ class Area {
         }
         return output;
     }
+    //lists every item on ground (for items dropped by player or just lying around)
     listItems() {
         let output;
-        //index of last takeable item in area
-        let lastTakeable = this.items.length - this.items.slice().reverse().findIndex(item => item.takeable === true) - 1;
+        //index of last item in area on the ground
+        let lastOnGround = this.items.length - this.items.slice().reverse().findIndex(item => item.onGround === true) - 1;
 
         //formatting the grammar for listed objects
-        if (this.items.length !== 0) {
-            output = `On the ground there is `
+        if (this.items.some(item => item.onGround)) {
+            output = `\nOn the ground there is `
             for (let i = 0; i < this.items.length; i++) {
-                if (this.items[i].takeable === true) {
-                    
-                    if (i === lastTakeable) {
+                if (this.items[i].onGround === true) {
+
+                    if (i === lastOnGround) {
                         output += 'and ';
                     }
                     output += `a ${this.items[i].name}`;
                 }
-                //check that the array isn't about to end and at least one item left is takeable
-                if (i < lastTakeable) {
+                //check that the array isn't about to end and at least one item left is on ground
+                if (i < lastOnGround) {
                     output += ', ';
                 }
             }
@@ -92,7 +94,7 @@ class Area {
     describe() {
         let output = `${this.description}\n\n`;
         if (this.listExits !== undefined) {
-            output += `${this.listExits()}\n`;
+            output += `${this.listExits()}`;
         }
         if (this.listItems() !== undefined) {
             output += `${this.listItems()}`;

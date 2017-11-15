@@ -11,6 +11,7 @@ var areaData = [{
     "items": [{
         "name": "rock",
         "description": "A rock.",
+        "onGround": true,
         "used": {
             "with": "rock 2",
             "text": "The rock explodes."
@@ -19,6 +20,7 @@ var areaData = [{
     {
         "name": "rock 2",
         "description": "The sequel to rock.",
+        "onGround": true,
         "used": {
             "with": "rock",
             "text": "Rock 2 implodes."
@@ -28,6 +30,7 @@ var areaData = [{
         "name": "stuck lever",
         "description": "This lever is jammed. It has dents shaped like a rock.",
         "takeable": false,
+        "onGround": true,
         "used": {
             "with": "rock",
             "text": "The lever snaps off at the base."

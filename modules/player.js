@@ -41,13 +41,24 @@ class Player {
     }
     take(object) {
         if (this.location.items.some(item => item.name.toLowerCase() === object)) {
-            this.inventory.push(this.location.items.find(item => item.name.toLowerCase() === object));
-            this.location.removeItem(this.location.items.find(item => item.name.toLowerCase() === object));
-            return `Got ${object}.`;
+            if (this.location.items.find(item => item.name === object).takeable) {
+                this.inventory.push(this.location.items.find(item => item.name.toLowerCase() === object));
+                this.location.removeItem(this.location.items.find(item => item.name.toLowerCase() === object));
+                return `Got ${object}.`;
+            }
+            else {return `Can't take ${object}.`}
         }
         else {
             return `I don't see that here.`;
         }
+    }
+    drop(object) {
+        if (this.inventory.find(item => item.name.toLowerCase() === object)) {
+            this.location.addItem(this.inventory.find(item => item.name.toLowerCase() === object));
+            this.location.find(item => item.name.toLowerCase() === object).onGround = true;
+            return `Dropped ${object}.`;
+        }
+        return `You don't have a ${object}.`;
     }
     use(object, secondObject) {
         //check if player has first object
