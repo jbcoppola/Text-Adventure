@@ -7,10 +7,21 @@ class Player {
         this.location = Areas.get("Start Room");
     }
     listInventory() {
-        let output = `You have: `;
-        for (let item of this.inventory) {
-            output += item.name;
+        let output;
+        if (this.inventory.length > 0) {
+            output = `You have: `;
+            for (let i = 0; i < this.inventory.length; i++) {
+                if (i + 1 === this.inventory.length) {
+                    output += "and ";
+                }
+                output += `${this.inventory[i].name}`;
+                if (i + 1 !== this.inventory.length) {
+                    output += ", ";
+                }
+            }
+            output += ".";
         }
+        else { output = `Your inventory is empty.`; }
         return output;
     }
     check(object, str) {
