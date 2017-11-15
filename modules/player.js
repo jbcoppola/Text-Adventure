@@ -13,6 +13,18 @@ class Player {
         }
         return output;
     }
+    check(object, str) {
+        if (str === "location") {
+            return this.location.items.some(item => item.name.toLowerCase() === object);
+        }
+        else { return this.inventory.some(item => item.name.toLowerCase() === object); }
+    }
+    get(object, str) {
+        if (str === "location") {
+            return this.location.items.find(item => item.name.toLowerCase() === object);
+        }
+        else { return this.inventory.find(item => item.name.toLowerCase() === object); }
+    }
     transport(roomName) {
         let newRoom = Areas.get(roomName);
         if (newRoom) { this.location = newRoom; }
@@ -29,21 +41,21 @@ class Player {
         return this.location.describe();
     }
     examine(object) {
-        if (this.inventory.some(item => item.name === object)) {
-            return this.inventory.find(item => item.name === object).description;
+        if (this.check(object)) {
+            return this.get(object).description;
         }
-        else if (this.location.items.some(item => item.name === object)) {
-            return this.location.items.find(item => item.name === object).description;
+        else if (this.check(object, "location")) {
+            return this.get(object, "location").description;
         }
         else {
             return `I don't see that here.`;
         }
     }
     take(object) {
-        if (this.location.items.some(item => item.name.toLowerCase() === object)) {
-            if (this.location.items.find(item => item.name === object).takeable) {
-                this.inventory.push(this.location.items.find(item => item.name.toLowerCase() === object));
-                this.location.removeItem(this.location.items.find(item => item.name.toLowerCase() === object));
+        if (this.check(object, "location")) {
+            if (this.get(object, "location").takeable) {
+                this.inventory.push(this.get(object, "location"));
+                this.location.removeItem(this.get(object, "location"));
                 return `Got ${object}.`;
             }
             else {return `Can't take ${object}.`}
@@ -53,25 +65,25 @@ class Player {
         }
     }
     drop(object) {
-        if (this.inventory.find(item => item.name.toLowerCase() === object)) {
-            this.location.addItem(this.inventory.find(item => item.name.toLowerCase() === object));
-            this.location.find(item => item.name.toLowerCase() === object).onGround = true;
+        if (this.check(object)) {
+            this.location.addItem(this.get(object));
+            this.get(object, "location").onGround = true;
             return `Dropped ${object}.`;
         }
         return `You don't have a ${object}.`;
     }
     use(object, secondObject) {
         //check if player has first object
-        if (this.inventory.some(item => item.name.toLowerCase() === object)) {
+        if (this.check(object)) {
             // using object "on" something
             if (secondObject) {
                 //check if second object is in area
-                if (this.location.items.some(item => item.name.toLowerCase() === secondObject)) {
-                    return this.location.items.find(item => item.name.toLowerCase() === secondObject).use(object);
+                if (this.check(secondObject, "location")) {
+                    return this.get(secondObject, "location").use(object);
                 }
                 //...or in inventory
-                else if (this.inventory.some(item => item.name.toLowerCase() === secondObject)) {
-                    return this.inventory.find(item => item.name.toLowerCase() === secondObject).use(object);
+                else if (this.check(secondObject)) {
+                    return this.get(secondObject).use(object);
                 }
                 else {
                     return `There is no ${secondObject} here.`;
@@ -80,12 +92,12 @@ class Player {
             // using object by itself
             else {
                 //check if object is in area
-                if (this.location.items.some(item => item.name.toLowerCase() === object)) {
-                    return this.location.items.find(item => item.name.toLowerCase() === object).use("player");
+                if (this.check(object, "location")) {
+                    return this.get(object, "location").use("player");
                 }
                 //...or in inventory
-                else if (this.inventory.some(item => item.name.toLowerCase() === object)) {
-                    return this.inventory.find(item => item.name.toLowerCase() === object).use("player");
+                else if (this.check(object)) {
+                    return this.get(object).use("player");
                 }
                 else { return `You don't have a ${object}.`; }
             }
