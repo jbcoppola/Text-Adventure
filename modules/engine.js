@@ -89,7 +89,10 @@ function newInput(player, input) {
         let noun = input.join(" ");
         output.addWithBreaks(player.take(noun));
     }
-
+    if (verb === "drop") {
+        let noun = input.join(" ");
+        output.addWithBreaks(player.drop(noun));
+    }
     if (verb === "use") {
         let noun;
         let secondNoun;
