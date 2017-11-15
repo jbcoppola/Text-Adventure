@@ -67,7 +67,7 @@ class Area {
     listItems() {
         let output;
         //index of last takeable item in area
-        let lastTakeable = this.items.slice().reverse().findIndex(item => item.takeable === true);
+        let lastTakeable = this.items.length - this.items.slice().reverse().findIndex(item => item.takeable === true) - 1;
 
         //formatting the grammar for listed objects
         if (this.items.length !== 0) {
