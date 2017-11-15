@@ -11,7 +11,6 @@ var areaData = [{
     "items": [{
         "name": "rock",
         "description": "A rock.",
-        "value": 0,
         "used": {
             "with": "rock 2",
             "text": "The rock explodes."
@@ -20,13 +19,22 @@ var areaData = [{
     {
         "name": "rock 2",
         "description": "The sequel to rock.",
-        "value": 0,
         "used": {
             "with": "rock",
             "text": "Rock 2 implodes."
         }
+    },
+    {
+        "name": "stuck lever",
+        "description": "This lever is jammed. It has dents shaped like a rock.",
+        "takeable": false,
+        "used": {
+            "with": "rock",
+            "text": "The lever snaps off at the base."
+        }
     }]
-}, {
+},
+{
     "name": "North Room",
     "description": "The room in the north.",
     "exits": [{

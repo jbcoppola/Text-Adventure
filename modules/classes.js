@@ -66,15 +66,23 @@ class Area {
     }
     listItems() {
         let output;
+        //index of last takeable item in area
+        let lastTakeable = this.items.slice().reverse().findIndex(item => item.takeable === true);
+
+        //formatting the grammar for listed objects
         if (this.items.length !== 0) {
             output = `On the ground there is `
             for (let i = 0; i < this.items.length; i++) {
-                output += `a ${this.items[i].name}`
-                if (i + 1 !== this.items.length) {
-                    output += ', ';
-                    if (i + 2 === this.items.length) {
+                if (this.items[i].takeable === true) {
+                    
+                    if (i === lastTakeable) {
                         output += 'and ';
                     }
+                    output += `a ${this.items[i].name}`;
+                }
+                //check that the array isn't about to end and at least one item left is takeable
+                if (i < lastTakeable) {
+                    output += ', ';
                 }
             }
             output += '.';
