@@ -73,8 +73,8 @@ class Player {
         return `You don't have a ${object}.`;
     }
     use(object, secondObject) {
-        //check if player has first object
-        if (this.check(object)) {
+        //check if first object is present
+        if (this.check(object) || this.check(object, "location")) {
             // using object "on" something
             if (secondObject) {
                 //check if second object is in area
@@ -102,7 +102,7 @@ class Player {
                 else { return `You don't have a ${object}.`; }
             }
         }
-        else { return `You don't have a ${object}.`; }
+        else { return `There is no ${object} here.`; }
     }
 }
 
