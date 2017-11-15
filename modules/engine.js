@@ -4,7 +4,7 @@ var Areas = require("./area-data.js");
 
 let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];
 let take = ["get", "take", "steal", "grab"];
-let inventory = ["i", "inventory"]
+let inventory = ["i", "inventory"];
 
 function parseDirections(input) {
     switch (input) {
