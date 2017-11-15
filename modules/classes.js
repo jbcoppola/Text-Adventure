@@ -1,16 +1,17 @@
 ﻿class Item {
-    constructor({ name, description, value = 0, used = {}}) {
+    constructor({ name, description, value = 0, takeable = true, used = {}}) {
         this.name = name;
         this.description = description;
         this.value = value;
-        this.used = { with: used.With, text: used.Text };
+        this.takeable = takeable;
+        this.used = { with: used.with, text: used.text };
     }
     print() {
         return `Name: ${this.name}; Description: ${this.description}; Value: ${this.value}`;
     }
     use(object) {
-        if (object === this.use.usedWith) {
-            return this.use.text;
+        if (object === this.used.with) {
+            return this.used.text;
         }
         else if (object === "player") {
             return `Use ${this.name} on what?`;

@@ -11,12 +11,20 @@ var areaData = [{
     "items": [{
         "name": "rock",
         "description": "A rock.",
-        "value": 0
+        "value": 0,
+        "used": {
+            "with": "rock 2",
+            "text": "The rock explodes."
+        }
     },
     {
         "name": "rock 2",
         "description": "The sequel to rock.",
-        "value": 0
+        "value": 0,
+        "used": {
+            "with": "rock",
+            "text": "Rock 2 implodes."
+        }
     }]
 }, {
     "name": "North Room",
