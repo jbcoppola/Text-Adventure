@@ -1,5 +1,4 @@
-﻿var classes = require("./classes.js");
-var player = require("./player.js");
+﻿var classes = require("./classes/classes.js");
 var Areas = require("./area-data.js");
 
 let directions = ["north", "n", "south", "s", "east", "e", "west", "w", "southwest", "sw", "northwest", "nw", "northeast", "ne", "southwest", "se"];

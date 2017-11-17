@@ -1,10 +1,10 @@
-﻿var classes = require("./classes");
-var Player = require("./player");
+﻿var classes = require("./classes/classes.js");
 var Areas = require("./area-data");
+var Items = require("./item-data")
 var newInput = require("./engine");
 
 window.onload = function () {
-    player = new Player();
+    player = new classes.Player();
     let output = document.querySelector(".output");
     output.innerText = `${player.location.describe()}\n\n`;
     document.querySelector("form").addEventListener("submit", function (e) {
@@ -13,4 +13,4 @@ window.onload = function () {
         output.innerText += newInput(player, input.value);
         input.value = "";
     });
-}
+};

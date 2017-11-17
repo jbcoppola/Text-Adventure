@@ -1,5 +1,6 @@
 ﻿var classes = require("./classes.js");
-var Areas = require("./area-data.js");
+var Areas = require("./../area-data.js");
+var Items = require("./../item-data.js");
 
 class Player {
     constructor() {
@@ -14,34 +15,27 @@ class Player {
                 if (i + 1 === this.inventory.length) {
                     output += "and ";
                 }
-                output += `${this.inventory[i].name}`;
+                output += `${this.inventory[i]}`;
                 if (i + 1 !== this.inventory.length) {
                     output += ", ";
                 }
             }
             output += ".";
         }
+
         else { output = `Your inventory is empty.`; }
         return output;
     }
-    check(object, str) {
-        if (str === "location") {
-            return this.location.items.some(item => item.name.toLowerCase() === object);
-        }
-        else { return this.inventory.some(item => item.name.toLowerCase() === object); }
-    }
-    get(object, str) {
-        if (str === "location") {
-            return this.location.items.find(item => item.name.toLowerCase() === object);
-        }
-        else { return this.inventory.find(item => item.name.toLowerCase() === object); }
+    check(object) {
+        return this.inventory.includes(object);
     }
     remove(object) {
-        if (this.check(object)) {
-            this.inventory.splice(this.inventory.indexOf(this.get(object)), 1);
+        let location = Items.get(object).location;
+        if (location === "inventory") {
+            this.inventory.splice(this.inventory.indexOf(object), 1);
         }
-        else if (this.check(object, "location")) {
-            this.get(object, "location").splice(this.location.indexOf(this.get(object)), 1);
+        else if (location === this.location.name) {
+            this.location.removeItem(object);
         }
     }
     add(object) {
@@ -50,7 +44,7 @@ class Player {
     transport(roomName) {
         let newRoom = Areas.get(roomName);
         if (newRoom) { this.location = newRoom; }
-        else { console.log("Error: invalid room name passed to transport") };
+        else { console.log("Error: invalid room name passed to transport"); }
     }
     move(direction) {
         if (this.location.exits.some(exit => exit.cardinal === direction)) {
@@ -63,34 +57,37 @@ class Player {
         return this.location.describe();
     }
     examine(object) {
-        if (this.check(object)) {
-            return this.get(object).description;
-        }
-        else if (this.check(object, "location")) {
-            return this.get(object, "location").description;
+        let object = Items.get(object);
+        if (object.check() || object.check(this.location.name)) {
+            return object.description;
         }
         else {
             return `I don't see that here.`;
         }
     }
     take(object) {
-        if (this.check(object, "location")) {
-            if (this.get(object, "location").takeable) {
+        let newObject = Items.get(object);
+        if (newObject.check(this.location.name)) {
+            if (newObject.takeable) {
                 this.add(object);
-                this.location.removeItem(this.get(object, "location"));
+                this.location.removeItem(object);
+                newObject.location = "inventory";
+                newObject.onGround = false;
                 return `Got ${object}.`;
             }
-            else {return `Can't take ${object}.`}
+            else { return `Can't take ${object}.`;}
         }
         else {
             return `I don't see that here.`;
         }
     }
     drop(object) {
+        let dropObject = Items.get(object);
         if (this.check(object)) {
-            this.location.addItem(this.get(object));
-            this.get(object, "location").onGround = true;
+            this.location.addItem(object);
+            dropObject.onGround = true;
             this.remove(object);
+            dropObject.location = this.location.name;
             return `Dropped ${object}.`;
         }
         return `You don't have a ${object}.`;

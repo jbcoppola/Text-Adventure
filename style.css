@@ -10,11 +10,9 @@
     align-content: center;
     padding: 20px;
 }
-
 .main * {
     align-self: center;
 }
-
 .main .output {
     display: flex;
     flex-direction: column-reverse;
