@@ -12,6 +12,10 @@ var areaData = [{
         "name": "rock",
         "description": "A rock.",
         "onGround": true,
+        "break": {
+            "text": "The rock cracks and shatters.",
+            "creates": "rock ref here"
+        },
         "used": {
             "with": "rock 2",
             "text": "The rock explodes into powder.",
@@ -26,6 +30,9 @@ var areaData = [{
         "name": "rock 2",
         "description": "The sequel to rock.",
         "onGround": true,
+        "break": {
+            "text": "You smash rock 2, but can't even chip it."
+        },
         "used": {
             "with": "rock",
             "text": "Rock 2 is impervious to force.",
