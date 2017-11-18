@@ -5,9 +5,10 @@ class Area {
         this.name = name;
         this.description = description;
         this.exits = exits;
-        for (let item of items) {
-            Items.get(item).move(this.name);
-        }
+        this.items = items;
+    }
+    check(item) {
+        return this.items.includes(item);
     }
     addItem(item) {
         this.items.push(item);
@@ -37,7 +38,7 @@ class Area {
     listItems() {
         let output;
         //index of last item in area on the ground
-        let onGroundItems = Items.filter(item => item.location === this.name && item.onGround);
+        let onGroundItems = this.items.map(item => Items.get(item)).filter(item => item.onGround);
         let lastOnGround = onGroundItems.length - onGroundItems.slice().reverse().findIndex(item => item.onGround) - 1;
 
         //formatting the grammar for listed objects
@@ -69,4 +70,4 @@ class Area {
     }
 }
 
-module.exports = { Area };
+module.exports = Area;

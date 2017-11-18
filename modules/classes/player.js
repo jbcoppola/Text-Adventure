@@ -12,7 +12,7 @@ class Player {
         if (this.inventory.length > 0) {
             output = `You have: `;
             for (let i = 0; i < this.inventory.length; i++) {
-                if (i + 1 === this.inventory.length) {
+                if (i > 0 && i + 1 === this.inventory.length) {
                     output += "and ";
                 }
                 output += `${this.inventory[i]}`;
@@ -26,7 +26,8 @@ class Player {
         else { output = `Your inventory is empty.`; }
         return output;
     }
-    check(object) {
+    check(object, location) {
+        if (location) { return this.location.items.includes(object); }
         return this.inventory.includes(object);
     }
     remove(object) {
@@ -39,7 +40,7 @@ class Player {
         }
     }
     add(object) {
-        this.inventory.push(this.get(object, "location"));
+        this.inventory.push(object);
     }
     transport(roomName) {
         let newRoom = Areas.get(roomName);
@@ -57,21 +58,22 @@ class Player {
         return this.location.describe();
     }
     examine(object) {
-        let object = Items.get(object);
-        if (object.check() || object.check(this.location.name)) {
-            return object.description;
+        if (this.check(object) || this.check(object, this.location)) {
+            return Items.get(object).description;
         }
         else {
             return `I don't see that here.`;
         }
     }
     take(object) {
-        let newObject = Items.get(object);
-        if (newObject.check(this.location.name)) {
+        if (this.check(object, this.location)) {
+            let newObject = Items.get(object);
             if (newObject.takeable) {
+                console.log(object);
+                console.log(newObject);
                 this.add(object);
+                console.log(this.inventory);
                 this.location.removeItem(object);
-                newObject.location = "inventory";
                 newObject.onGround = false;
                 return `Got ${object}.`;
             }
@@ -92,39 +94,46 @@ class Player {
         }
         return `You don't have a ${object}.`;
     }
+    
     use(object, secondObject) {
+        console.log(object);
+        console.log(this.inventory);
+        console.log(this.check(object));
         //check if first object is present
-        if (this.check(object) || this.check(object, "location")) {
+        if (this.check(object) || this.check(object, this.location)) {
             // using object "on" something
             if (secondObject) {
-                let alter;
                 //check if second object is in area
-                if (this.check(secondObject, "location")) {
-                    secondObject = this.get(secondObject, "location");
-                    let description = secondObject.use(object);
-                    if (secondObject.used.creates) {
-                        let newItem = new classes.Item(secondObject.used.creates);
-                        this.location.addItem(newItem);
+                if (this.check(secondObject, this.location)) {
+                    console.log(Items.get(secondObject));
+                    let used = Items.get(secondObject).use(object);
+                    if (used) {
+                        console.log(used.creates);
+                        if (used.creates) {
+                            this.location.addItem(used.creates);
+                        }
+                        //object is destroyed unless specified
+                        if (used.destroy !== false) {
+                            this.location.removeItem(secondObject);
+                        }
+                        return used.text;
                     }
-                    //object is destroyed unless specified
-                    if (secondObject.used.destroy !== false) {
-                        this.location.removeItem(secondObject);
-                    }
-                    return description;
+                    return `Can't use ${object} on ${secondObject}.`;
                 }
                 //...or in inventory
                 else if (this.check(secondObject)) {
-                    secondObject = this.get(secondObject);
-                    let description = secondObject.use(object);
-                    if (secondObject.used.creates) {
-                        let newItem = new classes.Item(secondObject.used.creates);
-                        this.add(newItem);
+                    let used = Items.get(secondObject).use(object);
+                    if (used) {
+                        if (used.creates) {
+                            this.add(used.creates);
+                        }
+                        //object is destroyed unless specified
+                        if (used.destroy !== false) {
+                            this.remove(secondObject);
+                        }
+                        return used.text;
                     }
-                    //object is destroyed unless specified
-                    if (secondObject.used.destroy !== false) {
-                        this.remove(secondObject);
-                    }
-                    return description;
+                    return `Can't use ${object} on ${secondObject}.`;
                 }
                 else {
                     return `There is no ${secondObject} here.`;
@@ -132,13 +141,23 @@ class Player {
             }
             // using object by itself
             else {
-                //check if object is in area
-                if (this.check(object, "location")) {
-                    return this.get(object, "location").use("player");
+                //check if object is in area or in inventory
+                if (this.check(object) || this.check(object, this.location.name)) {
+                    let used = Items.get(object).use("player");
+                    if (used) {
+                        if (used.creates) {
+                            this.add(used.creates);
+                        }
+                        //object is destroyed unless specified
+                        if (used.destroy !== false) {
+                            this.remove(secondObject);
+                        }
+                        return used.description;
+                    }
+                    return `Can't use ${object} by itself.`;
                 }
-                //...or in inventory
-                else if (this.check(object)) {
-                    return this.get(object).use("player");
+                else {
+                    return `There is no ${object} here.`
                 }
             }
         }

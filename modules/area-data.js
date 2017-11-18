@@ -1,4 +1,4 @@
-﻿var classes = require('./classes/Area.js');
+﻿var Area = require('./classes/Area.js');
 
 var areaData = [{
     "name": "Start Room",
@@ -21,7 +21,7 @@ var areaData = [{
     "items": ["stick", "stuck lever"]
 }];
 
-var Areas = areaData.map(area => new classes.Area(area));
+var Areas = areaData.map(area => new Area(area));
 Areas.get = function (roomName) {
     return Areas.find(room => room.name === roomName);
 };

@@ -1,4 +1,4 @@
-﻿var classes = require("./classes/Item.js");
+﻿var Item = require("./classes/Item.js");
 
 var itemData = [{
     "name": "rock",
@@ -9,7 +9,7 @@ var itemData = [{
         "creates": "rock dust"
     },
     "used": [{
-        "with": "rock 2",
+        "usedWith": "rock 2",
         "text": "The rock explodes into powder.",
         "creates": "rock dust"
     }]
@@ -27,7 +27,7 @@ var itemData = [{
         "text": "You smash rock 2, but can't even chip it."
     },
     "used": [{
-        "with": "rock",
+        "usedWith": "rock",
         "text": "Rock 2 is impervious to force.",
         "destroy": false
     }]
@@ -38,7 +38,7 @@ var itemData = [{
     "takeable": false,
     "onGround": true,
     "used": [{
-        "with": "rock",
+        "usedWith": "rock",
         "text": "The lever snaps off at the base.",
         "creates": "snapped lever"
     }]
@@ -56,7 +56,7 @@ var itemData = [{
     "value": 0
 }];
 
-var Items = itemData.map(item => new classes.Item(item));
+var Items = itemData.map(item => new Item(item));
 Items.get = function (itemName) {
     return this.find(item => item.name === itemName);
 };

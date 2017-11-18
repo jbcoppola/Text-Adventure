@@ -10,4 +10,4 @@
     }
 }
 
-module.export = { Output };
+module.exports = Output;
