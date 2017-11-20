@@ -123,7 +123,6 @@ class Player {
         }
         else if (this.check(object, this.location)) {
             let item = Items.get(object);
-            console.log(item);
             if (item.breaks) {
                 if (item.breaks.creates) {
                     this.location.addItem(item.breaks.creates);
@@ -153,6 +152,9 @@ class Player {
                         if (used.destroy !== false) {
                             this.location.removeItem(secondObject);
                         }
+                        if (used.move) {
+                            this.transport(used.move);
+                        }
                         return used.text;
                     }
                     return `Can't use ${object} on ${secondObject}.`;
@@ -167,6 +169,9 @@ class Player {
                         //object is destroyed unless specified
                         if (used.destroy !== false) {
                             this.remove(secondObject);
+                        }
+                        if (used.move) {
+                            this.transport(used.move);
                         }
                         return used.text;
                     }
