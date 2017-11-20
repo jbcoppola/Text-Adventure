@@ -91,7 +91,29 @@ class Player {
         }
         return `You don't have a ${object}.`;
     }
-    
+    break(object) {
+        if (this.check(object)) {
+            let item = Items.get(object);
+            if (item.breaks) {
+                if (item.breaks.creates) {
+                    this.add(item.breaks.creates);
+                }
+                return item.breaks.text;
+            }
+            return `You attempt to smash the ${object} to no effect.`
+        }
+        else if (this.check(object, this.location)) {
+            let item = Items.get(object);
+            if (item.breaks) {
+                if (item.breaks.creates) {
+                    this.location.addItem(item.breaks.creates);
+                }
+                return item.breaks.text;
+            }
+            return `You attempt to smash the ${object} to no effect.`
+        }
+        return `I don't see a ${object} here.`
+    }
     use(object, secondObject) {
         console.log(object);
         console.log(this.inventory);

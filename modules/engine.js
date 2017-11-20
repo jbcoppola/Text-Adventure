@@ -69,8 +69,9 @@ function newInput(player, input) {
 
     if (verb === "look") {
         if (input[0] === "at") {
-            verb = "examine";
             input.splice(0, 1);
+            let noun = input.join(" ");
+            output.addWithBreaks(player.examine(noun));
         }
         else if (input[0] === undefined) {
             output.addWithBreaks(player.look());
@@ -80,19 +81,23 @@ function newInput(player, input) {
             output.addWithBreaks(player.examine(noun));
         }
     }
-    if (verb === "examine") {
+    else if (verb === "examine") {
         let noun = input.join(" ");
         output.addWithBreaks(player.examine(noun));
     }
-    if (take.includes(verb)) {
+    else if (take.includes(verb)) {
         let noun = input.join(" ");
         output.addWithBreaks(player.take(noun));
     }
-    if (verb === "drop") {
+    else if (verb === "drop") {
         let noun = input.join(" ");
         output.addWithBreaks(player.drop(noun));
     }
-    if (verb === "use") {
+    else if (verb === "break") {
+        let noun = input.join(" ");
+        output.addWithBreaks(player.break(noun));
+    }
+    else if (verb === "use") {
         let noun;
         let secondNoun;
         if (input.includes("on")) {
@@ -104,6 +109,9 @@ function newInput(player, input) {
             noun = input.join(" ");
         }
         output.addWithBreaks(player.use(noun, secondNoun));
+    }
+    else {
+        output.addWithBreaks(`Unrecognized command: ${verb}`);
     }
     return output.text;
 }

@@ -1,10 +1,12 @@
 ﻿var UseCase = require('./UseCase.js')
 
 class Item {
-    constructor({ name, description, value = 0, takeable = false, onGround = false, used = [] }) {
+    constructor({ name, description, value = 0, takeable = false, breaks, onGround = false, used = [] }) {
         this.name = name;
         this.description = description;
         this.value = value;
+        //what happens when player tries to break the object
+        this.breaks = breaks;
         //for listing whether item is on ground (applies to dropped objects)
         this.onGround = onGround;
         //whether the player can add the item to inventory
