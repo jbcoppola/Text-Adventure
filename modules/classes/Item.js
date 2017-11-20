@@ -1,7 +1,7 @@
 ﻿var UseCase = require('./UseCase.js')
 
 class Item {
-    constructor({ name, description, value = 0, takeable = true, onGround = false, used = [] }) {
+    constructor({ name, description, value = 0, takeable = false, onGround = false, used = [] }) {
         this.name = name;
         this.description = description;
         this.value = value;

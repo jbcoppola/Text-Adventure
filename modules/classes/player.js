@@ -5,7 +5,7 @@ var Items = require("./../item-data.js");
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Start Room");
+        this.location = Areas.get("Bus outside");
     }
     listInventory() {
         let output;
@@ -69,10 +69,7 @@ class Player {
         if (this.check(object, this.location)) {
             let newObject = Items.get(object);
             if (newObject.takeable) {
-                console.log(object);
-                console.log(newObject);
                 this.add(object);
-                console.log(this.inventory);
                 this.location.removeItem(object);
                 newObject.onGround = false;
                 return `Got ${object}.`;
