@@ -5,7 +5,7 @@ var Items = require("./../item-data.js");
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Bus outside");
+        this.location = Areas.get("Bus engine");
     }
     listInventory() {
         let output;
@@ -26,8 +26,27 @@ class Player {
         else { output = `Your inventory is empty.`; }
         return output;
     }
+    checkAlias(object) {
+        for (let [key, value] of this.location.aliases.entries()) {
+            console.log(value);
+            if (value.some(name => name === object)) {
+                console.log("returning true");
+                return true;
+            }
+        }
+        console.log("returning false");
+        return false;
+    }
+    getAlias(object) {
+        for (let [key, value] of this.location.aliases.entries()) {
+            console.log(key);
+            if (value.some(name => name === object)) { return key; }
+        }
+    }
     check(object, location) {
-        if (location) { return this.location.items.includes(object); }
+        if (location) {
+            return this.checkAlias(object);
+        }
         return this.inventory.includes(object);
     }
     remove(object) {
@@ -67,7 +86,9 @@ class Player {
     }
     take(object) {
         if (this.check(object, this.location)) {
+            if (this.checkAlias(object)) { object = this.getAlias(object); }
             let newObject = Items.get(object);
+            console.log(newObject);
             if (newObject.takeable) {
                 this.add(object);
                 this.location.removeItem(object);

@@ -1,11 +1,12 @@
 ﻿var Items = require("./../item-data.js");
 
 class Area {
-    constructor({ name, description, exits=[], items=[] }) {
+    constructor({ name, description, exits=[], items=[], aliases=[] }) {
         this.name = name;
         this.description = description;
         this.exits = exits;
         this.items = items;
+        this.aliases = new Map(aliases);
     }
     check(item) {
         return this.items.includes(item);
