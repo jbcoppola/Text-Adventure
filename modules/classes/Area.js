@@ -6,13 +6,19 @@ class Area {
         this.description = description;
         this.exits = exits;
         this.items = items;
-        this.aliases = new Map(aliases);
+        this.aliases = new Map();
+        for (let item of this.items) {
+            item = Items.get(item);
+            this.aliases.set(item.name, item.aliases);
+        }
     }
     check(item) {
         return this.items.includes(item);
     }
     addItem(item) {
         this.items.push(item);
+        item = Items.get(item);
+        this.aliases.set(item.name, item.aliases);
         return this;
     }
     addItems(...items) {
@@ -22,11 +28,15 @@ class Area {
     removeItem(item) {
         var i = this.items.indexOf(item);
         this.items.splice(i, 1);
+        delete this.aliases[item];
         return this;
     }
     removeItems(...items) {
         items.forEach(item => removeItem(item));
         return this;
+    }
+    changeDesc(oldDesc, newDesc) {
+        this.description = this.description.replace(oldDesc, newDesc);
     }
     listExits() {
         let output = "";

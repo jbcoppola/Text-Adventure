@@ -19,10 +19,6 @@ var areaData = [
     "name": "Bus engine",
     "description": "The front of the bus is extremely rusty, especially the hood. The only semi-clear spot is the black scanner next to the hood.",
     "items": ["scanner", "hood"],
-    "aliases": [
-        ["scanner", ["scanner", "black scanner", "card scanner", "hood scanner", "bus scanner"]],
-        ["hood", ["hood", "bus hood", "engine hood"]]
-    ],
     "exits": [{
         "cardinal": "southeast",
         "destination": "Bus outside",

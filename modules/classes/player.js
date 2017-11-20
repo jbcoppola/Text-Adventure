@@ -28,18 +28,14 @@ class Player {
     }
     checkAlias(object) {
         for (let [key, value] of this.location.aliases.entries()) {
-            console.log(value);
             if (value.some(name => name === object)) {
-                console.log("returning true");
                 return true;
             }
         }
-        console.log("returning false");
         return false;
     }
     getAlias(object) {
         for (let [key, value] of this.location.aliases.entries()) {
-            console.log(key);
             if (value.some(name => name === object)) { return key; }
         }
     }
@@ -88,7 +84,6 @@ class Player {
         if (this.check(object, this.location)) {
             if (this.checkAlias(object)) { object = this.getAlias(object); }
             let newObject = Items.get(object);
-            console.log(newObject);
             if (newObject.takeable) {
                 this.add(object);
                 this.location.removeItem(object);
@@ -119,15 +114,22 @@ class Player {
                 if (item.breaks.creates) {
                     this.add(item.breaks.creates);
                 }
+                if (item.breaks.newDesc) {
+                    this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
+                }
                 return item.breaks.text;
             }
             return `You attempt to smash the ${object} to no effect.`
         }
         else if (this.check(object, this.location)) {
             let item = Items.get(object);
+            console.log(item);
             if (item.breaks) {
                 if (item.breaks.creates) {
                     this.location.addItem(item.breaks.creates);
+                }
+                if (item.breaks.newDesc) {
+                    this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
                 }
                 return item.breaks.text;
             }
@@ -136,19 +138,14 @@ class Player {
         return `I don't see a ${object} here.`
     }
     use(object, secondObject) {
-        console.log(object);
-        console.log(this.inventory);
-        console.log(this.check(object));
         //check if first object is present
         if (this.check(object) || this.check(object, this.location)) {
             // using object "on" something
             if (secondObject) {
                 //check if second object is in area
                 if (this.check(secondObject, this.location)) {
-                    console.log(Items.get(secondObject));
                     let used = Items.get(secondObject).use(object);
                     if (used) {
-                        console.log(used.creates);
                         if (used.creates) {
                             this.location.addItem(used.creates);
                         }

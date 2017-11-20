@@ -1,8 +1,9 @@
 ﻿var UseCase = require('./UseCase.js')
 
 class Item {
-    constructor({ name, description, value = 0, takeable = false, breaks, onGround = false, used = [] }) {
+    constructor({ name, aliases, description, value = 0, takeable = false, breaks, onGround = false, used = [] }) {
         this.name = name;
+        this.aliases = aliases;
         this.description = description;
         this.value = value;
         //what happens when player tries to break the object
