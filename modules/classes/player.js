@@ -6,7 +6,7 @@ var Events = require("./../event-data.js")
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Bus engine");
+        this.location = Areas.get("Bus inside");
     }
     listInventory() {
         let output;
@@ -68,6 +68,7 @@ class Player {
         return this.location.describe();
     }
     examine(object) {
+        if (this.checkAlias(object)) { object = this.getAlias(object); }
         if (this.check(object) || this.check(object, this.location)) {
             return Items.get(object).description;
         }
@@ -108,7 +109,6 @@ class Player {
     break(object) {
         let inLocation = this.check(object, this.location);
         let inInv = this.check(object);
-        console.log(this.location.aliases);
         if (inLocation || inInv) {
             let item = Items.get(object);
             if (item.breaks) {
@@ -122,10 +122,10 @@ class Player {
                 }
                 if (item.breaks.creates) {
                     if (inInv) {
-                        this.add(object);
+                        this.add(item.breaks.creates);
                     }
                     if (inLocation) {
-                        this.location.addItem(object);
+                        this.location.addItem(item.breaks.creates);
                     }
                 }
                 if (item.breaks.newDesc) {
@@ -177,6 +177,7 @@ class Player {
                     if (item.event === "none") {
                         changedItem.event = "";
                     }
+                    else { changeItem.event = item.event; }
                 }
                 if (item.used) {
                     for (let usecase of item.used) {
@@ -190,6 +191,9 @@ class Player {
         return event.text;
     }
     use(object, secondObject) {
+        if (this.checkAlias(object)) { object = this.getAlias(object); }
+        if (this.checkAlias(secondObject)) { secondObject = this.getAlias(secondObject); }
+
         //check if first object is present
         if (this.check(object) || this.check(object, this.location)) {
             // using object "on" something
@@ -207,15 +211,15 @@ class Player {
         }
     }
     checkObjectUse(checkedObject, useOn) {
-        let used = Items.get(checkedObject).use(useOn);
-        let inLocation = this.check(checkedObject, this.location);
-        let inInv = this.check(checkedObject);
+        let used = Items.get(useOn).use(checkedObject);
+        let inLocation = this.check(useOn, this.location);
+        let inInv = this.check(useOn);
         if (used) {
             if (used.creates) {
                 if (inLocation) {
                     this.location.addItem(used.creates);
                 }
-                else if (inInv) {
+                else if (inInv || useOn === "player") {
                     this.add(used.creates);
                 }
             }
@@ -224,7 +228,7 @@ class Player {
                 if (inLocation) {
                     this.location.removeItem(checkedObject);
                 }
-                else if (inInv) {
+                else if (inInv || useOn === "player") {
                     this.remove(checkedObject)
                 }
             }
@@ -239,7 +243,7 @@ class Player {
             }
         }
         if (useOn === "player") {
-            return `Can't use ${checkedObject} on self.`;
+            return `Can't use ${checkedObject}.`;
         }
         else if (useOn) {
             return `Can't use ${checkedObject} on ${useOn}.`;

@@ -44,10 +44,12 @@ var itemData = [{
     "name": "panel",
     "aliases": ["panel", "panels", "metal panel", "wall panel", "cover panel"],
     "description": "A metal panel. It looks like it could be opened at one point but is now stuck shut.",
-    "breaks": [{
-        "text": "You lever off the panel using a moderate amount of force",
+    "breaks": {
+        "text": "You lever off the panel using a moderate amount of force. The section behind is filled with wires.",
+        "oldDesc": "The walls next to the seats are covered with metal panels.",
+        "newDesc": "The walls next to the seats are covered with metal panels, one of which is open, revealing exposed wires.",
         "creates": "wires"
-    }]
+    }
 },
 {
     "name": "nozzles",

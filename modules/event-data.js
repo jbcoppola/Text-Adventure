@@ -8,7 +8,7 @@ var eventData = [{
     }
 }, {
         "name": "break hood",
-        "text": "You manage to batter the lock open, and swing open the hood to a shower of rust.",
+        "text": "The hood is so rusted your wrench completely destroys it. The engine underneath is somewhat less rusted, and you can see an ancient battery attached. It feels like the engine is still powered.",
         "location": {
             "name": "Bus engine",
             "oldDesc": "The front of the bus is extremely rusty, especially the hood.",

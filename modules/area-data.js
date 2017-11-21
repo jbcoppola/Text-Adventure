@@ -27,7 +27,7 @@ var areaData = [
 },
 {
     "name": "Bus inside",
-    "description": "The inside of the bus has rows of seats decayed by dry rot, watched over by the golem driver in front. The glass windows are still intact and have bars over them. The walls next to the seat are covered with metal panels. The roof has nozzles pointing down at the seats. Water doesn't seem to have gotten into this area. The midsection and rear have fire escapes.",
+    "description": "The inside of the bus has rows of seats decayed by dry rot, watched over by the golem driver in front. The glass windows are still intact and have bars over them. The walls next to the seats are covered with metal panels. The roof has nozzles pointing down at the seats. Water doesn't seem to have gotten into this area. The midsection and rear have fire escapes.",
     "items": ["gum", "panel", "nozzles", "fire escape", "windows"],
     "exits": [{
         "cardinal": "front",
