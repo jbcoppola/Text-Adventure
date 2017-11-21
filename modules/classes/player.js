@@ -1,6 +1,7 @@
 ﻿var classes = require("./classes.js");
 var Areas = require("./../area-data.js");
 var Items = require("./../item-data.js");
+var Events = require("./../event-data.js")
 
 class Player {
     constructor() {
@@ -111,23 +112,61 @@ class Player {
                     if (inInv) {
                         this.add(item.breaks.creates);
                     }
-                    if (inLocation) {
-                        this.location.addItem(item.breaks.creates);
-                    }
+                    this.location.addItem(item.breaks.creates);
                 }
                 if (item.breaks.newDesc) {
                     if (inInv) {
                         this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
                     }
-                    if (inLocation) {
-                        this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
-                    }
+                    this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
                 }
                 return item.breaks.text;
             }
             return `You attempt to smash the ${object} to no effect.`
         }
         return `I don't see a ${object} here.`
+    }
+    event(eventName) {
+        let event = Events.get(eventName);
+        if (event.addInventory) {
+            player.addInventory(event.addInventory);
+        }
+        if (event.removeInventory) {
+            player.removeInventory(event.removeInventory);
+        }
+        if (event.moveTo) {
+            player.transport(event.moveTo);
+        }
+        if (event.location) {
+            let location = Areas.get(event.location.name);
+            if (event.location.removeExit) {
+                location.splice(location.exits.findIndex(exit => exit.name === event.location.removeExit), 1);
+            }
+            if (event.location.addExit) {
+                location.push(event.location.addExit);
+            }
+        }
+        if (event.items) {
+            for (let item of event.items) {
+                let changedItem = Items.get(item.name);
+                if (item.oldDesc) {
+                    //change description
+                    changedItem.description.replace(item.oldDesc, item.NewDesc)
+                }
+                if (item.event) {
+                    if (item.event === "none") {
+                        changedItem.event = "";
+                    }
+                }
+                if (item.used) {
+                    for (let usecase of item.used) {
+                        //replace usecase with event usecase
+                        changedItem.used.find(use => use.name === usecase.name) = usecase;
+                    }
+                }
+            }
+        }
+        return event.text;
     }
     use(object, secondObject) {
         //check if first object is present
@@ -170,6 +209,9 @@ class Player {
             }
             if (used.move) {
                 this.transport(used.move);
+            }
+            if (used.event) {
+                return this.event(used.event);
             }
             if (used.text) {
                 return used.text;

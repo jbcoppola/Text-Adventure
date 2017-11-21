@@ -28,6 +28,7 @@ var itemData = [{
     "aliases": ["battery", "engine battery"],
     "description": "Your trained eye recognizes this as a self-powered battery. It can recharge itself over time using ambient magic in the area. Creating one is extremely difficult and very few people can do it in modern times. This battery has markings that identify it as an ancient artifact.",
     "takeable": true,
+    "event": "took battery",
     "breaks": {
         "text": "You attempt to smash the ancient battery, but can't even dent it."
     }

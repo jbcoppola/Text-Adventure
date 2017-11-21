@@ -5,15 +5,28 @@ var eventData = [{
     "location": {
         "name": "Bus outside",
         "removeExit": "Bus inside"
+    }
+},
+{
+    "name": "took battery",
+    "text": "You carefully detach the ancient tech from the rest of the engine. You feel the engine power down as you do so.",
+    "items": [{
+        "name": "battery",
+        "event": "none"
     },
     {
-    "name": "took battery",
-    "location": {
-        "name": "Bus inside",
-        "removeItem": ""
-        }
-}
-]
+        "name": "wires",
+        "oldDesc": "and you can feel the hum of energy coming off them. Seems dangerous.",
+        "newDesc": "though you can't feel any energy coming off them."
+    },
+    {
+        "name": "bus seat",
+        "used": [{
+            "usedWith": "wires",
+            "text": "You use your wrench to pull a bare wire to touch the exposed foam. However, nothing happens."
+        }]
+    }]
+}];
 
 var Events = eventData.map(area => new Event(event));
 Events.get = function (eventName) {
