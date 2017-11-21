@@ -28,7 +28,8 @@ class Area {
     removeItem(item) {
         var i = this.items.indexOf(item);
         this.items.splice(i, 1);
-        delete this.aliases[item];
+        this.aliases.delete(item);
+        console.log(this.aliases);
         return this;
     }
     removeItems(...items) {

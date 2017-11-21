@@ -1,10 +1,12 @@
 ﻿var UseCase = require('./UseCase.js')
 
 class Item {
-    constructor({ name, aliases=[name], description, value = 0, takeable = false, breaks, onGround = false, used = [] }) {
+    constructor({ name, aliases=[name], description, event, value = 0, takeable = false, breaks, onGround = false, used = [] }) {
         this.name = name;
         this.aliases = aliases;
         this.description = description;
+        //event triggers when picked up
+        this.event = event;
         this.value = value;
         //what happens when player tries to break the object
         this.breaks = breaks;

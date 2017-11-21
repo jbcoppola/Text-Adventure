@@ -2,8 +2,9 @@
 var Areas = require("./../area-data.js");
 
 class Event {
-    constructor(name, addInventory, removeInventory, moveTo, location, items=[]) {
+    constructor({ name, text, addInventory, removeInventory, moveTo, location, items = [] }) {
         this.name = name;
+        this.text = text;
         this.addInventory = addInventory;
         this.removeInventory = removeInventory;
         //where to move the player

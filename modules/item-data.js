@@ -17,10 +17,7 @@ var itemData = [{
     "aliases": ["hood", "bus hood", "engine hood", "car hood"],
     "description": "The bus hood looks the worse for the wear. It's pitted and has rusted through in spots.",
     "breaks": {
-        "text": "You manage to batter the lock open, and swing open the hood to a shower of rust.",
-        "oldDesc": "The front of the bus is extremely rusty, especially the hood.",
-        "newDesc": "The front of the bus is extremely rusty. The hood is open. The engine is spotted with rust, but you can see an intact battery hooked up.",
-        "creates": "battery"
+        "event": "break hood"
     }
 },
 {

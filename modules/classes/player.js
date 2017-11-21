@@ -83,6 +83,9 @@ class Player {
                 this.add(object);
                 this.location.removeItem(object);
                 newObject.onGround = false;
+                if (newObject.event) {
+                    return this.event(newObject.event);
+                }
                 return `Got ${object}.`;
             }
             else { return `Can't take ${object}.`; }
@@ -105,20 +108,31 @@ class Player {
     break(object) {
         let inLocation = this.check(object, this.location);
         let inInv = this.check(object);
+        console.log(this.location.aliases);
         if (inLocation || inInv) {
             let item = Items.get(object);
             if (item.breaks) {
+                if (!item.breaks.destroy) {
+                    if (inInv) {
+                        this.inventory.remove(object);
+                    }
+                    if (inLocation) {
+                        this.location.removeItem(object);
+                    }
+                }
                 if (item.breaks.creates) {
                     if (inInv) {
-                        this.add(item.breaks.creates);
+                        this.add(object);
                     }
-                    this.location.addItem(item.breaks.creates);
+                    if (inLocation) {
+                        this.location.addItem(object);
+                    }
                 }
                 if (item.breaks.newDesc) {
-                    if (inInv) {
-                        this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
-                    }
                     this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
+                }
+                if (item.breaks.event) {
+                    return this.event(item.breaks.event);
                 }
                 return item.breaks.text;
             }
@@ -139,6 +153,12 @@ class Player {
         }
         if (event.location) {
             let location = Areas.get(event.location.name);
+            if (event.location.newDesc) {
+                location.changeDesc(event.location.oldDesc, event.location.newDesc);
+            }
+            if (event.location.creates) {
+                location.addItem(event.location.creates);
+            }
             if (event.location.removeExit) {
                 location.splice(location.exits.findIndex(exit => exit.name === event.location.removeExit), 1);
             }
@@ -161,7 +181,8 @@ class Player {
                 if (item.used) {
                     for (let usecase of item.used) {
                         //replace usecase with event usecase
-                        changedItem.used.find(use => use.name === usecase.name) = usecase;
+                        let changedUse = changedItem.used.find(use => use.name === usecase.name);
+                        if (changedUse) { changedUse = usecase; };
                     }
                 }
             }
