@@ -46,13 +46,7 @@ class Player {
         return this.inventory.includes(object);
     }
     remove(object) {
-        let location = Items.get(object).location;
-        if (location === "inventory") {
-            this.inventory.splice(this.inventory.indexOf(object), 1);
-        }
-        else if (location === this.location.name) {
-            this.location.removeItem(object);
-        }
+        this.inventory.splice(this.inventory.indexOf(object), 1);
     }
     add(object) {
         this.inventory.push(object);
@@ -90,7 +84,7 @@ class Player {
                 newObject.onGround = false;
                 return `Got ${object}.`;
             }
-            else { return `Can't take ${object}.`;}
+            else { return `Can't take ${object}.`; }
         }
         else {
             return `I don't see that here.`;
@@ -141,70 +135,59 @@ class Player {
         if (this.check(object) || this.check(object, this.location)) {
             // using object "on" something
             if (secondObject) {
-                //check if second object is in area
-                if (this.check(secondObject, this.location)) {
-                    let used = Items.get(secondObject).use(object);
-                    if (used) {
-                        if (used.creates) {
-                            this.location.addItem(used.creates);
-                        }
-                        //object is destroyed unless specified
-                        if (used.destroy !== false) {
-                            this.location.removeItem(secondObject);
-                        }
-                        if (used.move) {
-                            this.transport(used.move);
-                        }
-                        return used.text;
-                    }
-                    return `Can't use ${object} on ${secondObject}.`;
-                }
-                //...or in inventory
-                else if (this.check(secondObject)) {
-                    let used = Items.get(secondObject).use(object);
-                    if (used) {
-                        if (used.creates) {
-                            this.add(used.creates);
-                        }
-                        //object is destroyed unless specified
-                        if (used.destroy !== false) {
-                            this.remove(secondObject);
-                        }
-                        if (used.move) {
-                            this.transport(used.move);
-                        }
-                        return used.text;
-                    }
-                    return `Can't use ${object} on ${secondObject}.`;
-                }
-                else {
-                    return `There is no ${secondObject} here.`;
-                }
+                return this.checkObjectUse(object, secondObject)
             }
             // using object by itself
             else {
-                //check if object is in area or in inventory
-                if (this.check(object) || this.check(object, this.location.name)) {
-                    let used = Items.get(object).use("player");
-                    if (used) {
-                        if (used.creates) {
-                            this.add(used.creates);
-                        }
-                        //object is destroyed unless specified
-                        if (used.destroy !== false) {
-                            this.remove(secondObject);
-                        }
-                        return used.description;
-                    }
-                    return `Can't use ${object} by itself.`;
-                }
-                else {
-                    return `There is no ${object} here.`
-                }
+                //check for using object with player
+                return this.checkObjectUse(object, "player")
             }
         }
-        else { return `There is no ${object} here.`; }
+        else {
+            return `There is no ${object} here.`;
+        }
+    }
+    checkObjectUse(checkedObject, useOn) {
+        let used = Items.get(checkedObject).use(useOn);
+        let inLocation = this.check(checkedObject, this.location);
+        let inInv = this.check(checkedObject);
+        if (used) {
+            if (used.creates) {
+                if (inLocation) {
+                    this.location.addItem(used.creates);
+                }
+                else if (inInv) {
+                    this.add(used.creates);
+                }
+            }
+            //object is destroyed unless specified
+            if (used.destroy !== false) {
+                if (inLocation) {
+                    this.location.removeItem(checkedObject);
+                }
+                else if (inInv) {
+                    this.remove(checkedObject)
+                }
+            }
+            if (used.move) {
+                this.transport(used.move);
+            }
+            if (used.text) {
+                return used.text;
+            }
+        }
+        if (useOn === "player") {
+            return `Can't use ${checkedObject} on self.`;
+        }
+        else if (useOn) {
+            return `Can't use ${checkedObject} on ${useOn}.`;
+        }
+        else {
+            return `There is no ${checkedObject} here.`;
+        }
     }
 }
+
+
 
 module.exports = Player;
