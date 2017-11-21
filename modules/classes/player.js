@@ -102,27 +102,26 @@ class Player {
         return `You don't have a ${object}.`;
     }
     break(object) {
-        if (this.check(object)) {
+        let inLocation = this.check(object, this.location);
+        let inInv = this.check(object);
+        if (inLocation || inInv) {
             let item = Items.get(object);
             if (item.breaks) {
                 if (item.breaks.creates) {
-                    this.add(item.breaks.creates);
+                    if (inInv) {
+                        this.add(item.breaks.creates);
+                    }
+                    if (inLocation) {
+                        this.location.addItem(item.breaks.creates);
+                    }
                 }
                 if (item.breaks.newDesc) {
-                    this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
-                }
-                return item.breaks.text;
-            }
-            return `You attempt to smash the ${object} to no effect.`
-        }
-        else if (this.check(object, this.location)) {
-            let item = Items.get(object);
-            if (item.breaks) {
-                if (item.breaks.creates) {
-                    this.location.addItem(item.breaks.creates);
-                }
-                if (item.breaks.newDesc) {
-                    this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
+                    if (inInv) {
+                        this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
+                    }
+                    if (inLocation) {
+                        this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
+                    }
                 }
                 return item.breaks.text;
             }
