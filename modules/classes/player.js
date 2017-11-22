@@ -6,7 +6,7 @@ var Events = require("./../event-data.js")
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Bus inside");
+        this.location = Areas.get("Bus engine");
     }
     listInventory() {
         let output;
@@ -121,11 +121,13 @@ class Player {
                     }
                 }
                 if (item.breaks.creates) {
-                    if (inInv) {
-                        this.add(item.breaks.creates);
-                    }
-                    if (inLocation) {
-                        this.location.addItem(item.breaks.creates);
+                    for (let createdItem of item.breaks.creates) {
+                        if (inInv) {
+                            this.add(createdItem);
+                        }
+                        if (inLocation) {
+                            this.location.addItem(createdItem);
+                        }
                     }
                 }
                 if (item.breaks.newDesc) {
@@ -152,18 +154,25 @@ class Player {
             player.transport(event.moveTo);
         }
         if (event.location) {
-            let location = Areas.get(event.location.name);
-            if (event.location.newDesc) {
-                location.changeDesc(event.location.oldDesc, event.location.newDesc);
-            }
-            if (event.location.creates) {
-                location.addItem(event.location.creates);
-            }
-            if (event.location.removeExit) {
-                location.splice(location.exits.findIndex(exit => exit.name === event.location.removeExit), 1);
-            }
-            if (event.location.addExit) {
-                location.push(event.location.addExit);
+            for (let area of event.location) {
+                let location = Areas.get(area.name);
+                if (area.newDesc) {
+                    location.changeDesc(event.location.oldDesc, event.location.newDesc);
+                }
+                if (area.creates) {
+                    for (let item of area.creates) {
+                        location.addItem(item);
+                    }
+                }
+                if (area.removes) {
+                    location.removeItem(event.location.removes);
+                }
+                if (area.removeExit) {
+                    location.splice(location.exits.findIndex(exit => exit.name === event.location.removeExit), 1);
+                }
+                if (area.addExit) {
+                    location.push(event.location.addExit);
+                }
             }
         }
         if (event.items) {
@@ -177,7 +186,22 @@ class Player {
                     if (item.event === "none") {
                         changedItem.event = "";
                     }
-                    else { changeItem.event = item.event; }
+                    else { changedItem.event = item.event; }
+                }
+                if (item.breaks) {
+                    if (item.breaks.text) {
+                        changedItem.breaks.text = item.breaks.text;
+                    }
+                    if (item.breaks.newDesc) {
+                        changedItem.breaks.newDesc = item.breaks.newDesc;
+                        changedItem.breaks.oldDesc = item.breaks.oldDesc;
+                    }
+                    if (item.breaks.creates) {
+                        changedItem.breaks.creates = item.breaks.creates;
+                    }
+                    if (item.breaks.event) {
+                        changedItem.breaks.event = item.breaks.event;
+                    }
                 }
                 if (item.used) {
                     for (let usecase of item.used) {
@@ -203,7 +227,7 @@ class Player {
             // using object by itself
             else {
                 //check for using object with player
-                return this.checkObjectUse(object, "player")
+                return this.checkObjectUse("player", object)
             }
         }
         else {
@@ -216,11 +240,13 @@ class Player {
         let inInv = this.check(useOn);
         if (used) {
             if (used.creates) {
-                if (inLocation) {
-                    this.location.addItem(used.creates);
-                }
-                else if (inInv || useOn === "player") {
-                    this.add(used.creates);
+                for (let item of used.creates) {
+                    if (inLocation) {
+                        this.location.addItem(item);
+                    }
+                    else if (inInv) {
+                        this.add(item);
+                    }
                 }
             }
             //object is destroyed unless specified

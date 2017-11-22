@@ -9,7 +9,7 @@ var itemData = [{
     },
     "used": [{
         "usedWith": "faculty ID",
-        "text": "The scanner beeps and flashes green.",
+        "event": "scan faculty ID"
     }]
 },
 {
@@ -41,6 +41,31 @@ var itemData = [{
     }
 },
 {
+    "name": "bag",
+    "aliases": ["bag", "satchel", "floor bag"],
+    "description": "What looks to be a leather satchel lying on the ground. Its material is snagged under the seat. It's lumpy enough that you think something must be inside it.",
+    "onGround": true,
+    "breaks": {
+        "text": "The bag is under the seat and out of reach of your wrench."
+    },
+    "used": [{
+        "usedWith": "player",
+        "text": "You open the bag.",
+        "creates": ["faculty ID", "textbook"]
+    }]
+},
+{
+    "name": "faculty ID",
+    "aliases": ["faculty ID", "faculty card", "ID", "card"],
+    "description": "A faded glossy square of official-looking text. You can't read it, but it looks like identification."
+},
+{
+    "name": "textbook",
+    "aliases": ["textbook", "book", "magic book"],
+    "description": "Though you can't read the text, this book has several diagrams throughout that seem to indicate it's a teacher's book to help teach concepts of ancient magical theory to students. This is a valuable find!",
+    "value": 1000
+},
+{
     "name": "panel",
     "aliases": ["panel", "panels", "metal panel", "wall panel", "cover panel"],
     "description": "A metal panel. It looks like it could be opened at one point but is now stuck shut.",
@@ -48,7 +73,7 @@ var itemData = [{
         "text": "You lever off the panel using a moderate amount of force. The section behind is filled with wires.",
         "oldDesc": "The walls next to the seats are covered with metal panels.",
         "newDesc": "The walls next to the seats are covered with metal panels, one of which is open, revealing exposed wires.",
-        "creates": "wires"
+        "creates": ["live wires"]
     }
 },
 {
@@ -60,22 +85,30 @@ var itemData = [{
     },
     "used": [{
         "usedWith": "gum",
-        "text": "You stick the gum into the nozzles, clogging them completely.",
+        "event": "clog nozzles",
     }]
 },
 {
-    "name": "wires",
-    "aliases": ["wire", "wires", "electric wires", "bare wire", "bare wires"],
+    "name": "live wires",
+    "aliases": ["live wires", "live wire", "wire", "wires", "electric wires", "bare wire", "bare wires"],
     "description": "A mass of wires. Some of them are bare, and you can feel the hum of energy coming off them. Seems dangerous.",
+},
+{
+    "name": "dead wires",
+    "aliases": ["dead wires", "dead wire", "wire", "wires", "electric wires", "bare wire", "bare wires"],
+    "description": "A mass of wires. Some of them are bare, but you can't feel any energy.",
 },
 {
     "name": "bus seat",
     "aliases": ["seat", "seats", "bus seat", "leather seat"],
     "description": "A seat that looks like it was made for children. Dry rot has decayed some of the leather, exposing the foam underneath.",
     "used": [{
-        "usedWith": "wires",
-        "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight.",
-        "creates": "flaming bus seat"
+        "usedWith": "dead wires",
+        "text": "You use your wrench to pull a wire to touch the bare foam of the seat, but nothing happens. Seems like there's no power."
+    },
+    {
+        "usedWith": "live wires",
+        "event": "lit fire failure"
     }]
 },
 {
@@ -87,10 +120,12 @@ var itemData = [{
     "name": "fire escape",
     "aliases": ["escape", "fire escape", "exit", "fire exit", "fire door"],
     "description": "The fire escape seems largely intact. It has a lever you can pull to release the door in case of fire.",
+    "breaks": {
+        "text": "You attempt to smash through, but the fire escape is remarkably sturdy for something made to allow people to escape in an emergency."
+    },
     "used": [{
         "usedWith": "player",
-        "text": "You pull the lever and the door falls off, leaving a hole you clamber though back into the clearing.",
-        "move": "Bus outside"
+        "event": "fire escape used"
     }]
 },
 {

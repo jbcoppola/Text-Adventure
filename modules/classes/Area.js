@@ -29,7 +29,6 @@ class Area {
         var i = this.items.indexOf(item);
         this.items.splice(i, 1);
         this.aliases.delete(item);
-        console.log(this.aliases);
         return this;
     }
     removeItems(...items) {
@@ -42,7 +41,7 @@ class Area {
     listExits() {
         let output = "";
         for (let exit of this.exits) {
-            output += `To the ${exit.cardinal} there is a ${exit.description}.\n`;
+            output += `To the ${exit.cardinal} there is ${exit.description}.\n`;
         }
         return output;
     }
