@@ -1,12 +1,6 @@
 ﻿var Event = require('./classes/Event.js');
 
-var eventData = [{
-    "name": "bus burned",
-    "location": [{
-        "name": "Bus outside",
-        "removeExit": "Bus inside"
-    }]
-},
+var eventData = [
 {
     "name": "break hood",
     "text": "The hood is so rusted your wrench completely destroys it. The engine underneath is somewhat less rusted, and you can see an ancient battery attached. It feels like the engine is still powered.",
@@ -63,19 +57,32 @@ var eventData = [{
 },
 {
     "name": "lit fire failure",
-    "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight. However, the sprinklers on the roof start blaring and shoot out a white powder that instantly smothers the flames.\n\nThe golem booms 'DO NOT START FIRES ON THE BUS.'",
+    "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight. However, the sprinklers on the roof start blaring and shoot out a white powder that instantly smothers the flames.\n\nThe golem booms 'DO NOT START FIRES ON THE BUS.'"
 },
 {
     "name": "lit fire success",
     "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight. After a few seconds the golem booms `OUT OF CONTROL FIRE DETECTED. EXIT THE BUS THROUGH EMERGENCY EXITS IMMEDIATELY.`",
-    "creates": "flaming bus seat"
+    "creates": ["flaming bus seat"],
+    "items": [{
+        "name": "fire escape",
+        "event": "fire escape used success"
+    }]
 },
 {
-    "name": "fire escape used",
+    "name": "fire escape used success",
     "text": "You pull the lever and the door falls off, leaving a hole you clamber though back into the clearing.",
-    "moveTo": "Bus outside"
-
-}];
+    "moveTo": "Bus outside",
+    "location": [{
+        "name": "Bus outside",
+        "oldDesc": "A large rusted bus in at the north of a small clearing in the garbage. It has a door near the front that appears to be stuck open. You can see a hulking metal golem through the thick windshield where the driver's seat would normally be. The side of the hood has a black card scanner attached.",
+        "newDesc": "A flaming bus in in the north of a small clearing in the garbage. You hear the metallic screaming of the golem through the melted windshield.",
+        "removeExit": "Bus inside"
+    }]
+},
+{
+    "name": "fire escape used failure",
+    "text": "You start to pull the fire escape lever, but the golem points its arm at you. The device on the end glows threateningly. 'DO NOT USE FIRE ESCAPE IN NON-EMERGENCY CIRCUMSTANCES.'\n\nYou step away."
+},];
 
 var Events = eventData.map(event => new Event(event));
 Events.get = function (eventName) {

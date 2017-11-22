@@ -164,11 +164,15 @@ class Player {
                         location.addItem(item);
                     }
                 }
-                if (area.removes) {
-                    location.removeItem(event.location.removes);
+                if (area.destroys) {
+                    for (let item of area.destroys) {
+                        location.removeItem(item);
+                    }
                 }
                 if (area.removeExit) {
-                    location.splice(location.exits.findIndex(exit => exit.name === event.location.removeExit), 1);
+                    for (let removedExit of area.removeExit) {
+                        location.splice(location.exits.findIndex(exit => exit.name === removedExit), 1);
+                    }
                 }
                 if (area.addExit) {
                     location.push(event.location.addExit);
