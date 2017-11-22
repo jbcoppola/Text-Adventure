@@ -31,6 +31,14 @@ var itemData = [{
     }
 },
 {
+    "name": "golem",
+    "aliases": ["golem", "driver", "bus golem", "bus driver", "machine"],
+    "description": "The golem is attached to the floor at the front of the bus. It is a hulking metal machine, apparently powered by a glowing crystal in its chest. Its head is a domed helmet with glowing eyes. It has two enormous arms, one which ends in a humanoid hand, and the other ending in a complicated device you can't identify the function of.\n\nThe golem is watching you with a blank stare.",
+    "breaks": {
+        "text": "You swing your wrench at the golem, but it effortlessly catches the wrench in its hand and flings you back.\n\n'TAKE A SEAT UNTIL WE ARRIVE AT SCHOOL, PRECOCIOUS YOUNGSTER.'"
+    }
+},
+{
     "name": "gum",
     "aliases": ["gum", "chewing gum", "floor gum"],
     "description": "An ancient rubbery mass that somehow is still sticky. They don't make it like they used to.",

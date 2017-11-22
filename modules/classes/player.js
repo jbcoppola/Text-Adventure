@@ -6,7 +6,7 @@ var Events = require("./../event-data.js")
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Bus engine");
+        this.location = Areas.get("Bus inside");
     }
     listInventory() {
         let output;
@@ -236,6 +236,7 @@ class Player {
     }
     checkObjectUse(checkedObject, useOn) {
         let used = Items.get(useOn).use(checkedObject);
+        console.log(used);
         let inLocation = this.check(useOn, this.location);
         let inInv = this.check(useOn);
         if (used) {
