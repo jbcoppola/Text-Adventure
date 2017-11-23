@@ -75,7 +75,10 @@ var eventData = [
     }],
     "items": [{
         "name": "fire escape",
-        "event": "fire escape used success"
+        "used": [{
+            "usedWith": "player",
+            "event": "fire escape used success"
+        }]
     }]
 },
 {
@@ -85,8 +88,8 @@ var eventData = [
     "location": [{
         "name": "Bus outside",
         "oldDesc": "A large rusted bus in at the north of a small clearing in the garbage. It has a door near the front that appears to be stuck open. You can see a hulking metal golem through the thick windshield where the driver's seat would normally be. The side of the hood has a black card scanner attached.",
-        "newDesc": "A flaming bus in in the north of a small clearing in the garbage. You hear the metallic screaming of the golem through the melted windshield.",
-        "removeExit": "Bus inside"
+        "newDesc": "A flaming bus is in the north of a small clearing in the garbage. You hear the metallic screaming of the golem through the melted windshield.",
+        "removeExit": ["north"]
     }]
 },
 {

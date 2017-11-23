@@ -158,9 +158,6 @@ class Player {
         if (event.removeInventory) {
             player.removeInventory(event.removeInventory);
         }
-        if (event.moveTo) {
-            player.transport(event.moveTo);
-        }
         if (event.location) {
             for (let area of event.location) {
                 let location = Areas.get(area.name);
@@ -179,7 +176,9 @@ class Player {
                 }
                 if (area.removeExit) {
                     for (let removedExit of area.removeExit) {
-                        location.splice(location.exits.findIndex(exit => exit.name === removedExit), 1);
+                        let exitToRemove = location.exits.findIndex(exit => exit.cardinal === removedExit);
+                        console.log(exitToRemove);
+                        location.exits.splice(location.exits.findIndex(exit => exit.cardinal === removedExit), 1);
                     }
                 }
                 if (area.addExit) {
@@ -252,6 +251,10 @@ class Player {
                     }
                 }
             }
+        }
+        if (event.moveTo) {
+            player.transport(event.moveTo);
+            return `${event.text}\n\n${this.location.describe()}`;
         }
         return event.text;
     }
