@@ -19,10 +19,15 @@ var itemData = [{
     "breaks": {
         "event": "break hood"
     }
-},
+    },
+{
+    "name": "engine",
+    "aliases": ["engine", "bus engine", "car engine"],
+    "description": "What isn't covered with rust is blackened by oil, save for the area around the battery casing."
+    },
 {
     "name": "battery",
-    "aliases": ["battery", "engine battery"],
+    "aliases": ["battery", "engine battery", "battery casing"],
     "description": "Your trained eye recognizes this as a self-powered battery. It can recharge itself over time using ambient magic in the area. Creating one is extremely difficult and very few people can do it in modern times. This battery has markings that identify it as an ancient artifact.",
     "takeable": true,
     "event": "took battery",

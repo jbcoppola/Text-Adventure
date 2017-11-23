@@ -247,7 +247,10 @@ class Player {
         if (this.check(object) || this.check(object, this.location)) {
             // using object "on" something
             if (secondObject) {
-                return this.checkObjectUse(object, secondObject)
+                if (this.check(secondObject)) {
+                    return this.checkObjectUse(object, secondObject);
+                }
+                return `There is no ${secondObject} here.`;
             }
             // using object by itself
             else {
