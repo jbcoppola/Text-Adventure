@@ -63,7 +63,6 @@ function newInput(player, input) {
 
     if (directions.includes(verb)) {
         output.addWithBreaks(player.move(parseDirections(verb)));
-        output.addWithBreaks(player.location.describe());
         return output.text;
     }
 

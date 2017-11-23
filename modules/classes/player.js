@@ -6,7 +6,7 @@ var Events = require("./../event-data.js");
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Bus inside");
+        this.location = Areas.get("Bus outside");
     }
     listInventory() {
         let output;
@@ -33,6 +33,7 @@ class Player {
                 return true;
             }
         }
+
         return false;
     }
     getAlias(object) {
@@ -64,7 +65,7 @@ class Player {
                 return this.event(exit.event);
             }
             this.transport(exit.destination);
-            return `You move ${direction}.`;
+            return `You move ${direction}.\n\n${this.location.describe()}`;
         }
         else { return `You can't go ${direction} here.`; }
     }
@@ -82,8 +83,10 @@ class Player {
         }
     }
     take(object) {
+        if (this.checkAlias(object)) {
+            object = this.getAlias(object);
+        }
         if (this.check(object, this.location)) {
-            if (this.checkAlias(object)) { object = this.getAlias(object); }
             let newObject = Items.get(object);
             if (newObject.takeable) {
                 this.add(object);

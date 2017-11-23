@@ -64,7 +64,7 @@ var itemData = [{
 },
 {
     "name": "faculty ID",
-    "aliases": ["faculty ID", "faculty card", "ID", "card"],
+    "aliases": ["faculty ID", "faculty card", "ID", "card", "faculty id", "id", "Id", "faculty Id"],
     "takeable": true,
     "onGround": true,
     "description": "A faded glossy square of official-looking text. You can't read it, but it looks like identification."
