@@ -57,12 +57,18 @@ var eventData = [
 },
 {
     "name": "lit fire failure",
-    "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight. However, the sprinklers on the roof start blaring and shoot out a white powder that instantly smothers the flames.\n\nThe golem booms 'DO NOT START FIRES ON THE BUS.'"
+    "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight. However, the sprinklers on the roof shoot out a white powder that instantly smothers the flames.\n\nThe golem booms 'DO NOT START FIRES ON THE BUS.'"
 },
 {
     "name": "lit fire success",
     "text": "You use your wrench to pull a bare wire to touch the exposed foam. Within moments it catches alight. After a few seconds the golem booms `OUT OF CONTROL FIRE DETECTED. EXIT THE BUS THROUGH EMERGENCY EXITS IMMEDIATELY.`",
-    "creates": ["flaming bus seat"],
+    "location": [{
+        "name": "Bus inside",
+        "oldDesc": "The inside of the bus has rows of seats decayed by dry rot, watched over by the golem driver in front.",
+        "newDesc": "The inside of the bus has rows of seats decayed by dry rot, one of which is ablaze. The golem driver in front is repeating its instructions to use the fire escape.",
+        "creates": ["flaming bus seat"],
+        "destroys": ["bus seat"],
+    }],
     "items": [{
         "name": "fire escape",
         "event": "fire escape used success"
@@ -82,7 +88,11 @@ var eventData = [
 {
     "name": "fire escape used failure",
     "text": "You start to pull the fire escape lever, but the golem points its arm at you. The device on the end glows threateningly. 'DO NOT USE FIRE ESCAPE IN NON-EMERGENCY CIRCUMSTANCES.'\n\nYou step away."
-},];
+},
+{
+    "name": "bus golem stop",
+    "text": "You attempt to leave the bus, only for the golem to place its arm to bar your path. `REMAIN SEATED ON BUS UNTIL WE ARE AT SCHOOL, CHILD.`"
+}];
 
 var Events = eventData.map(event => new Event(event));
 Events.get = function (eventName) {

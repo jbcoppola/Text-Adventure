@@ -1,7 +1,7 @@
 ﻿var classes = require("./classes.js");
 var Areas = require("./../area-data.js");
 var Items = require("./../item-data.js");
-var Events = require("./../event-data.js")
+var Events = require("./../event-data.js");
 
 class Player {
     constructor() {
@@ -59,12 +59,17 @@ class Player {
     }
     move(direction) {
         if (this.location.exits.some(exit => exit.cardinal === direction)) {
-            this.transport(this.location.exits.find(exit => exit.cardinal === direction).destination);
+            let exit = this.location.exits.find(exit => exit.cardinal === direction);
+            if (exit.event) {
+                return this.event(exit.event);
+            }
+            this.transport(exit.destination);
             return `You move ${direction}.`;
         }
         else { return `You can't go ${direction} here.`; }
     }
     look() {
+        console.log(this.location);
         return this.location.describe();
     }
     examine(object) {
@@ -157,7 +162,7 @@ class Player {
             for (let area of event.location) {
                 let location = Areas.get(area.name);
                 if (area.newDesc) {
-                    location.changeDesc(event.location.oldDesc, event.location.newDesc);
+                    location.changeDesc(area.oldDesc, area.newDesc);
                 }
                 if (area.creates) {
                     for (let item of area.creates) {
@@ -179,7 +184,7 @@ class Player {
                 }
             }
         }
-        if (event.items) {
+        if (event.items.length > 0) {
             for (let item of event.items) {
                 let changedItem = Items.get(item.name);
                 if (item.oldDesc) {
@@ -211,7 +216,20 @@ class Player {
                     for (let usecase of item.used) {
                         //replace usecase with event usecase
                         let changedUse = changedItem.used.find(use => use.name === usecase.name);
-                        if (changedUse) { changedUse = usecase; };
+                        if (changedUse) {
+                            if (usecase.text) {
+                                changedUse.text = usecase.text;
+                            }
+                            if (usecase.event) {
+                                changedUse.event = usecase.event;
+                            }
+                            if (usecase.destroy) {
+                                changedUse.destroy = usecase.destroy;
+                            }
+                            if (usecase.creates) {
+                                changedUse.creates = usecase.creates;
+                            }
+                        };
                     }
                 }
             }
@@ -240,7 +258,6 @@ class Player {
     }
     checkObjectUse(checkedObject, useOn) {
         let used = Items.get(useOn).use(checkedObject);
-        console.log(used);
         let inLocation = this.check(useOn, this.location);
         let inInv = this.check(useOn);
         if (used) {
@@ -257,10 +274,10 @@ class Player {
             //object is destroyed unless specified
             if (used.destroy !== false) {
                 if (inLocation) {
-                    this.location.removeItem(checkedObject);
+                    this.location.removeItem(useOn);
                 }
-                else if (inInv || useOn === "player") {
-                    this.remove(checkedObject)
+                else if (inInv || checkedObject === "player") {
+                    this.remove(useOn)
                 }
             }
             if (used.move) {
@@ -273,8 +290,8 @@ class Player {
                 return used.text;
             }
         }
-        if (useOn === "player") {
-            return `Can't use ${checkedObject}.`;
+        if (checkedObject === "player") {
+            return `Can't use ${useOn}.`;
         }
         else if (useOn) {
             return `Can't use ${checkedObject} on ${useOn}.`;

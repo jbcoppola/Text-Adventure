@@ -1,5 +1,5 @@
 ﻿class UseCase {
-    constructor({ usedWith, text, destroy = true, creates, event }) {
+    constructor({ usedWith, text, destroy=true, creates, event }) {
         //items the item can be used with
         this.usedwith = usedWith;
         //the description of what happens when used

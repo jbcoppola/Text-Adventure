@@ -58,18 +58,22 @@ var itemData = [{
     },
     "used": [{
         "usedWith": "player",
-        "text": "You open the bag.",
+        "text": "You open the bag. Inside you see an ID and a book.",
         "creates": ["faculty ID", "textbook"]
     }]
 },
 {
     "name": "faculty ID",
     "aliases": ["faculty ID", "faculty card", "ID", "card"],
+    "takeable": true,
+    "onGround": true,
     "description": "A faded glossy square of official-looking text. You can't read it, but it looks like identification."
 },
 {
     "name": "textbook",
-    "aliases": ["textbook", "book", "magic book"],
+    "aliases": ["textbook", "book", "magic book", "bag book"],
+    "takeable": true,
+    "onGround": true,
     "description": "Though you can't read the text, this book has several diagrams throughout that seem to indicate it's a teacher's book to help teach concepts of ancient magical theory to students. This is a valuable find!",
     "value": 1000
 },
@@ -86,7 +90,7 @@ var itemData = [{
 },
 {
     "name": "nozzles",
-    "aliases": ["nozzle", "nozzles", "ceiling nozzles", "fire nozzles"],
+    "aliases": ["nozzle", "nozzles", "ceiling nozzles", "fire nozzles", "sprinkler", "sprinklers"],
     "description": "The nozzles stick out from the ceiling pointed towards the seats.",
     "breaks": {
         "text": "Your wrench bounces off the nozzles. Seems they were made to be child-proof."
@@ -100,6 +104,7 @@ var itemData = [{
     "name": "live wires",
     "aliases": ["live wires", "live wire", "wire", "wires", "electric wires", "bare wire", "bare wires"],
     "description": "A mass of wires. Some of them are bare, and you can feel the hum of energy coming off them. Seems dangerous.",
+    "destroy": false
 },
 {
     "name": "dead wires",
@@ -111,13 +116,15 @@ var itemData = [{
     "aliases": ["seat", "seats", "bus seat", "leather seat"],
     "description": "A seat that looks like it was made for children. Dry rot has decayed some of the leather, exposing the foam underneath.",
     "used": [{
-        "usedWith": "dead wires",
-        "text": "You use your wrench to pull a wire to touch the bare foam of the seat, but nothing happens. Seems like there's no power."
+        "usedWith": "live wires",
+        "event": "lit fire failure",
+        "destroy": false
     },
     {
-        "usedWith": "live wires",
-        "event": "lit fire failure"
-    }]
+        "usedWith": "dead wires",
+        "text": "You use your wrench to pull a wire to touch the bare foam of the seat, but nothing happens. Seems like there's no power."
+    }
+    ]
 },
 {
     "name": "flaming bus seat",
@@ -133,7 +140,7 @@ var itemData = [{
     },
     "used": [{
         "usedWith": "player",
-        "event": "fire escape used"
+        "event": "fire escape used failure"
     }]
 },
 {

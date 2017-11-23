@@ -31,7 +31,7 @@ var areaData = [
     "items": ["gum", "panel", "nozzles", "fire escape", "windows", "bag", "bus seat", "golem"],
     "exits": [{
         "cardinal": "east",
-        "destination": "Bus outside",
+        "event": "bus golem stop",
         "description": "the door at the front of the bus"
     }]
 }

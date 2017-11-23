@@ -50,18 +50,17 @@ class Area {
         let output;
         //index of last item in area on the ground
         let onGroundItems = this.items.map(item => Items.get(item)).filter(item => item.onGround);
-        let lastOnGround = onGroundItems.length - onGroundItems.slice().reverse().findIndex(item => item.onGround) - 1;
 
         //formatting the grammar for listed objects
         if (onGroundItems.length > 0) {
             output = `\nOn the ground there is `;
             for (let i = 0; i < onGroundItems.length; i++) {
-                if (i === lastOnGround && i !== 0) {
+                if (i === onGroundItems.length - 1 && i !== 0) {
                     output += 'and ';
                 }
                 output += `a ${onGroundItems[i].name}`;
                 //check that the array isn't about to end and at least one item left is on ground
-                if (i < lastOnGround) {
+                if (i < onGroundItems.length - 1) {
                     output += ', ';
                 }
             }
