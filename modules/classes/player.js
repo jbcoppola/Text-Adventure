@@ -183,7 +183,23 @@ class Player {
                     }
                 }
                 if (area.addExit) {
-                    location.push(event.location.addExit);
+                    for (let addedExit of area.addExit) {
+                        location.push(addedExit);
+                    }
+                }
+                if (area.changeExit) {
+                    for (let changedExit of area.changeExit) {
+                        let existingExit = location.exits.find(exit => exit.cardinal === changedExit.cardinal);
+                        if (changedExit.event) {
+                            existingExit.event = changedExit.event;
+                        }
+                        if (changedExit.destination) {
+                            existingExit.destination = changedExit.destination;
+                        }
+                        if (changedExit.description) {
+                            existingExit.description = changedExit.description;
+                        }
+                    }
                 }
             }
         }
@@ -247,7 +263,7 @@ class Player {
         if (this.check(object) || this.check(object, this.location)) {
             // using object "on" something
             if (secondObject) {
-                if (this.check(secondObject)) {
+                if (this.check(secondObject) || this.check(secondObject, this.location)) {
                     return this.checkObjectUse(object, secondObject);
                 }
                 return `There is no ${secondObject} here.`;

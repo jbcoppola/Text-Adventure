@@ -68,6 +68,10 @@ var eventData = [
         "newDesc": "The inside of the bus has rows of seats decayed by dry rot, one of which is ablaze. The golem driver in front is repeating its instructions to use the fire escape.",
         "creates": ["flaming bus seat"],
         "destroys": ["bus seat"],
+        "changeExit": [{
+            "cardinal": "east",
+            "event": "bus golem stop fire"
+        }]
     }],
     "items": [{
         "name": "fire escape",
@@ -92,6 +96,10 @@ var eventData = [
 {
     "name": "bus golem stop",
     "text": "You attempt to leave the bus, only for the golem to place its arm to bar your path. `REMAIN SEATED ON BUS UNTIL WE ARE AT SCHOOL, CHILD.`"
+},
+{
+    "name": "bus golem stop fire",
+    "text": "You attempt to leave the bus, only for the golem to place its arm to bar your path. `USE FIRE ESCAPE WHILE FIRE IS PRESENT.`"
 }];
 
 var Events = eventData.map(event => new Event(event));

@@ -7,7 +7,7 @@ var areaData = [
     "exits": [{
         "cardinal": "north",
         "destination": "Bus inside",
-        "description": "door into the bus"
+        "description": "the door into the bus"
     },
     {
         "cardinal": "northeast",
