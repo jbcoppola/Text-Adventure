@@ -1,12 +1,9 @@
 ﻿class Output {
     constructor(input) {
-        this.text = `> ${input}\n\n`;
+        this.text = `<div>> ${input}</div>`;
     }
     add(text) {
-        this.text += `${text}`;
-    }
-    addWithBreaks(text) {
-        this.text += `${text}\n\n`;
+        this.text += `<div>${text}<div>`;
     }
 }
 

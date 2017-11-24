@@ -50,7 +50,7 @@ function newInput(player, input) {
     input = input.split(" ");
 
     if (inventory.includes(input[0])) {
-        output.addWithBreaks(player.listInventory());
+        output.add(player.listInventory());
         return output.text;
     }
 
@@ -62,7 +62,7 @@ function newInput(player, input) {
     input.splice(0, 1);
 
     if (directions.includes(verb)) {
-        output.addWithBreaks(player.move(parseDirections(verb)));
+        output.add(player.move(parseDirections(verb)));
         return output.text;
     }
 
@@ -70,31 +70,31 @@ function newInput(player, input) {
         if (input[0] === "at") {
             input.splice(0, 1);
             let noun = input.join(" ");
-            output.addWithBreaks(player.examine(noun));
+            output.add(player.examine(noun));
         }
         else if (input[0] === undefined) {
-            output.addWithBreaks(player.look());
+            output.add(player.look());
         }
         else {
             let noun = input.join(" ");
-            output.addWithBreaks(player.examine(noun));
+            output.add(player.examine(noun));
         }
     }
     else if (verb === "examine") {
         let noun = input.join(" ");
-        output.addWithBreaks(player.examine(noun));
+        output.add(player.examine(noun));
     }
     else if (take.includes(verb)) {
         let noun = input.join(" ");
-        output.addWithBreaks(player.take(noun));
+        output.add(player.take(noun));
     }
     else if (verb === "drop") {
         let noun = input.join(" ");
-        output.addWithBreaks(player.drop(noun));
+        output.add(player.drop(noun));
     }
     else if (verb === "break") {
         let noun = input.join(" ");
-        output.addWithBreaks(player.break(noun));
+        output.add(player.break(noun));
     }
     else if (verb === "use") {
         let noun;
@@ -107,10 +107,10 @@ function newInput(player, input) {
         else {
             noun = input.join(" ");
         }
-        output.addWithBreaks(player.use(noun, secondNoun));
+        output.add(player.use(noun, secondNoun));
     }
     else {
-        output.addWithBreaks(`Unrecognized command: ${verb}`);
+        output.add(`Unrecognized command: ${verb}`);
     }
     return output.text;
 }

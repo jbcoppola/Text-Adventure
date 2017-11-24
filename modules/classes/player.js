@@ -247,7 +247,7 @@ class Player {
                             if (usecase.creates) {
                                 changedUse.creates = usecase.creates;
                             }
-                        };
+                        }
                     }
                 }
             }

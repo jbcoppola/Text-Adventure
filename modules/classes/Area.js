@@ -39,10 +39,11 @@ class Area {
         this.description = this.description.replace(oldDesc, newDesc);
     }
     listExits() {
-        let output = "";
+        let output = "<li>";
         for (let exit of this.exits) {
-            output += `To the ${exit.cardinal} there is ${exit.description}.\n`;
+            output += `<ul>To the ${exit.cardinal} there is ${exit.description}.</ul>`;
         }
+        output += "</li>"
         return output;
     }
     //lists every item on ground (for items dropped by player or just lying around)
@@ -53,7 +54,7 @@ class Area {
 
         //formatting the grammar for listed objects
         if (onGroundItems.length > 0) {
-            output = `\nOn the ground there is `;
+            output = `On the ground there is `;
             for (let i = 0; i < onGroundItems.length; i++) {
                 if (i === onGroundItems.length - 1 && i !== 0) {
                     output += 'and ';
@@ -69,12 +70,12 @@ class Area {
         return output;
     }
     describe() {
-        let output = `${this.description}\n\n`;
+        let output = `<p>${this.description}</p>`;
         if (this.listExits !== undefined) {
-            output += `${this.listExits()}`;
+            output += `<p>${this.listExits()}</p>`;
         }
         if (this.listItems() !== undefined) {
-            output += `${this.listItems()}`;
+            output += `<p>${this.listItems()}</p>`;
         }
         return output;
     }

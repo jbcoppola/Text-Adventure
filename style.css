@@ -15,7 +15,8 @@
 }
 .main .output {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
+    justify-content: flex-end;
     height: 65vh;
     width: 65vw;
     padding: 30px;
@@ -24,6 +25,21 @@
     color: white;
     font-size: 18px;
     overflow-y: scroll;
+}
+.output p {
+    margin-bottom: 20px;
+}
+.output div {
+    margin-bottom: 20px;
+}
+.output li {
+    margin-bottom: 20px;
+    list-style-type: none;
+}
+.output ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
 }
 
 .main .input {
