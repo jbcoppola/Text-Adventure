@@ -27,10 +27,12 @@
     overflow-y: scroll;
 }
 .output p {
+    padding: 0;
+    margin: 0;
     margin-bottom: 20px;
 }
 .output div {
-    margin-bottom: 20px;
+    margin: 0;
 }
 .output li {
     margin-bottom: 20px;

@@ -65,7 +65,7 @@ class Player {
                 return this.event(exit.event);
             }
             this.transport(exit.destination);
-            return `You move ${direction}.\n\n${this.location.describe()}`;
+            return `<p>You move ${direction}.</p>${this.location.describe()}`;
         }
         else { return `You can't go ${direction} here.`; }
     }
