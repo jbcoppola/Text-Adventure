@@ -6,7 +6,7 @@ var Events = require("./../event-data.js");
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("Bus outside");
+        this.location = Areas.get("CEO office");
     }
     listInventory() {
         let output;

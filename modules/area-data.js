@@ -1,19 +1,24 @@
 ﻿var Area = require('./classes/Area.js');
 
 var areaData = [
-{
-    "name": "Bus outside",
-    "description": "A large rusted bus in at the north of a small clearing in the garbage. It has a door near the front that appears to be stuck open. You can see a hulking metal golem through the thick windshield where the driver's seat would normally be. The side of the hood has a black card scanner attached.",
-    "exits": [{
-        "cardinal": "north",
-        "destination": "Bus inside",
-        "description": "the door into the bus"
-    },
     {
-        "cardinal": "northeast",
-        "destination": "Bus engine",
-        "description": "the front of the bus"
-    }],
+        "name": "Bus outside",
+        "description": "A large rusted bus in at the north of a small clearing in the garbage. It has a door near the front that appears to be stuck open. You can see a hulking metal golem through the thick windshield where the driver's seat would normally be. The side of the hood has a black card scanner attached.",
+        "exits": [{
+            "cardinal": "north",
+            "destination": "Bus inside",
+            "description": "the door into the bus"
+        },
+        {
+            "cardinal": "northeast",
+            "destination": "Bus engine",
+            "description": "the front of the bus"
+        },
+        {
+            "cardinal": "south",
+            "destination": "CEO office",
+            "description": "a door to a huge cement block"
+        }]
 },
 {
     "name": "Bus engine",
@@ -33,6 +38,21 @@ var areaData = [
         "cardinal": "east",
         "event": "bus golem stop",
         "description": "the door at the front of the bus"
+    }]
+},
+{
+    "name": "CEO office",
+    "description": "You open the door and step inside a tackily decorated, garish green office. The back wall is entirely a window which has long since shattered. Near the back is a metal desk with a comfortable looking leather office chair, and a lidded trashcan next to it. The left wall has a faded painting in a thick frame. As you close the door you can see official-looking paperwork taped to it.",
+    "items": ["office window", "desk", "office chair", "trashcan", "painting", "paperwork"],
+    "exits": [{
+        "cardinal": "north",
+        "destination": "Bus outside",
+        "description": "the door to the bus clearing"
+    },
+    {
+        "cardinal": "south",
+        "destination": "Bus outside",
+        "description": "a placeholder through the window"
     }]
 }
 ];

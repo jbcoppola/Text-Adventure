@@ -19,12 +19,12 @@ var itemData = [{
     "breaks": {
         "event": "break hood"
     }
-    },
+},
 {
     "name": "engine",
     "aliases": ["engine", "bus engine", "car engine"],
     "description": "What isn't covered with rust is blackened by oil, save for the area around the battery casing."
-    },
+},
 {
     "name": "battery",
     "aliases": ["battery", "engine battery", "battery casing"],
@@ -155,7 +155,39 @@ var itemData = [{
     "breaks": {
         "text": "You batter the window, but the glass doesn't even crack. No wonder it's lasted all this time."
     }
-}];
+},
+{
+    "name": "office window",
+    "aliases": ["window", "shattered window", "office window", "back wall"],
+    "description": "The back wall was once a single window, but broke at some point. Now it's just a big frame with bits of broken glass at the edges."
+},
+{
+    "name": "desk",
+    "aliases": ["office desk, metal desk, desk, CEO desk"],
+    "description": "The desk is large and imposing. It probably belonged to some bigshot. It has several closed drawers."
+},
+{
+    "name": "office chair",
+    "aliases": ["chair", "leather chair", "office chair", "CEO chair", "big chair", "comfortable chair"],
+    "description": "The chair is big, leather, and luxurious - at least, it was before time wore away at it. Now it's dingy and faded."
+},
+{
+    "name": "trashcan",
+    "aliases": ["trash", "trash can", "trashcan", "bin", "trash bin", "dustbin", "foot lever", "lever"],
+    "description": "The metal trash can is rusted but intact. It has a foot lever to open the top."
+},
+{
+    "name": "painting",
+    "aliases": ["painting", "big painting", "frame", "painting frame", "left wall", "left"],
+    "description": "The left wall has a huge painting on it hanging crooked in a gilded frame. You can make barely make out the subject, a jowly suited man."
+},
+{
+    "name": "paperwork",
+    "aliases": ["papers", "paperwork", "door papers", "door paper", "door paperwork", "taped paper"],
+    "description": "The door has a paper taped to it. You can't read what it says, but it looks official.",
+    "takeable": true
+}
+];
 
 var Items = itemData.map(item => new Item(item));
 Items.get = function (itemName) {
