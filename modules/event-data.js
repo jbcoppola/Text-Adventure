@@ -106,11 +106,12 @@ var eventData = [
 },
     {
         "name": "desk open",
-        "text": "You open the desk. Inside is blah blah blah",
+        "text": "You open the desk. Inside is a lighter and a notepad.",
         "location": [{
             "name": "office",
             "oldDesc": "a metal desk",
-            "newDesc": "an open metal desk"
+            "newDesc": "an open metal desk",
+            "creates": ["lighter", "notepad"]
         }],
         "items": [{
             "name": "desk",

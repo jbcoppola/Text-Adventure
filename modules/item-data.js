@@ -177,6 +177,16 @@ var itemData = [{
     }]
 },
 {
+    "name": "lighter",
+    "aliases": ["lighter"],
+    "description": "A golden lighter. Looks barely used."
+},
+{
+    "name": "notepad",
+    "aliases": ["notepad", "pad", "paper pad"],
+    "description": "A paper pad for writing notes. Looks like there a few papers have been torn off."
+},
+{
     "name": "office chair",
     "aliases": ["chair", "leather chair", "office chair", "CEO chair", "big chair", "comfortable chair"],
     "description": "The chair is big, leather, and luxurious - at least, it was before time wore away at it. Now it's dingy and faded."
