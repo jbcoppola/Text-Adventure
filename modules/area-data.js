@@ -41,8 +41,8 @@ var areaData = [
     }]
 },
 {
-    "name": "CEO office",
-    "description": "You open the door and step inside a tackily decorated, garish green office. The back wall is entirely a window which has long since shattered. Near the back is a metal desk with a comfortable looking leather office chair, and a lidded trashcan next to it. The left wall has a faded painting in a thick frame. As you close the door you can see official-looking paperwork taped to it.",
+    "name": "office",
+    "description": "You are in a tackily decorated, garish green office. The back wall is entirely a window which has long since shattered. Near the back is a metal desk with a comfortable looking leather office chair, and a lidded trashcan next to it. The left wall has a faded painting in a thick frame. You see official-looking paperwork taped to the door.",
     "items": ["office window", "desk", "office chair", "trashcan", "painting", "paperwork"],
     "exits": [{
         "cardinal": "north",

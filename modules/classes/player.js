@@ -6,7 +6,7 @@ var Events = require("./../event-data.js");
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("CEO office");
+        this.location = Areas.get("office");
     }
     listInventory() {
         let output;
@@ -239,7 +239,12 @@ class Player {
                                 changedUse.text = usecase.text;
                             }
                             if (usecase.event) {
-                                changedUse.event = usecase.event;
+                                if (usecase.event === "none") {
+                                    changedUse.event = "";
+                                }
+                                else {
+                                    changedUse.event = usecase.event;
+                                }
                             }
                             if (usecase.destroy) {
                                 changedUse.destroy = usecase.destroy;

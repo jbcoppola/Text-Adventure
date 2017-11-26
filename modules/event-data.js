@@ -103,6 +103,23 @@ var eventData = [
 {
     "name": "bus golem stop fire",
     "text": "You attempt to leave the bus, only for the golem to place its arm to bar your path. `USE FIRE ESCAPE WHILE FIRE IS PRESENT.`"
+},
+    {
+        "name": "desk open",
+        "text": "You open the desk. Inside is blah blah blah",
+        "location": [{
+            "name": "office",
+            "oldDesc": "a metal desk",
+            "newDesc": "an open metal desk"
+        }],
+        "items": [{
+            "name": "desk",
+            "used": [{
+                "usedWith": "player",
+                "text": "The desk is already open.",
+                "event": "none"
+            }]
+        }]
 }];
 
 var Events = eventData.map(event => new Event(event));

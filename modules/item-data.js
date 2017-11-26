@@ -159,12 +159,22 @@ var itemData = [{
 {
     "name": "office window",
     "aliases": ["window", "shattered window", "office window", "back wall"],
-    "description": "The back wall was once a single window, but broke at some point. Now it's just a big frame with bits of broken glass at the edges."
+    "description": "The back wall was once a single window, but broke at some point. Now it's just a big frame with bits of broken glass at the edges.",
+    "breaks": {
+        "text": "There's nothing left to break."
+    }
 },
 {
     "name": "desk",
-    "aliases": ["office desk, metal desk, desk, CEO desk"],
-    "description": "The desk is large and imposing. It probably belonged to some bigshot. It has several closed drawers."
+    "aliases": ["desk", "office desk, metal desk, CEO desk"],
+    "description": "The desk is large and imposing. It probably belonged to some bigshot. It has several closed drawers.",
+    "breaks": {
+        "text": "You put several new dents in the desk, but its construction is too solid to destroy it outright."
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "desk open"
+    }]
 },
 {
     "name": "office chair",
