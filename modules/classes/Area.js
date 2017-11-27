@@ -70,12 +70,12 @@ class Area {
         return output;
     }
     describe() {
-        let output = `<p>${this.description}</p>`;
+        let output = `${this.description}`;
         if (this.listExits !== undefined) {
-            output += `<p>${this.listExits()}</p>`;
+            output += `${this.listExits()}`;
         }
         if (this.listItems() !== undefined) {
-            output += `<p>${this.listItems()}</p>`;
+            output += `</p><p>${this.listItems()}`;
         }
         return output;
     }

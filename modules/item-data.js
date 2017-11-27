@@ -194,18 +194,60 @@ var itemData = [{
 {
     "name": "trashcan",
     "aliases": ["trash", "trash can", "trashcan", "bin", "trash bin", "dustbin", "foot lever", "lever"],
-    "description": "The metal trash can is rusted but intact. It has a foot lever to open the top."
+    "description": "The metal trash can is rusted but intact. It has a foot lever to open the top.",
+    "breaks": {
+        "text": "You smash open the trash can. Foot levers are for wimps!",
+        "event": "open trash can"
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "open trash can"
+    }]
 },
 {
     "name": "painting",
     "aliases": ["painting", "big painting", "frame", "painting frame", "left wall", "left"],
-    "description": "The left wall has a huge painting on it hanging crooked in a gilded frame. You can make barely make out the subject, a jowly suited man."
+    "description": "The left wall has a huge painting on it hanging crooked in a gilded frame. You can make barely make out the subject, a jowly suited man.",
+    "breaks": {
+        "text": "Your wrench rips apart the canvas and breaks the frame, revealing a safe behind the painting.",
+        "event": "reveal safe"
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "reveal safe"
+    }]
 },
 {
     "name": "paperwork",
     "aliases": ["papers", "paperwork", "door papers", "door paper", "door paperwork", "taped paper"],
     "description": "The door has a paper taped to it. You can't read what it says, but it looks official.",
     "takeable": true
+},
+{
+    "name": "memos",
+    "aliases": ["memo", "memos", "trash memo", "trash paper", "trash memos"],
+    "description": "Memos detailing designs.",
+    "takeable": true
+},
+{
+    "name": "safe",
+    "aliases": ["safe", "wall safe", "left safe", "recessed safe", "hidden safe"],
+    "description": "The safe has three seperate locks: a combination lock with numbers, a retinal scanner, and a fingerprint scanner."
+},
+{
+    "name": "retina scanner",
+    "aliases": ["eye scanner", "retina scanner", "retinal scanner"],
+    "description": "The retina scanner is shaped for an eye. You can see a faint light indicating it still works."
+},
+{
+    "name": "fingerprint scanner",
+    "aliases": ["fingerprint scanner", "finger scanner", "fingerprint lock", "finger lock", "thumb scanner"],
+    "description": "The fingerprint scanner is a glass oval. A small light indicates it's still active."
+},
+{
+    "name": "combination lock",
+    "aliases": ["combo lock", "number lock", "combination lock", "numbers lock"],
+    "description": "The combination lock has a turnable knob with numbers."
 }
 ];
 

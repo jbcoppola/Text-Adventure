@@ -65,12 +65,11 @@ class Player {
                 return this.event(exit.event);
             }
             this.transport(exit.destination);
-            return `<p>You move ${direction}.</p>${this.location.describe()}`;
+            return `You move ${direction}.</p><p>${this.location.describe()}`;
         }
         else { return `You can't go ${direction} here.`; }
     }
     look() {
-        console.log(this.location);
         return this.location.describe();
     }
     examine(object) {
@@ -140,6 +139,10 @@ class Player {
                 }
                 if (item.breaks.newDesc) {
                     this.location.changeDesc(item.breaks.oldDesc, item.breaks.newDesc);
+                }
+                if (item.breaks.event && item.breaks.text) {
+                    this.event(item.breaks.event);
+                    return item.breaks.text;
                 }
                 if (item.breaks.event) {
                     return this.event(item.breaks.event);
@@ -227,7 +230,12 @@ class Player {
                         changedItem.breaks.creates = item.breaks.creates;
                     }
                     if (item.breaks.event) {
-                        changedItem.breaks.event = item.breaks.event;
+                        if (item.breaks.event === "none") {
+                            changedItem.breaks.event = "";
+                        }
+                        else {
+                            changedItem.breaks.event = item.breaks.event;
+                        }
                     }
                 }
                 if (item.used) {

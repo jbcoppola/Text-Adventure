@@ -3,7 +3,7 @@
 var areaData = [
     {
         "name": "Bus outside",
-        "description": "A large rusted bus in at the north of a small clearing in the garbage. It has a door near the front that appears to be stuck open. You can see a hulking metal golem through the thick windshield where the driver's seat would normally be. The side of the hood has a black card scanner attached.",
+        "description": "A large rusted bus is at the north of a small clearing in the garbage. It has a door near the front that appears to be stuck open. You can see a hulking metal golem through the thick windshield where the driver's seat would normally be. The side of the hood has a black card scanner attached.",
         "exits": [{
             "cardinal": "north",
             "destination": "Bus inside",
@@ -16,7 +16,7 @@ var areaData = [
         },
         {
             "cardinal": "south",
-            "destination": "CEO office",
+            "destination": "office",
             "description": "a door to a huge cement block"
         }]
 },

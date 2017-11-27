@@ -3,7 +3,7 @@
         this.text = `<div><p>> ${input}</p></div>`;
     }
     add(text) {
-        this.text += `<div>${text}<div>`;
+        this.text += `<div><p>${text}<p><div>`;
     }
 }
 
