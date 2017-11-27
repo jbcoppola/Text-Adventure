@@ -196,12 +196,13 @@ var itemData = [{
     "aliases": ["trash", "trash can", "trashcan", "bin", "trash bin", "dustbin", "foot lever", "lever"],
     "description": "The metal trash can is rusted but intact. It has a foot lever to open the top.",
     "breaks": {
-        "text": "You smash open the trash can. Foot levers are for wimps!",
+        "text": "You smash open the trash can. Foot levers are for wimps!\n\nInside you see several memos.",
         "event": "open trash can"
     },
     "used": [{
         "usedWith": "player",
-        "event": "open trash can"
+        "event": "open trash can",
+        "destroy": false
     }]
 },
 {
@@ -210,6 +211,7 @@ var itemData = [{
     "description": "The left wall has a huge painting on it hanging crooked in a gilded frame. You can make barely make out the subject, a jowly suited man.",
     "breaks": {
         "text": "Your wrench rips apart the canvas and breaks the frame, revealing a safe behind the painting.",
+        "destroy": true,
         "event": "reveal safe"
     },
     "used": [{
@@ -237,17 +239,48 @@ var itemData = [{
 {
     "name": "retina scanner",
     "aliases": ["eye scanner", "retina scanner", "retinal scanner"],
-    "description": "The retina scanner is shaped for an eye. You can see a faint light indicating it still works."
+    "description": "The retina scanner is shaped for an eye. You can see a faint light indicating it still works.",
+    "breaks": {
+        "text": "You smash the retina scanner thoroughly.",
+        "destroy": true
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "retina scan failure",
+        "destroy": false
+    }]
 },
 {
     "name": "fingerprint scanner",
     "aliases": ["fingerprint scanner", "finger scanner", "fingerprint lock", "finger lock", "thumb scanner"],
-    "description": "The fingerprint scanner is a glass oval. A small light indicates it's still active."
+    "description": "The fingerprint scanner is a glass oval. A small light indicates it's still active.",
+    "breaks": {
+        "text": "You shatter the fingerprint scanner.",
+        "destroy": true
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "fingerprint scan failure",
+        "destroy": false
+    },
+    {
+        "usedWith": "lighter",
+        "event": "fingerprint scan success",
+        "destroy": false
+    }]
 },
 {
     "name": "combination lock",
     "aliases": ["combo lock", "number lock", "combination lock", "numbers lock"],
-    "description": "The combination lock has a turnable knob with numbers."
+    "description": "The combination lock has a turnable knob with numbers. There's the remains of a piece of paper taped next to the lock, but it's too decayed to read.",
+    "breaks": {
+        "text": "You attack the lock, but it's too sturdy to destroy."
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "combo lock failure",
+        "destroy": false
+    }]
 }
 ];
 

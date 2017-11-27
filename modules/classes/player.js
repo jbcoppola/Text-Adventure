@@ -114,12 +114,13 @@ class Player {
         return `You don't have a ${object}.`;
     }
     break(object) {
+        if (this.checkAlias(object)) { object = this.getAlias(object); }
         let inLocation = this.check(object, this.location);
         let inInv = this.check(object);
         if (inLocation || inInv) {
             let item = Items.get(object);
             if (item.breaks) {
-                if (!item.breaks.destroy) {
+                if (item.breaks.destroy) {
                     if (inInv) {
                         this.inventory.remove(object);
                     }
@@ -180,7 +181,6 @@ class Player {
                 if (area.removeExit) {
                     for (let removedExit of area.removeExit) {
                         let exitToRemove = location.exits.findIndex(exit => exit.cardinal === removedExit);
-                        console.log(exitToRemove);
                         location.exits.splice(location.exits.findIndex(exit => exit.cardinal === removedExit), 1);
                     }
                 }
@@ -210,7 +210,7 @@ class Player {
                 let changedItem = Items.get(item.name);
                 if (item.oldDesc) {
                     //change description
-                    changedItem.description.replace(item.oldDesc, item.NewDesc)
+                    changedItem.description = changedItem.description.replace(item.oldDesc, item.newDesc);
                 }
                 if (item.event) {
                     if (item.event === "none") {

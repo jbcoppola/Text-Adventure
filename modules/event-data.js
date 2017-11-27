@@ -133,6 +133,8 @@ var eventData = [
         }],
         "items": [{
             "name": "trashcan",
+            "oldDesc": "It has a foot lever to open the top.",
+            "newDesc": "The top is open.",
             "breaks": {
                 "event": "none"
             },
@@ -152,6 +154,26 @@ var eventData = [
             "newDesc": "The left wall has a recessed safe.",
             "creates": ["safe", "retina scanner", "fingerprint scanner", "combination lock"]
         }]
+    },
+    {
+        "name": "combo lock failure",
+        "text": "You randomly spin the lock a few times, but nothing happens. Without knowing the combination you'll never get through."
+    },
+    {
+        "name": "combo lock success",
+        "text": "You spin the lock to the combination that was on the notepad and hear a click. The safe is open! Apparently you only needed to bypass any one of the safe's locks and not all three. Odd design."
+    },
+    {
+        "name": "fingerprint scan failure",
+        "text": "You put your finger on the scanner. It beeps and flashes red. Looks like it's still functional."
+    },
+    {
+        "name": "fingerprint scan success",
+        "text": "You hold a part of the lighter you haven't touched against the scanner. It beeps and flashes green. You hear a click. The safe is open!Apparently you only needed to bypass any one of the safe's locks and not all three. Odd design."
+    },
+    {
+        "name": "retina scan failure",
+        "text": "You place your eye against the scanner. It beeps and flashes red. Guess it still works."
     }];
 
 var Events = eventData.map(event => new Event(event));
