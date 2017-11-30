@@ -19,22 +19,26 @@ class Container extends Item {
     describe() {
         let text = this.description;
         if (this.isOpen) {
-            text += `\n\nThe ${this.name} is open.${this.listItems()}`
+            text += `</p><p>The ${this.name} is open. ${this.listItems()}`
         }
         return text;
     }
     listItems() {
-        let text = `Inside you see `;
-        for (let i = 0; i < this.items.length; i++) {
-            if (i + 1 === this.items.length && i !== 0) {
-                text += "and ";
+        let text;
+        if (this.items.length > 0) {
+            text = `Inside you see `;
+            for (let i = 0; i < this.items.length; i++) {
+                if (i + 1 === this.items.length && i !== 0) {
+                    text += "and ";
+                }
+                text += `a ${item}`;
+                if (i + 1 < this.items.length) {
+                    text += ', '
+                }
+                else { text += '.'; }
             }
-            text += `a ${item}`;
-            if (i + 1 < this.items.length) {
-                text += ', '
-            }
-            else { text += '.'; }
         }
+        else { text = `There is nothing inside.`; }
         return text;
     }
 }

@@ -300,7 +300,7 @@ class Player {
         let inInv = this.check(useOn);
         if (used) {
             //if object is container
-            if (typeof(used.items) === "object") {
+            if (typeof used.items === "object") {
                 used.isOpen = !used.isOpen;
                 if (used.isOpen) {
                     this.location.addItems(...used.items);
