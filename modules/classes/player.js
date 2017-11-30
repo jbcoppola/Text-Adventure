@@ -299,6 +299,19 @@ class Player {
         let inLocation = this.check(useOn, this.location);
         let inInv = this.check(useOn);
         if (used) {
+            //if object is container
+            if (typeof(used.items) === "object") {
+                used.isOpen = !used.isOpen;
+                if (used.isOpen) {
+                    this.location.addItems(...used.items);
+                    return `You open the ${used.name}.${used.listItems()}`;
+                }
+                else {
+                    this.location.removeItems(...used.items);
+                    return `You close the ${used.name}.`;
+                }
+            }
+
             if (used.creates) {
                 for (let item of used.creates) {
                     if (inLocation) {

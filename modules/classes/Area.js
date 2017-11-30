@@ -21,7 +21,7 @@ class Area {
         this.aliases.set(item.name, item.aliases);
         return this;
     }
-    addItems(...items) {
+    addItems(items) {
         items.forEach(item => addItem(item));
         return this;
     }
@@ -31,7 +31,7 @@ class Area {
         this.aliases.delete(item);
         return this;
     }
-    removeItems(...items) {
+    removeItems(items) {
         items.forEach(item => removeItem(item));
         return this;
     }
