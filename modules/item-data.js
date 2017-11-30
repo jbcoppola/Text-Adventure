@@ -241,7 +241,7 @@ var itemData = [{
     "aliases": ["eye scanner", "retina scanner", "retinal scanner"],
     "description": "The retina scanner is shaped for an eye. You can see a faint light indicating it still works.",
     "breaks": {
-        "text": "You smash the retina scanner thoroughly.",
+        "text": "You smash the retina scanner into uselessness.",
         "destroy": true
     },
     "used": [{
@@ -255,7 +255,7 @@ var itemData = [{
     "aliases": ["fingerprint scanner", "finger scanner", "fingerprint lock", "finger lock", "thumb scanner"],
     "description": "The fingerprint scanner is a glass oval. A small light indicates it's still active.",
     "breaks": {
-        "text": "You shatter the fingerprint scanner.",
+        "text": "You shatter the fingerprint scanner thoroughly.",
         "destroy": true
     },
     "used": [{

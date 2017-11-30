@@ -52,7 +52,7 @@ var areaData = [
     {
         "cardinal": "south",
         "destination": "Bus outside",
-        "description": "a placeholder through the window"
+        "description": "a path outside the shattered window"
     }]
 }
 ];
