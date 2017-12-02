@@ -94,6 +94,14 @@ class Player {
             if (newObject.takeable) {
                 this.add(object);
                 this.location.removeItem(object);
+                for (let item of this.location.items) {
+                    let container = Items.get(item);
+                    if (container.isOpen) {
+                        if (container.items.includes(object)) {
+                            container.remove(object);
+                        }
+                    }
+                }
                 newObject.onGround = false;
                 if (newObject.event) {
                     return this.event(newObject.event);
