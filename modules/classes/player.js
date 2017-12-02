@@ -75,7 +75,11 @@ class Player {
     examine(object) {
         if (this.checkAlias(object)) { object = this.getAlias(object); }
         if (this.check(object) || this.check(object, this.location)) {
-            return Items.get(object).description;
+            let item = Items.get(object);
+            if (item.isOpen) {
+                return item.describe();
+            }
+            return item.description;
         }
         else {
             return `I don't see that here.`;
@@ -299,19 +303,6 @@ class Player {
         let inLocation = this.check(useOn, this.location);
         let inInv = this.check(useOn);
         if (used) {
-            //if object is container
-            if (typeof used.items === "object") {
-                used.isOpen = !used.isOpen;
-                if (used.isOpen) {
-                    this.location.addItems(...used.items);
-                    return `You open the ${used.name}.${used.listItems()}`;
-                }
-                else {
-                    this.location.removeItems(...used.items);
-                    return `You close the ${used.name}.`;
-                }
-            }
-
             if (used.creates) {
                 for (let item of used.creates) {
                     if (inLocation) {
@@ -342,7 +333,20 @@ class Player {
             }
         }
         if (checkedObject === "player") {
-            return `Can't use ${useOn}.`;
+            useOn = Items.get(useOn);
+            if (typeof useOn.items !== undefined) {
+                //if object is container
+                useOn.isOpen = !useOn.isOpen;
+                if (useOn.isOpen) {
+                    this.location.addItems(useOn.items);
+                    return `You open the ${useOn.name}. ${useOn.listItems()}`;
+                }
+                else {
+                    this.location.removeItems(useOn.items);
+                    return `You close the ${useOn.name}.`;
+                }
+            }
+            return `Can't use ${useOn.name}.`;
         }
         else if (useOn) {
             return `Can't use ${checkedObject} on ${useOn}.`;

@@ -1,4 +1,5 @@
 ﻿var Item = require("./classes/Item.js");
+var Container = require("./classes/Container.js");
 
 var itemData = [{
     "name": "scanner",
@@ -167,22 +168,21 @@ var itemData = [{
 {
     "name": "desk",
     "aliases": ["desk", "office desk, metal desk, CEO desk"],
-    "description": "The desk is large and imposing. It probably belonged to some bigshot. It has several closed drawers.",
+    "description": "The desk is large and imposing. It probably belonged to some bigshot.",
     "breaks": {
         "text": "You put several new dents in the desk, but its construction is too solid to destroy it outright."
     },
-    "used": [{
-        "usedWith": "player",
-        "event": "desk open"
-    }]
+    "items": ["lighter", "notepad"]
 },
 {
     "name": "lighter",
+    "takeable": true,
     "aliases": ["lighter"],
     "description": "A golden lighter. Looks barely used."
 },
 {
     "name": "notepad",
+    "takeable": true,
     "aliases": ["notepad", "pad", "paper pad"],
     "description": "A paper pad for writing notes. Looks like there a few papers have been torn off."
 },
@@ -284,7 +284,10 @@ var itemData = [{
 }
 ];
 
-var Items = itemData.map(item => new Item(item));
+var Items = itemData.map(item => {
+    if (item.items === undefined) { return new Item(item); }
+    else { return new Container(item); }
+});
 Items.get = function (itemName) {
     return this.find(item => item.name === itemName);
 };

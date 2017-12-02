@@ -22,7 +22,7 @@ class Area {
         return this;
     }
     addItems(items) {
-        items.forEach(item => addItem(item));
+        items.forEach(item => this.addItem(item));
         return this;
     }
     removeItem(item) {
@@ -32,7 +32,7 @@ class Area {
         return this;
     }
     removeItems(items) {
-        items.forEach(item => removeItem(item));
+        items.forEach(item => this.removeItem(item));
         return this;
     }
     changeDesc(oldDesc, newDesc) {

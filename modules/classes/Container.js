@@ -2,13 +2,13 @@
 
 class Container extends Item {
     constructor({ name, aliases = [name], description, event, value = 0, takeable = false, breaks, onGround = false, used = [], items }) {
-        super(name, aliases, description, event, value, takeable, breaks, onGround, used);
-
+        super({ name, aliases, description, event, value, takeable, breaks, onGround, used });
         this.isOpen = false;
         this.items = [];
         for (let item of items) {
             this.items.push(item);
         }
+        
     }
     add(item) {
         this.items.push(item);
@@ -31,7 +31,7 @@ class Container extends Item {
                 if (i + 1 === this.items.length && i !== 0) {
                     text += "and ";
                 }
-                text += `a ${item}`;
+                text += `a ${this.items[i]}`;
                 if (i + 1 < this.items.length) {
                     text += ', '
                 }
@@ -43,5 +43,5 @@ class Container extends Item {
     }
 }
 
-module.exports = Item;
+module.exports = Container;
 
