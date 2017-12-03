@@ -62,11 +62,7 @@ var itemData = [{
     "breaks": {
         "text": "The bag is under the seat and out of reach of your wrench."
     },
-    "used": [{
-        "usedWith": "player",
-        "text": "You open the bag. Inside you see an ID and a book.",
-        "creates": ["faculty ID", "textbook"]
-    }]
+    "items": ["faculy ID", "notebook"]
 },
 {
     "name": "faculty ID",
