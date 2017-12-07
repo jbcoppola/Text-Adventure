@@ -168,7 +168,7 @@ var itemData = [{
     "breaks": {
         "text": "You put several new dents in the desk, but its construction is too solid to destroy it outright."
     },
-    "items": ["lighter", "notepad"]
+    "items": ["lighter", "notepad", "desk toy"]
 },
 {
     "name": "lighter",
@@ -181,6 +181,12 @@ var itemData = [{
     "takeable": true,
     "aliases": ["notepad", "pad", "paper pad"],
     "description": "A paper pad for writing notes. Looks like there a few papers have been torn off."
+},
+{
+    "name": "desk toy",
+    "takeable": true,
+    "aliases": ["desk toy", "toy", "decoration", "desk decoration", "metal toy"],
+    "description": "Some kind of fiddly metal toy for decorating a desk. The metal is unusual and might be worth something."
 },
 {
     "name": "office chair",
@@ -230,7 +236,9 @@ var itemData = [{
 {
     "name": "safe",
     "aliases": ["safe", "wall safe", "left safe", "recessed safe", "hidden safe"],
-    "description": "The safe has three seperate locks: a combination lock with numbers, a retinal scanner, and a fingerprint scanner."
+    "description": "The safe has three seperate locks: a combination lock with numbers, a retinal scanner, and a fingerprint scanner.",
+    "locked": true,
+    "items": ["blueprints"]
 },
 {
     "name": "retina scanner",

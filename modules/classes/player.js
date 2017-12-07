@@ -220,6 +220,7 @@ class Player {
         if (event.items.length > 0) {
             for (let item of event.items) {
                 let changedItem = Items.get(item.name);
+                if (item.locked !== undefined) { changedItem.locked = item.locked; }
                 if (item.oldDesc) {
                     //change description
                     changedItem.description = changedItem.description.replace(item.oldDesc, item.newDesc);
@@ -344,6 +345,9 @@ class Player {
             useOn = Items.get(useOn);
             if (typeof useOn.items !== undefined) {
                 //if object is container
+                if (useOn.locked) {
+                    return `You try to open the ${useOn.name}, but it's locked.`
+                }
                 useOn.isOpen = !useOn.isOpen;
                 if (useOn.isOpen) {
                     this.location.addItems(useOn.items);

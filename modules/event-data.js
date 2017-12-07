@@ -105,24 +105,6 @@ var eventData = [
         "text": "You attempt to leave the bus, only for the golem to place its arm to bar your path. `USE FIRE ESCAPE WHILE FIRE IS PRESENT.`"
     },
     {
-        "name": "desk open",
-        "text": "You open the desk. Inside is a lighter and a notepad.",
-        "location": [{
-            "name": "office",
-            "oldDesc": "a metal desk",
-            "newDesc": "an open metal desk",
-            "creates": ["lighter", "notepad"]
-        }],
-        "items": [{
-            "name": "desk",
-            "used": [{
-                "usedWith": "player",
-                "text": "The desk is already open.",
-                "event": "none"
-            }]
-        }]
-    },
-    {
         "name": "open trash can",
         "text": "You open the trash can. Inside are several memos.",
         "location": [{
@@ -156,6 +138,16 @@ var eventData = [
         }]
     },
     {
+        "name": "open safe failure",
+        "text": "The safe swings open.",
+        "location": [{
+            "name": "office",
+            "oldDesc": "The left wall has a faded painting in a thick frame.",
+            "newDesc": "The left wall has a recessed safe.",
+            "creates": ["safe", "retina scanner", "fingerprint scanner", "combination lock"]
+        }]
+    },
+    {
         "name": "combo lock failure",
         "text": "You randomly spin the lock a few times, but nothing happens. Without knowing the combination you'll never get through."
     },
@@ -169,7 +161,11 @@ var eventData = [
     },
     {
         "name": "fingerprint scan success",
-        "text": "You hold a part of the lighter you haven't touched against the scanner. It beeps and flashes green. You hear a click. The safe is open!Apparently you only needed to bypass any one of the safe's locks and not all three. Odd design."
+        "text": "You hold a part of the lighter you haven't touched against the scanner. It beeps and flashes green. You hear a click. The safe is open!Apparently you only needed to bypass any one of the safe's locks and not all three. Odd design.",
+        "items": [{
+            "name": "safe",
+            "locked": false
+        }]
     },
     {
         "name": "retina scan failure",

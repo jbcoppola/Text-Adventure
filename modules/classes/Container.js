@@ -1,9 +1,10 @@
 ﻿var Item = require('./Item.js')
 
 class Container extends Item {
-    constructor({ name, aliases = [name], description, event, value = 0, takeable = false, breaks, onGround = false, used = [], items }) {
+    constructor({ name, aliases = [name], description, event, value = 0, takeable = false, breaks, onGround = false, used = [], items, locked=false }) {
         super({ name, aliases, description, event, value, takeable, breaks, onGround, used });
         this.isOpen = false;
+        this.locked = locked;
         this.items = [];
         for (let item of items) {
             this.items.push(item);
