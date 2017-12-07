@@ -62,7 +62,7 @@ var itemData = [{
     "breaks": {
         "text": "The bag is under the seat and out of reach of your wrench."
     },
-    "items": ["faculy ID", "notebook"]
+    "items": ["faculty ID", "textbook"]
 },
 {
     "name": "faculty ID",
