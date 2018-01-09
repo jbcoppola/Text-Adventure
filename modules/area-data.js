@@ -54,6 +54,16 @@ var areaData = [
         "destination": "Bus outside",
         "description": "a path outside the shattered window"
     }]
+},
+{
+    "name": "dump",
+    "description": "You are in what looks like a factory dumping area. Magic powders have soaked into the ground, and mutated insects scurry around. A large bin on the ground has is completely rusty except for the under one jar. Next to the bin, glowing goop continually seeps out of a tipped bucket.",
+    "items": ["bucket", "jar", "nest", "bin", "goop"],
+    "exits": [{
+        "cardinal": "north",
+        "destination": "office",
+        "description": "a broken window into a fancy room"
+    }]
 }
 ];
 

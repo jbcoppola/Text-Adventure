@@ -285,6 +285,21 @@ var itemData = [{
         "event": "combo lock failure",
         "destroy": false
     }]
+},
+{
+    "name": "bucket",
+    "aliases": ["bucket", "tipped bucket", "half empty bucket", "empty bucket"],
+    "description": "The bucket is tipped on its side. No matter how much glowing liquid seeps out, more continues to leak - seems like it's actually producing the liquid. Buzzing insects have built a nest inside the bucket.",
+    "breaks": {
+        "text": "You smash the bucket. Insects swarm out of their broken nest and attack you, quickly stripping the flesh from your bones with their needle-like teeth. You are dead.",
+        "destroy": true,
+        "event": "death"
+    },
+    "used": [{
+        "usedWith": "player",
+        "event": "bucket failure",
+        "destroy": false
+    }]
 }
 ];
 
