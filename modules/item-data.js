@@ -300,6 +300,16 @@ var itemData = [{
         "event": "bucket failure",
         "destroy": false
     }]
+},
+{
+    "name": "jar",
+    "aliases": ["jar", "bin jar", "clean jar"],
+    "description": "The jar is the only thing in the bin that isn't rusted. The liquid inside glows slightly.",
+    "used": [{
+        "usedWith": "player",
+        "event": "take jar failure",
+        "destroy": false
+    }]
 }
 ];
 
