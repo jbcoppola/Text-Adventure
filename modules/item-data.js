@@ -320,6 +320,11 @@ var itemData = [{
         "event": "take nest failure",
         "destroy": false
     }]
+},
+{
+    "name": "bin",
+    "aliases": ["bin", "jar bin", "rusty bin", "ground bin"],
+    "description": "This bin is filled with rusted clutter, save for a single clean jar. Everything else has decayed to uselessness."
 }
 ];
 
