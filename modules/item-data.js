@@ -327,7 +327,7 @@ var itemData = [{
     "description": "This bin is filled with rusted clutter, save for a single clean jar. Everything else has decayed to uselessness."
 },{
     "name": "goop",
-    "aliases": ["glowing liquid", "liquid", "goop", "glowing goop"],
+    "aliases": ["glowing liquid", "liquid", "goop", "glowing goop", "magic liquid"],
     "description": "Glowing magical liquid. Seeing the mutated insects around it, you decide against touching it."
 }
 ];
