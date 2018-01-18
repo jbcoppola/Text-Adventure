@@ -313,7 +313,7 @@ var itemData = [{
 },
 {
     "name": "nest",
-    "aliases": ["nest", "insect nest", "hive", "insect hive", "jar hive", "jar nest"],
+    "aliases": ["nest", "insect nest", "hive", "insect hive", "jar hive", "jar nest", "insects"],
     "description": "Insects have made a nest inside the glowing jar. They seem to feed on the glowing liquid and have clearly mutated.",
     "used": [{
         "usedWith": "player",
