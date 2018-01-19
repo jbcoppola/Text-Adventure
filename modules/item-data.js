@@ -324,7 +324,7 @@ var itemData = [{
 {
     "name": "bin",
     "aliases": ["bin", "jar bin", "rusty bin", "ground bin"],
-    "description": "This bin is filled with rusted clutter, save for a single clean jar. Everything else has decayed to uselessness."
+    "description": "This bin is filled with rusted clutter, save for a single clean jar. Everything else has decayed into uselessness."
 },{
     "name": "goop",
     "aliases": ["glowing liquid", "liquid", "goop", "glowing goop", "magic liquid"],
