@@ -303,7 +303,7 @@ var itemData = [{
 },
 {
     "name": "jar",
-    "aliases": ["jar", "bin jar", "clean jar"],
+    "aliases": ["jar", "bin jar", "clean jar", "bin jar"],
     "description": "The jar is the only thing in the bin that isn't rusted. The liquid inside glows slightly.",
     "used": [{
         "usedWith": "player",
@@ -325,7 +325,8 @@ var itemData = [{
     "name": "bin",
     "aliases": ["bin", "jar bin", "rusty bin", "ground bin"],
     "description": "This bin is filled with rusted clutter, save for a single clean jar. Everything else has decayed into uselessness."
-},{
+},
+{
     "name": "goop",
     "aliases": ["glowing liquid", "liquid", "goop", "glowing goop", "magic liquid"],
     "description": "Glowing magical liquid. Seeing the mutated insects around it, you decide against touching it."
