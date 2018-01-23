@@ -170,6 +170,10 @@ var eventData = [
     {
         "name": "retina scan failure",
         "text": "You place your eye against the scanner. It beeps and flashes red. Guess it still works."
+    },
+    {
+        "name": "take nest failure",
+        "text": "You attempt to move the nest, but the insects within start buzzing angrily as your hand gets close. You think better of touching it."
     }];
 
 var Events = eventData.map(event => new Event(event));
