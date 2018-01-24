@@ -317,7 +317,7 @@ var itemData = [{
     "description": "Insects have made a nest inside the glowing jar. They seem to feed on the glowing liquid and have clearly mutated.",
     "used": [{
         "usedWith": "player",
-        "event": "take nest failure",
+        "event": "take jar failure",
         "destroy": false
     }]
 },
