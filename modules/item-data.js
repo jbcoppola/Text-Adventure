@@ -328,7 +328,7 @@ var itemData = [{
 },
 {
     "name": "goop",
-    "aliases": ["glowing liquid", "liquid", "goop", "glowing goop", "magic liquid"],
+    "aliases": ["glowing liquid", "liquid", "goop", "glowing goop", "magic liquid", "magic goop"],
     "description": "Glowing magical liquid. Seeing the mutated insects around it, you decide against touching it."
 }
 ];
