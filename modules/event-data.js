@@ -177,7 +177,7 @@ var eventData = [
     },
     {
         "name": "death",
-        "text": "You are dead. F"
+        "text": "You are dead."
     }];
 
 var Events = eventData.map(event => new Event(event));
