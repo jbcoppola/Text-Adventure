@@ -342,7 +342,6 @@ class Player {
             }
         }
         if (checkedObject === "player") {
-            return 'test';
             useOn = Items.get(useOn);
             //if object is container (has other objects inside)
             if (useOn.items instanceof Array) {
