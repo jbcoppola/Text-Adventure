@@ -300,7 +300,7 @@ class Player {
             // using object by itself
             else {
                 //check for using object with player
-                return this.checkObjectUse("player", object)
+                return this.checkObjectUse("player", object);
             }
         }
         else {
@@ -342,11 +342,12 @@ class Player {
             }
         }
         if (checkedObject === "player") {
+            return 'test';
             useOn = Items.get(useOn);
-            if (typeof useOn.items !== undefined) {
-                //if object is container
+            //if object is container (has other objects inside)
+            if (useOn.items instanceof Array) {
                 if (useOn.locked) {
-                    return `You try to open the ${useOn.name}, but it's locked.`
+                    return `You try to open the ${useOn.name}, but it's locked.`;
                 }
                 useOn.isOpen = !useOn.isOpen;
                 if (useOn.isOpen) {
