@@ -77,7 +77,18 @@ var itemData = [{
     "takeable": true,
     "onGround": true,
     "description": "Though you can't read the text, this book has several diagrams throughout that seem to indicate it's a teacher's book to help teach concepts of ancient magical theory to students. This is a valuable find!",
-    "value": 1000
+    "value": 1000,
+    "used": [{
+        "usedWith": "live wires",
+        "event": "small bus fire",
+        "destroy": true
+    },
+    {
+        "usedWith": "dead wires",
+        "text": "You hold the book against the wire inside the panel, but nothing happens. It appears there's no power."
+    }
+    ]
+
 },
 {
     "name": "panel",
@@ -135,7 +146,7 @@ var itemData = [{
 },
 {
     "name": "fire escape",
-    "aliases": ["escape", "fire escape", "exit", "fire exit", "fire door"],
+    "aliases": ["escape", "fire escape", "exit", "fire exit", "fire door", "emergency exit", "emergency door"],
     "description": "The fire escape seems largely intact. It has a lever you can pull to release the door in case of fire.",
     "breaks": {
         "text": "You attempt to smash through, but the fire escape is remarkably sturdy for something made to allow people to escape in an emergency."
@@ -231,7 +242,17 @@ var itemData = [{
     "name": "memos",
     "aliases": ["memo", "memos", "trash memo", "trash paper", "trash memos"],
     "description": "Memos detailing designs.",
-    "takeable": true
+    "takeable": true,
+    "used": [{
+        "usedWith": "live wires",
+        "event": "small bus fire",
+        "destroy": true
+    },
+    {
+        "usedWith": "dead wires",
+        "text": "You hold a memo against the wire inside the panel, but nothing happens. It appears there's no power."
+    }
+    ]
 },
 {
     "name": "safe",
@@ -330,6 +351,17 @@ var itemData = [{
     "name": "goop",
     "aliases": ["glowing liquid", "liquid", "goop", "glowing goop", "magic liquid", "magic goop"],
     "description": "Glowing magical liquid. Seeing the mutated insects around it, you decide against touching it."
+},
+{
+    "name": "vase",
+    "aliases": ["vase", "bin vase", "intact vase", "flawed vase", "intact flawed vase", "flower vase"],
+    "description": "This vase is chipped but largely intact. It's made of heavy ceramic and obviously held large bouqets.",
+    "breaks": "The ceramic cracks and then shatters under your determined onslaught. It now lies in useless pieces on the ground.",
+    "used": [{
+        "usedWith": "nest",
+        "event": "seal nest vase",
+        "destroy": true,
+    }]
 }
 ];
 

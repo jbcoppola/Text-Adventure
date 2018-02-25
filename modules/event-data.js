@@ -82,6 +82,10 @@ var eventData = [
         }]
     },
     {
+        "name": "small bus fire",
+        "text": "You hold the papers against the humming wires until they catch alight. Within moments they flare into a cheerful blaze, and you drop them to the ground before they singe your fingers. You wait to see if the anything further happens, but the loose papers burn out within seconds. Guess you'll need to be more ambitious with your pyromania."
+    },
+    {
         "name": "fire escape used success",
         "text": "You pull the lever and the door falls off, leaving a hole you clamber though back into the clearing.",
         "moveTo": "Bus outside",
