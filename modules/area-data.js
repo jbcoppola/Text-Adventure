@@ -57,13 +57,28 @@ var areaData = [
 },
 {
     "name": "dump",
-    "description": "You are in what looks like a factory dumping area. Magic powders have soaked into the ground, and mutated insects scurry around. A large bin on the ground is completely rusty except for the under one jar. Next to the bin, glowing goop continually seeps out of a tipped bucket.",
-    "items": ["bucket", "jar", "nest", "bin", "goop"],
+    "description": "You are in what looks like a factory dumping area. Magic powders have soaked into the ground, and mutated insects scurry around. A large bin on the ground is completely rusty except for under one jar. Next to the bin, glowing goop continually seeps out of a tipped bucket. A nearby container has some kind of black powder inside it.",
+    "items": ["bucket", "jar", "nest", "bin", "goop", "powder"],
     "exits": [{
         "cardinal": "north",
         "destination": "office",
         "description": "a broken window into a fancy room"
+    },
+    {
+        "cardinal": "south",
+        "destination": "golem",
+        "description": "a field with a large golem in the middle"
     }]
+},
+{
+    "name": "golem",
+    "description": "Several corpses lie on the ground around a large immobile golem. The corpses are only lightly decayed, suggesting they died relatively recently. The golem has no legs and has a large device attached to its head that looks like a telescope. Its neck seems to be designed to be highly flexible. A pamphlet lies on the ground.",
+    "items": ["scanner", "pamphlet", "corpses"],
+    "exits": [{
+        "cardinal": "north",
+        "destination": "dump",
+        "description": "a dumping area for magic trash"
+    }],
 }
 ];
 

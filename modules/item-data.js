@@ -364,7 +364,7 @@ var itemData = [{
     }]
 },
 {
-    "name": "black powder",
+    "name": "powder",
     "aliases": ["powder", "black dust", "dust", "black grit", "grit", "binding dust", "binding powder"],
     "description": "A gritty black powder, like fine sand. You can feel some kind of energy coming off it, but it's so faint as to be almost nonexistant.",
     "breaks": "Swinging your wrench at the powder is like trying to break sand. You quickly stop after seeing how pointless it is."
