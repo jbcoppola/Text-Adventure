@@ -367,7 +367,13 @@ var itemData = [{
     "name": "powder",
     "aliases": ["powder", "black dust", "dust", "black grit", "grit", "binding dust", "binding powder"],
     "description": "A gritty black powder, like fine sand. You can feel some kind of energy coming off it, but it's so faint as to be almost nonexistant.",
-    "breaks": "Swinging your wrench at the powder is like trying to break sand. You quickly stop after seeing how pointless it is."
+    "breaks": "Swinging your wrench at the powder is like trying to break sand. You give up after seeing how pointless it is."
+},
+{
+    "name": "corpses",
+    "aliases": ["corpse", "corpses", "bodies", "body", "dead body", "dead bodies"],
+    "description": "Dead, decaying corpses lie scattered on the ground. Gruesome wounds on them look self inflicted. A note near one of the bodies catches your eye, and you read it :\n\nThe Judger has deemed us to be contaminated. We are impure. We must cleanse ourselves in the next life.",
+    "breaks": "You think better of smashing a rotting corpse with your wrench."
 }
 ];
 
