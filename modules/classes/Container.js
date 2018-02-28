@@ -1,4 +1,4 @@
-﻿var Item = require('./Item.js')
+﻿var Item = require('./Item.js');
 
 class Container extends Item {
     constructor({ name, aliases = [name], description, event, value = 0, takeable = false, breaks, onGround = false, used = [], items, locked=false }) {
@@ -20,7 +20,7 @@ class Container extends Item {
     describe() {
         let text = this.description;
         if (this.isOpen) {
-            text += `</p><p>The ${this.name} is open. ${this.listItems()}`
+            text += `</p><p>The ${this.name} is open. ${this.listItems()}`;
         }
         return text;
     }
@@ -34,7 +34,7 @@ class Container extends Item {
                 }
                 text += `a ${this.items[i]}`;
                 if (i + 1 < this.items.length) {
-                    text += ', '
+                    text += ', ';
                 }
                 else { text += '.'; }
             }

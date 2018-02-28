@@ -1,4 +1,4 @@
-﻿var UseCase = require('./UseCase.js')
+﻿var UseCase = require('./UseCase.js');
 
 class Item {
     constructor({ name, aliases=[name], description, event, value = 0, takeable = false, breaks, onGround = false, used = [] }) {

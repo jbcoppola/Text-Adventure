@@ -1,6 +1,6 @@
 ﻿var classes = require("./classes/classes.js");
 var Areas = require("./area-data");
-var Items = require("./item-data")
+var Items = require("./item-data");
 var newInput = require("./engine");
 
 window.onload = function () {

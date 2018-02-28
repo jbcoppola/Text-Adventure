@@ -43,7 +43,7 @@ class Area {
         for (let exit of this.exits) {
             output += `<ul>To the ${exit.cardinal} there is ${exit.description}.</ul>`;
         }
-        output += "</li>"
+        output += "</li>";
         return output;
     }
     //lists every item on ground (for items dropped by player or just lying around)

@@ -19,7 +19,7 @@ var eventData = [
             "used": [{
                 "usedWith": "live wires",
                 "event": "lit fire success"
-            }],
+            }]
         }]
     },
     {
@@ -52,7 +52,7 @@ var eventData = [
             "name": "panel",
             "breaks": {
                 "creates": ["dead wires"]
-            },
+            }
         }]
     },
     {
@@ -165,7 +165,7 @@ var eventData = [
     },
     {
         "name": "fingerprint scan success",
-        "text": "You hold a part of the lighter you haven't touched against the scanner. It beeps and flashes green. You hear a click. The safe is open!Apparently you only needed to bypass any one of the safe's locks and not all three. Odd design.",
+        "text": "You hold a part of the lighter you haven't touched against the scanner. It beeps and flashes green. You hear a click. The safe is open! Apparently you only needed to bypass any one of the safe's locks and not all three. Odd design.",
         "items": [{
             "name": "safe",
             "locked": false
@@ -178,6 +178,14 @@ var eventData = [
     {
         "name": "take nest failure",
         "text": "You attempt to move the nest, but the insects within start buzzing angrily as your hand gets close. You think better of touching it."
+    },
+    {
+        "name": "seal nest vase",
+        "text": "You place the vase carefully over the insect nest, sealing them inside. You shouldn't have to worry about the bugs now.",
+        "items": [{
+            "name": "jar",
+            "event": "take jar success"
+        }]
     },
     {
         "name": "death",

@@ -51,7 +51,7 @@ var areaData = [
     },
     {
         "cardinal": "south",
-        "destination": "Bus outside",
+        "destination": "dump",
         "description": "a path outside the shattered window"
     }]
 },
@@ -78,7 +78,7 @@ var areaData = [
         "cardinal": "north",
         "destination": "dump",
         "description": "a dumping area for magic trash"
-    }],
+    }]
 }
 ];
 

@@ -6,7 +6,7 @@ var Events = require("./../event-data.js");
 class Player {
     constructor() {
         this.inventory = [];
-        this.location = Areas.get("office");
+        this.location = Areas.get("dump");
     }
     listInventory() {
         let output;
@@ -162,9 +162,9 @@ class Player {
                 }
                 return item.breaks.text;
             }
-            return `You attempt to smash the ${object} to no effect.`
+            return `You attempt to smash the ${object} to no effect.`;
         }
-        return `I don't see a ${object} here.`
+        return `I don't see a ${object} here.`;
     }
     event(eventName) {
         let event = Events.get(eventName);
@@ -226,9 +226,11 @@ class Player {
                     changedItem.description = changedItem.description.replace(item.oldDesc, item.newDesc);
                 }
                 if (item.event) {
+                    //remove event
                     if (item.event === "none") {
                         changedItem.event = "";
                     }
+                    //otherwise, replace event
                     else { changedItem.event = item.event; }
                 }
                 if (item.breaks) {
@@ -279,6 +281,7 @@ class Player {
             }
         }
         if (event.moveTo) {
+            //sometimes an event moves the player somewhere else
             player.transport(event.moveTo);
             return `${event.text}\n\n${this.location.describe()}`;
         }
@@ -328,7 +331,7 @@ class Player {
                     this.location.removeItem(useOn);
                 }
                 else if (inInv || checkedObject === "player") {
-                    this.remove(useOn)
+                    this.remove(useOn);
                 }
             }
             if (used.move) {
@@ -345,6 +348,7 @@ class Player {
             useOn = Items.get(useOn);
             //if object is container (has other objects inside)
             if (useOn.items instanceof Array) {
+                //containers can be locked
                 if (useOn.locked) {
                     return `You try to open the ${useOn.name}, but it's locked.`;
                 }

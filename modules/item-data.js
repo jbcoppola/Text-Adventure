@@ -110,7 +110,7 @@ var itemData = [{
     },
     "used": [{
         "usedWith": "gum",
-        "event": "clog nozzles",
+        "event": "clog nozzles"
     }]
 },
 {
@@ -122,7 +122,7 @@ var itemData = [{
 {
     "name": "dead wires",
     "aliases": ["dead wires", "dead wire", "wire", "wires", "electric wires", "bare wire", "bare wires"],
-    "description": "A mass of wires. Some of them are bare, but you can't feel any energy.",
+    "description": "A mass of wires. Some of them are bare, but you can't feel any energy."
 },
 {
     "name": "bus seat",
@@ -335,7 +335,7 @@ var itemData = [{
 {
     "name": "nest",
     "aliases": ["nest", "insect nest", "hive", "insect hive", "jar hive", "jar nest", "insects"],
-    "description": "Insects have made a nest inside the glowing jar. They seem to feed on the glowing liquid and have clearly mutated.",
+    "description": "Insects have made a nest inside the glowing bucket. They seem to feed on the glowing liquid and have clearly mutated.",
     "used": [{
         "usedWith": "player",
         "event": "take jar failure",
@@ -355,18 +355,20 @@ var itemData = [{
 {
     "name": "vase",
     "aliases": ["vase", "bin vase", "intact vase", "flawed vase", "intact flawed vase", "flower vase"],
-    "description": "This vase is chipped but largely intact. It's made of heavy ceramic and obviously held large bouqets.",
+    "description": "This vase is chipped but largely intact. It's made of thick, heavy ceramic and obviously held large bouqets.",
+    "takeable": true,
     "breaks": "The ceramic cracks and then shatters under your determined onslaught. It now lies in useless pieces on the ground.",
     "used": [{
         "usedWith": "nest",
         "event": "seal nest vase",
-        "destroy": true,
+        "destroy": true
     }]
 },
 {
     "name": "powder",
     "aliases": ["powder", "black dust", "dust", "black grit", "grit", "binding dust", "binding powder"],
     "description": "A gritty black powder, like fine sand. You can feel some kind of energy coming off it, but it's so faint as to be almost nonexistant.",
+    "takeable": true,
     "breaks": "Swinging your wrench at the powder is like trying to break sand. You give up after seeing how pointless it is."
 },
 {
