@@ -376,6 +376,15 @@ var itemData = [{
     "aliases": ["corpse", "corpses", "bodies", "body", "dead body", "dead bodies"],
     "description": "Dead, decaying corpses lie scattered on the ground. Gruesome wounds on them look self inflicted. A note near one of the bodies catches your eye, and you read it :\n\nThe Judger has deemed us to be contaminated. We are impure. We must cleanse ourselves in the next life.",
     "breaks": "You think better of smashing a rotting corpse with your wrench."
+},
+    {
+        "name": "pamphlet",
+        "aliases": ["leaflet", "pamphlet", "paper"],
+        "description": "A bright, bold pamphlet promises saving via the 'reader of souls' which can 'see the gravest of sins in loyal followers'. The relentlessly cheerful promises of salvation make your skin crawl.",
+        "breaks": {
+            "text": "You tear the pamphlet in half. Good riddance.",
+            "destroy": true
+        }
 }
 ];
 
