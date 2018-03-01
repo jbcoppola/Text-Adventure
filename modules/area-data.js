@@ -67,7 +67,7 @@ var areaData = [
     {
         "cardinal": "south",
         "destination": "golem",
-        "description": "a field with a large golem in the middle"
+        "description": "a field with a large golem in the center"
     }]
 },
 {

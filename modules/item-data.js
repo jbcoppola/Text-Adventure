@@ -76,7 +76,7 @@ var itemData = [{
     "aliases": ["textbook", "book", "magic book", "bag book"],
     "takeable": true,
     "onGround": true,
-    "description": "Though you can't read the text, this book has several diagrams throughout that seem to indicate it's a teacher's book to help teach concepts of ancient magical theory to students. This is a valuable find!",
+    "description": "Though you can't read the text, this book has several diagrams throughout that indicate it's a teacher's book to help teach concepts of ancient magical theory to students. This is a valuable find!",
     "value": 1000,
     "used": [{
         "usedWith": "live wires",
@@ -312,8 +312,8 @@ var itemData = [{
     "aliases": ["bucket", "tipped bucket", "half empty bucket", "empty bucket"],
     "description": "The bucket is tipped on its side. No matter how much glowing liquid seeps out, more continues to leak - seems like it's actually producing the liquid. Buzzing insects have built a nest inside the bucket.",
     "breaks": {
-        "text": "You smash the bucket. Insects swarm out of their broken nest and attack you, quickly stripping the flesh from your bones with their needle-like teeth. You are dead.",
         "destroy": true,
+        "text": "You smash the bucket. Insects swarm out of their broken nest and attack you, quickly stripping the flesh from your bones with their needle-like teeth. ",
         "event": "death"
     },
     "used": [{
