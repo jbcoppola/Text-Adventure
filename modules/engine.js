@@ -49,7 +49,7 @@ function newInput(player, input) {
     input = input.toLowerCase();
     input = input.split(" ");
 
-    if (player.location.name == "death room") {
+    if (player.location.name === "death room") {
         return player.look();
     }
 
