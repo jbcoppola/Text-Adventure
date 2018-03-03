@@ -49,6 +49,10 @@ function newInput(player, input) {
     input = input.toLowerCase();
     input = input.split(" ");
 
+    if (player.location.name == "death room") {
+        return player.look();
+    }
+
     if (inventory.includes(input[0])) {
         output.add(player.listInventory());
         return output.text;

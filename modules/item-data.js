@@ -309,7 +309,7 @@ var itemData = [{
 },
 {
     "name": "bucket",
-    "aliases": ["bucket", "tipped bucket", "half empty bucket", "empty bucket"],
+    "aliases": ["bucket", "tipped bucket", "half empty bucket", "empty bucket", "pail"],
     "description": "The bucket is tipped on its side. No matter how much glowing liquid seeps out, more continues to leak - seems like it's actually producing the liquid. Buzzing insects have built a nest inside the bucket.",
     "breaks": {
         "destroy": true,

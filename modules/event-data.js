@@ -189,7 +189,6 @@ var eventData = [
     },
     {
         "name": "death",
-        "text": "You are dead.",
         "moveTo": "death room",
     }];
 
