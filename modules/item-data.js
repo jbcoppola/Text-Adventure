@@ -385,7 +385,12 @@ var itemData = [{
             "text": "You tear the pamphlet in half. Good riddance.",
             "destroy": true
         }
-}
+},
+    {
+        "name": "scanner",
+        "aliases": ["statue", "scanner", "magic scanner"],
+        "description": "A large statue with what looks like a telescope as its head."
+    }
 ];
 
 var Items = itemData.map(item => {
