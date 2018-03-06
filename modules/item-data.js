@@ -389,7 +389,11 @@ var itemData = [{
     {
         "name": "scanner",
         "aliases": ["statue", "scanner", "magic scanner"],
-        "description": "A large statue with what looks like a telescope as its head."
+        "description": "A large statue with what looks like a telescope as its head.",
+        "used": [{
+            "usedWith": "player",
+            "event": "scan player"
+        }]
     }
 ];
 
