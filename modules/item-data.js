@@ -393,7 +393,6 @@ var itemData = [{
         "used": [{
             "usedWith": "player",
             "event": "scan player"
-            "destroy": true
         }]
     }
 ];
