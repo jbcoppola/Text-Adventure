@@ -392,8 +392,7 @@ var itemData = [{
         "description": "A large statue with what looks like a telescope as its head.",
         "used": [{
             "usedWith": "player",
-            "event": "scan player"
-            "destroy", true
+            "event": "scan player"a
         }]
     }
 ];
