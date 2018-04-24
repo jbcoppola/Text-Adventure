@@ -291,7 +291,7 @@ var itemData = [{
     {
         "usedWith": "lighter",
         "event": "fingerprint scan success",
-        "destroy": false
+        "destroy": falsea
     }]
 },
 {
