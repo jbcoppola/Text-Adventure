@@ -37,7 +37,7 @@ function parseDirections(input) {
             break;
         case "ne":
         case "northeast":
-            input = "northeast";
+            input = "northeast";a
             break;
     }
     return input;
